@@ -15,7 +15,7 @@
    * Collage
    * elm-html
 * パッケージ
-* FRPについて
+* FRP
 * Javascript
    * Native 
 * プロジェクトを作る
