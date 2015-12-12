@@ -14,10 +14,10 @@
    * Element
    * Collage
    * elm-html
-* パッケージ
 * FRP
 * Javascript
    * Native 
+* パッケージ
 * プロジェクトを作る
    * プロジェクトの構築
    * Grunt
