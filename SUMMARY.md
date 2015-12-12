@@ -2,5 +2,5 @@
 
 * [Introduction](README.md)
 * Elmについて
-   * インストール
+   * [インストール](install.md)
 
