@@ -1,4 +1,10 @@
-My Awesome Book
+Elmの薄い本
 =======
+###本書のテーマ
+プログラミング言語Elmの情報
 
-This file file serves as your book's preface, a great place to describe your book's content and ideas.
+###モチベーション
+* gitbookの練習
+* 今まで書いたもののリライト
+
+プルリク歓迎です。
