@@ -4,5 +4,5 @@
    * [Elmについて](aboutElm.md)
 * [準備](elm.md)
    * [インストール](install.md)
-   * [ビルドしてみる](makeELm.md)
+   * [ビルドしてみる](makeElm.md)
 
