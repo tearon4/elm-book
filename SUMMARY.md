@@ -1,6 +1,6 @@
 # Summary
 
 * [Introduction](README.md)
-* [Elmについて](elm.md)
+* [Elm](elm.md)
    * [インストール](install.md)
 
