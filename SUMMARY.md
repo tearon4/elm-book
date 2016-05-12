@@ -2,23 +2,26 @@
 
 * [はじめに](README.md)
    * [Elmについて](aboutElm.md)
-* [準備](elm.md)
+* [準備](elm.md)について
    * [インストール](install.md)
-   * [ビルドしてみる](makeElm.md)
    * ツール
-* 構文
-   * Union Type
-   * Task
-* Graphics
-   * Element
-   * Collage
-   * elm-html
-* FRP
-* Javascript
-   * Native 
-* パッケージ
-* プロジェクトを作る
-   * プロジェクトの構築
-   * Grunt
+* 言語についての情報
+  * 構文
+      * 関数 
+     * Union Type
+     * Task
+  * Graphics
+     * Element
+     * Collage
+     * Html
+  * Javascriptとの連帯
+     * port 
+     * Native 
+  * パッケージについての情報
+* STEP
+  * [ビルドしてみる](makeElm.md)
+  * プロジェクトを作る
+     * プロジェクトの構築
+     * Grunt
 * 参考になるリンク先
 
