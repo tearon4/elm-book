@@ -8,7 +8,6 @@
    * ツール
 * 構文
    * Union Type
-   * Signal
    * Task
 * Graphics
    * Element
