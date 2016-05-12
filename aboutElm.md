@@ -1,5 +1,10 @@
 # Elmについて
 
+Elmはプログラミング言語です。
+Elmはコンパイルすると、Html,CSS,Javascriptを生成します。
+
+altJs（Javascript生成言語）や、フレームワーク（reactやredux.js）にもなります。
+
 * main関数がブラウザ出力になる。
 * 純粋関数型言語
 * 言語であり、フレームワークにもなる。
