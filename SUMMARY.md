@@ -8,12 +8,13 @@
 * [言語についての情報](gengoSecsion.md)
    * 構文
        * 関数
-           * Union Type
-           * Task
+       * Union Type
+       * Task
    * Graphics
        * Element
        * Collage
        * Html
+   * Elmアーキテクチャ
    * Javascriptとの連帯
        * port
        * Native
