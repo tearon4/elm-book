@@ -1,7 +1,6 @@
-# Summary
+# Elm Book
 
 * [はじめに](README.md)
-    * [Elmについて](src/aboutElm.md)
 * [準備編](src/elm.md)
     * [インストール](src/install.md)
 * [Elm構文](src/gengoSecsion.md)

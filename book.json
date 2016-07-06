@@ -1,4 +1,11 @@
 {
   "title":"Elmの本",
-  "plugins": ["japanese-support"]
+
+  "plugins": ["japanese-support"],
+
+  "pluginsConfig": {
+        "fontsettings": {
+            "theme": "white"
+        }
+    }
 }
