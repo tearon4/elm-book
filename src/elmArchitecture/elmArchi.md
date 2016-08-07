@@ -1,78 +1,14 @@
-##Htmlアプリケーションを書く
-
-Htmlの関数を使いHtmlを書きました。
-
-次に、ある程度の機能や画面を総合した「アプリケーション」（またはコンポーネント）を書く方法を説明します。
-
-HtmlパッケージのHtml.Appモジュールの関数を使います。
-
-以下はテキストフィールドに入力すると、文字の部分がリアルタイムに画面に出て、
-エンターキーを押すと、そのフィールド上にリストで表示されていく、というよくわからない例です。
-
-```hs
-
-import Html exposing (Html,div,input,text,li,Attribute)
-import Html.App exposing (beginnerProgram)
-import Html.Events exposing (on,keyCode,onInput)
-import Html.Attributes exposing (type',value)
-import Json.Decode as Json
-
-main : Program Never
-main =
-  beginnerProgram { model = model, view = view, update = update }
-
-type Msg = Input String | Fail | Enter
-
-type alias Model ={list : List String, value : String}
-
-model : Model
-model = {list=[],value=""}
+##Program aとは
 
 
------Update
+Elmのエントリポイント（main）の型は、SvgやHtmlなどの画面を表現する型か、Progam aという型にしなければなりません。
+SvgやHtmlという型は、静的な画面を表現しています。
 
-update : Msg -> Model -> Model
-update msg ({list,value} as model) =
-  case msg of
-    Input str -> {model | value = str}
-    Enter -> {model | list = list ++ [value]
-                    , value = ""}
-    Fail -> model
+このProgramという型はアプリケーション全体を表した特殊な型で、Program型をつくるには現状、Html.Appと、elm-lang/navigationにある関数を使います。
 
 
----view
+##Html.App
 
-view {list,value} =
-  div []
-    [ listStr list
-    , yourName value
-    , textField value]
-
-
-listStr model =
-  let toList a = li [] [text a ]
-  in div [] <| List.map toList model
-
-yourName value =
-  div [] [text <| "こんにちは　" ++ value ++ "　さん！"]
-
-textField v =
-  input [ type' "text"
-        , onInput Input
-        , value v
-        , onEnter Fail Enter ] []
-
-
-onEnter : msg -> msg -> Attribute msg
-onEnter fail success =
-  let
-    tagger code =
-      if code == 13 then success
-      else fail
-  in
-    on "keyup" (Json.map tagger keyCode)
-
-```
 
 エントリポイントを見てみます。
 Html.AppのbeginnerProgramという関数を使っています。

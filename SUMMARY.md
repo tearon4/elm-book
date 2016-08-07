@@ -1,25 +1,40 @@
 # Elm Book
 
 * [はじめに](README.md)
-* [準備編](src/elm.md)
-    * [インストール](src/install.md)
-* [Elm構文](src/gengoSecsion.md)
-    * 構文
-        * 関数
-        * Union Type
-        * [Task](src/elmTask.md)
-    * Graphics
-        * Element
-        * Collage
-        * Html
-    * Elmアーキテクチャ
-    * Javascriptとの連帯
-        * port
-        * Native
-    * パッケージについての情報
-* [サンプルプロジェクト](src/sampleProject.md)
-    * [ビルドしてみる](src/makeElm.md)
-    * プロジェクトを作る
-        * プロジェクトの構築
-        * Grunt
-* 参考になるリンク先
+* [Elmについて](src/Elm/aboutElm.md)
+* [Elmのインストール](src/Elm/zyunbi.md)
+    * [インストール](src/install/install.md)
+    * [Hellow World](src/install/hello.md)
+    * [REPL : elm-repl](src/Tool/repl.md)
+    * [コンパイル : elm-make](src/Tool/make.md)
+    * [パッケージング : elm-package](src/Tool/elmPackage.md)
+* [Elm構文](src/syntax/gengoSecsion.md)
+    * [構文全体](src/syntax/allSyntax.md)
+    * [関数](src/syntax/function.md)
+    * [型の明示](src/syntax/type/type.md)
+    * [基本的な型](src/syntax/primitive.md)
+    * [新しい型を定義する](src/syntax/type/teigi.md)
+    * [Module](src/syntax/module.md)
+    * [port Native](src/syntax/port.md)
+    * [Haskellとの違い](src/syntax/fromHaskell.md)
+* [モジュール](src/module/about.md)
+    * [Html](src/module/html.md)
+    * [Basics](src/module/basics.md)
+    * [List](src/module/List.md)
+    * [Task](src/module/elmTask.md)
+    * [Error](src/Error/err.md)
+    * [Test](src/Test/test.md)
+    * [Dict](src/module/dict.md)
+    * [Json](src/module/json.md)
+    * [Debug](src/module/debug.md)
+* [Elmアーキテクチャ](src/elmArchitecture/about.md)
+  * [Elmアーキテクチャで書いてみる](src/elmArchitecture/elmArchi.md)
+  * [Pub/Sub](src/module/PubSub.md)
+* [Javascriptと連帯する方法](src/javascript/javascipt.md)
+* [Elm Package](src/sample/gaibu.md)
+  * [Element/Collage](src/module/element.md)
+  * [Bogdanp/elm-combine](src/sample/combinater.md)
+* [よく見るエラー](src/etc/errors.md)
+* [Elmの実績調査](src/etc/zisseki.md)
+* [参考になるリンク先](src/etc/sankou.md)
+* [おわりに](src/Elm/owarini.md)
