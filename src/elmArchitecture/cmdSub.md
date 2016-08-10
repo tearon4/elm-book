@@ -1,34 +1,44 @@
 
 #Cmd/Subバージョン
 
-CmdとSubとCmd/Subバージョンについて解説しています。
+アプリケーションには、避けられない副作用処理がつきもので、現行のElm-Architectureはそれらの処理に、Cmd/Subというインターフェースを提供しています。
 
-##Cmd
+Cmd/Subを使うと、マウスなどの入力や、DBアクセスや、httpアクセスや、別スレッドで実行されるTaskなどを扱えます。
 
+Cmd/Subを利用するには、どちらも別スレッド実行される非同期の処理と理解するといいと思います。なのでTask型の理解が役に立ちます。
 
+Cmd/Subは副作用の取り扱いをCmd/Sub利用者に見えないように行います。例えばスレッドを起動する処理はそれ自体が副作用で、生成したスレッドを管理しないといけません。そういった面倒な処理を裏（Cmd/Subを提供するライブラリ製作者）にまかせて、ライブラリ利用者はCmd/Subを使うだけでいいのです。
 
-##Sub
+そしてCmd/Subは、副作用の処理が失敗してもメインのシステムには影響がなく、メインの処理とは独立に復旧するようになっています。
 
+余談：reduxやcycle.jsといったフレームワークの作者がElm-Architectureを参考にした時は、Cmd/Subバージョンが確立する前でした、なので非同期処理については各フレームワークによってばらつきがあるようです。
 
-programという関数は以下のような型になっています。
+##Cmd/Sub利用の仕方
 
-```
-program
-  : { init : (model, Cmd msg)
-    , update : msg -> model -> (model, Cmd msg)
-    , subscriptions : model -> Sub msg
-    , view : model -> Html msg
-    }
-  -> Program Never
-```
+###Cmd
 
-使うときは、init関数、update関数などの関数を用意してレコード型で渡します。
+Cmdは外にだす命令、コマンドという意味です。DBへの検索指示であったり、Taskの実行であったりといった、こちらから非同期で実行して結果が返ってくるものがCmd型になっています。
+
+Cmdを発行できる場所は、init関数と、update関数です。
 
 ```
+init : (Model,Cmd msg)
+```
 
-main = program {　init = init
-               ,　update = update
-               , subscriptions = subscriptions
-               , view = view }
+init関数に行いたいコマンドを渡すと、Modelの初期化終わってすぐに実行されます。ElmがDomに展開された後すぐhttpで確認したいなどという時にinitに設定します。
+
+update関数に渡すと、処理の途中で発行されます。
+
+###Sub
+
+Subは外から内にくるイベントを表しています。マウスの入力とかがそうです。
+
+
 
 ```
+subscriptions : 
+```
+
+##CmdとSubに用意されている関数
+
+Cmdは、Subには同じ関数が用意されています。
