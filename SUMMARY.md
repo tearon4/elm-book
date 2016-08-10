@@ -1,4 +1,3 @@
-* [Elmの薄い本](README.md)
 
 * [はじめに](README.md)
 * [Elmについて](src/Elm/aboutElm.md)
@@ -30,7 +29,7 @@
     * [Debug:デバッグ](src/module/debug.md)
 * [Elm-Architecture](src/elmArchitecture/about.md)
   * [Cmd/Subバージョン](src/elmArchitecture/cmdSub.md)
-* [Javascriptと連帯する方法まとめ](src/javascript/javascript.md)
+* [Javascriptと連帯する方法まとめ](src/Javascript/javascript.md)
 * [Elm Packageで公開されているパッケージ](src/sample/gaibu.md)
   <!-- * [Element/Collage](src/module/element.md) -->
   * [Html](src/module/html.md)
