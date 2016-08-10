@@ -15,7 +15,7 @@
 
 ElmをJs出力し、Html側に読み込むコードと起動するコードを書きます。この時、fullscreenで起動するか、embedで何処かのDOMに埋め込むか、workerで画面を出さないか選ぶ子ができます。
 
-```
+```js
 <script type="text/javascript" src="Example.js"></script>
 ...
 
@@ -25,7 +25,7 @@ var elmApp =  Elm.Example.fullscreen()
 
 まずElmのMainになるモジュールの先頭行に、モジュール名をつけます。
 
-```Example.elm
+```elm
 module Example exposing (...)
 
 ```
@@ -54,9 +54,9 @@ fullscreen　--全画面
 embed　--どこかのDOM内で展開
 worker　--画面なし
 
-###DOMに紐付けて起動する。
+####DOMに紐付けて起動する。
 
-embedを使うとどこかのDOMにElmを展開できます。
+embedを使うと指定したDOMの内部にElmを展開できます。
 tutorialから拝借したコード。
 
 ```html
@@ -106,4 +106,5 @@ coreライブラリ内を見ると、Nativeというフォルダがあります�
 
 やり方TODO
 
-影響がElmに及ばないように、Effectモジュールという方法もあります。（まだよくわかってない）
+###Effect Module
+PubSubの裏側、Effectモジュールという方法もあります。（まだよくわかってない）
