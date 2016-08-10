@@ -1,8 +1,8 @@
-#Debug
+#Debug : デバッグ
 
 Debugのlog関数は、ブラウザのコンソールに現在の状態を表示することが出来ます。
 
-```
+```elm
 log : String -> a -> a
 ```
 
@@ -11,7 +11,7 @@ log : String -> a -> a
 
 以下のように使います。
 
-```
+```elm
 case Debug.log "msg:" msg of
       Hoge a ->
 
