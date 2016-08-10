@@ -1,4 +1,4 @@
- 
+
 * [はじめに](README.md)
 * [Elmについて](src/Elm/aboutElm.md)
 * [Elmのインストール](src/install/zyunbi.md)
@@ -31,7 +31,6 @@
   * [Cmd/Subバージョン](src/elmArchitecture/cmdSub.md)
 * [Javascriptと連帯する方法まとめ](src/Javascript/javascript.md)
 * [Elm Packageで公開されているパッケージ](src/sample/gaibu.md)
-  <!-- * [Element/Collage](src/module/element.md) -->
   * [Html](src/module/html.md)
   * [Html.App](src/module/html2.md)
   <!-- * [Test](src/Test/test.md) -->
