@@ -3,7 +3,7 @@
 * [Elmについて](src/Elm/aboutElm.md)
 * [Elmのインストール](src/install/zyunbi.md)
     * [インストール](src/install/install.md)
-    * [Hellow World](src/install/hello.md)
+    * [Hello World](src/install/hello.md)
 * [ツール](src/Tool/tool.md)
     * [elm-repl:REPL](src/Tool/repl.md)
     * [elm-make:コンパイル](src/Tool/make.md)
