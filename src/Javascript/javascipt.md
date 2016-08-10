@@ -13,6 +13,60 @@
 
 ###fullscreen/embed
 
+ElmをJs出力し、Html側に読み込むコードと起動するコードを書きます。この時、fullscreenで起動するか、embedで何処かのDOMに埋め込むか、workerで画面を出さないか選ぶ子ができます。
+
+```
+<script type="text/javascript" src="Example.js"></script>
+...
+
+var elmApp =  Elm.Example.fullscreen()
+
+```
+
+まずElmのMainになるモジュールの先頭行に、モジュール名をつけます。
+
+```Example.elm
+module Example exposing (...)
+
+```
+
+次にJsファイルとしてコンパイルします。
+
+```
+elm-make Example.elm --output=Example.js
+```
+
+そしてHtmlファイルを用意して、出来たJSを読み込んで起動するコードを書きます。
+
+```html
+...
+<script type="text/javascript" src="Example.js"></script>
+...
+
+var elmApp =  Elm.Example.fullscreen()
+
+```
+
+これでElmが起動します。
+
+呼び出し方は３つあり
+fullscreen　--全画面
+embed　--どこかのDOM内で展開
+worker　--画面なし
+
+###DOMに紐付けて起動する。
+
+embedを使うとどこかのDOMにElmを展開できます。
+tutorialから拝借したコード。
+
+```html
+<div id="my-thing"></div>
+<script src="my-thing.js"></script>
+<script>
+    var node = document.getElementById('my-thing');
+    var app = Elm.MyThing.embed(node);
+</script>
+```
 
 
 ###Port
@@ -30,6 +84,8 @@ app.ports.test.subscribe(function(a) {
   console.log(a);
 });
 ```
+
+syntaxのportのページで解説しています。
 
 ###programWithFlags
 

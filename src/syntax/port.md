@@ -15,7 +15,7 @@ var elm = document.getElementById('elm');
 var app = Elm.Test.embed(elm);
 
 //Elm -> Js
-app.ports.hello.subscribe(function(a) { 
+app.ports.hello.subscribe(function(a) {
   console.log(a);
   app.ports.jsHello.send("Hi!");
 });
@@ -23,7 +23,7 @@ app.ports.hello.subscribe(function(a) {
 setTimeout(function () {  　　　　//subscribeの外だと、setTimeoutで囲う必要があるっぽい。次のバージョンで直ります。
 
 　　//Js -> Elm
-   app.ports.jsHello.send("Elm! hellooooo"); 
+   app.ports.jsHello.send("Elm! hellooooo");
 
 }, 0);
 
@@ -45,6 +45,7 @@ ElmとJsの型は合わせる必要があります。以下が対応表です。
 | Json.Encode.Value | JSON |
 
 
+メモ：portを使っているパッケージは公開できません。（同時にjsのインストールも必要になるため）
 
 
 ##Portの書き方。
