@@ -1,7 +1,20 @@
-#モジュール、パッケージ
+#Coreライブラリ
 
-ここでは、Elm内に組み込みのモジュールについてのページです。（一部Elmパッケージに公開されているモジュールもある。）
+このセクションは、ElmのCoreライブラリについての解説ページです。
+だんだんページを増やしていきたいと思います。
+今はTaskとDictとDebugのページがあります。
 
-並べて解説してあるので、ある程度わかったら飛ばしてElmアーキテクチャに進んでみてください。
+メモ：Elm0.17では、以下のライブラリと型が自動でimportされるので、以下の型はimportを書かなくても使うことができます。
 
-また、公式サイトにサンプルコードがそろっています。見に行ってみるといいです。
+```
+import Basics exposing (..)
+import List exposing ( List, (::) )
+import Maybe exposing ( Maybe( Just, Nothing ) )
+import Result exposing ( Result( Ok, Err ) )
+import Platform exposing ( Program )
+import Platform.Cmd exposing ( Cmd, (!) )
+import Platform.Sub exposing ( Sub )
+
+```
+
+メモ：最初のコンパイル時にelm-makeを使いElmファイルをコンパイルしようとすると、Coreライブラリをダウンロードしますか、と聞かれます。ElmインストーラにはCoreライブラリが含まれていません。Coreライブラリをelm-packageでバージョン管理して扱うようにするためです。

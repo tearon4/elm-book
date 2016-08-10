@@ -2,8 +2,10 @@
 
 Elmに用意されている基本的な型についてです。
 
-#### 数字型(number)
-`Int` と `Float`があります。 `number`とは特殊な型で、`Int` と `Float`になる型です。
+####数字型(number)
+
+`number`とは特殊な型で、`Int` と `Float`になる型です。
+`Int` は自然数という型、 `Float`は実数という型です。 
 
 ```elm
 > 1
@@ -13,7 +15,8 @@ Elmに用意されている基本的な型についてです。
 ```
 
 #### 文字列
- 文字列型です。`Char` と `String`
+
+文字列型です。`Char` と `String`
 
 ```elm
 > 'a'
@@ -22,16 +25,14 @@ Elmに用意されている基本的な型についてです。
 "Hello" : String
 ```
 
+####String
 
-Single quotes are for `char` only
 ```elm
-> 'ab'
--- SYNTAX PROBLEM --
-> "ab"
-"ab" : String
+
 ```
 
-#### Booleans
+
+#### Bool型
 ```elm
 > True
 True : Bool
@@ -39,15 +40,12 @@ True : Bool
 False : Bool
 ```
 
-#### Other
-`comparable` - `ints`, `floats`, `chars`, `strings`, `lists`, `tuples`
-<br/>
-`appendable` - `strings`, `lists`, `text`.
-<br/>
 
+## コレクション型
 
-## Collections
 #### Lists
+
+List型は
 
 ```elm
 > []
@@ -58,7 +56,6 @@ False : Bool
 ["a","b","c"] : List String
 ```
 
-List型を作る方法です。
 
 ```elm
 > [1..4]
@@ -68,7 +65,7 @@ List型を作る方法です。
 ```
 
 #### Tuples
-タプル型とは、型を並べた型です。この時種類の型でもタプルにすることが出来ます。
+タプル型とは、型を並べた型です。種類の型でもタプルにすることが出来ます。
 '()'で囲みコンマで区切るとTuple型になります。
 
 ```elm
@@ -82,7 +79,7 @@ List型を作る方法です。
 (1,True,'a',[]) : ( number, Bool, Char, List a )
 ```
 
-複数の値を返却するときタプルを使うことが出来ます。
+複数の値を返却するときにタプルを使うことが出来ます。
 
 ```elm
 (x, y) = (1, 2)
@@ -101,7 +98,7 @@ myRecord =
  }
 ```
 
-Accessing records
+
 ```elm
 > myRecord.style
 "Blue" : String
@@ -109,7 +106,7 @@ Accessing records
 "Blue" : String
 ```
 
-Updating records returns a new record
+
 ```elm
 > updatedRecord = { myRecord | style = "Red", number = 10, isCool = False }
 > myRecord.style
@@ -118,15 +115,14 @@ Updating records returns a new record
 "Red" : String
 ```
 
-Destructuring
+パターンマッチすることが出来ます
+
 ```elm
 { style, number, isCool } = myRecord
 > style
 "Blue" : String
 ```
 
-#### Other
-Core library also has:
- * [Array](http://package.elm-lang.org/packages/elm-lang/core/3.0.0/Array)
- * [Dict](http://package.elm-lang.org/packages/elm-lang/core/3.0.0/Dict)
- * [Set](http://package.elm-lang.org/packages/elm-lang/core/3.0.0/Set)
+####　その他
+コアライブラリには
+Array　Dict　Setといった型があります。

@@ -1,109 +1,119 @@
-#コラム：Haskellとの違い
-ElmはHaskellとどのように違うか、ということを考えてみました。
+#コラム：Haskellから見たElm
+
+ElmとHaskellはどのように違うか、ということを考えてみました。（あまりHaskell知らないので間違っているかもしれません。。）
 
 
-表記の違いについて
+###表記の違い
 
-* Elmでの型の明記はコロンで、リストの表現は `::` になります。Haskellとは逆になっています。
+Elmでの型の明記はコロンで、リストの表現は `::` になります。Haskellとは逆になっています。
 
-```
+以下はElmです。
+
+```elm
 answer : Int
 answer = 42
 
 1 :: [2,3,4]
 ```
 
+・where構文は無く、let式だけです。
 
-* 型表記とレコード表記の違い。
+・関数を並べるタイプのパターンマッチはないです。case式を使います。
 
-列挙型、直和型（Union Type）定義を`type`で行い、型の別名付け、レコード表記を`type alias`で行います
+・headとtailがMaybeを返します。
 
+```elm
+head : List a -> Maybe a
+tail : List a -> Maybe (List a)
 ```
+
+・do構文がない。
+色んな所で状態の変更がないようにするためと聞きました。
+
+・elmのreplでは、:typeとか打たなくても改行で型が出ます。letとか書かなくても変数とか定義できます。
+
+###型表記の違い。
+
+列挙型、代数的データ型の定義を`type`で行い、型の別名付け、レコード型の定義を`type alias`で行います
+
+```elm
 type Bool = True | False   -- Elmでは | がある型をUnion Typeと読んでいる。
 type Data = Data Int Int   -- 直積型
 type alias Name = String   -- type aliasで型に別名をつけることが出来る。
 ```
 
-Elmのレコード表記はが可能です。
+###レコード表記の違い。
 
-```
-type alias Position = { x : Int , y : Int}
+Elmではレコード型に型構築子を付けなくても定義できます。
+
+```elm
+type alias Position = { x : Int , y : Int}  --.x .y関数も作られます。
+
+--type alias User = User { name : String }    --型構築子を付けるとエラーになる。
 
 position : Position
-position = {x = 10, y = 10}
+position = {x = 10, y = 10}  
+
+position2 : Position
+position2 = Position 5 5   ---レコード表記しないでも型を作ることが出来ます。(型構築子が自動生成されてる？)
 ```
 
-こうすると型は{a | x :Int , y : Int}という型になります。aというは型変数で、「x、yというプロパティがある型、」という意味になります。（構造的部分型とかoverload recordとかいうらしい）
+Elmのレコード型はオブジェクトにすこし近いです。(構造的部分型？)
 
-こういう型も作れます。
+こういう型が作れます。
 
-```
+```elm
 type alias Position a = { a | x : Int , y : Int}
 
 ```
 
-作った型は重ねることが出来ます。
+レコードの中の`a|`と言うのは、ここに型が入ることが出来るということです。
+これを使うと重ねることが出来ます。
 
-```
-type alias Chara = Position { name :String }
+```elm
+type alias Position a = { a | x : Int , y : Int}
 
-chara = {x=0,y=0,name = "piyo"}
-```
+type alias Chara = Position { name :String }    --別名つける方のtype alias
 
+chara : Chara
+chara = {x=0,y=0,name = "piyo"}                --３つのプロパティ
 
-
-* whereが無く、letだけです。
-
-* 関数を並べるタイプのパターンマッチはないです。case式使います。
-
-* headとtailがMaybeを返します。
-
-```hs
-head : List a -> Maybe a
-tail : List a -> Maybe (List a)
+getPosition : Position a -> Int                --レコードの部分用の関数
+getPosition {x} = x
 ```
 
-* Elmでは型構築子のないレコード表記が一般的で、カプセル化したい時に型構築子バージョンにします。
+レコードの更新構文
 
-```
-
-type alias Obj = {pro : Int , pro2 : Int}
-
-type
+```elm
+position = {x = 0, y = 0}
+{ position | x = position.x + 1}　  -- == {x = 1 , y = 0}  x = x + 1 みたいなもの
 ```
 
 
-* Elmには型クラス構文とかがない。
-型クラスがないので、例えばこの型はFunctorのインスタンスだ、とか、これらは(+)できる型だ、といったジェネリックなプログラミングとかが出来ないです。
+###Elmには型クラス構文とかがない。
+
+型クラスがないので、ジェネリックなプログラミングが出来ないです。
 実装される話もあるようですが、あまり乗り気ではないようです。そういう思考のフレームで使う道具にしている感じがします。
 
-型クラス等がほしいときはpuresciptとか、scala-js、ghc-js、typescriptとかを検討したほうがいいかもしれません。
+型クラス等がほしいならpuresciptとか、scala-js、ghc-js、typescriptとかを検討したほうがいいかもしれません。。
 
-余談:Elmの組み込まれているジェネリックな関数について。
-ジェネリックプログラミングする方法は用意されていませんが、"Time"型同士を(<)で比較したり、文字列同士を(++)したり、自分で定義した型をtoStringしたり出来るようになっています。
 
-```
+###余談：Elmの特別な型
 
-'a' < 'z'
+Elmではジェネリックプログラミング出来ないのですが、number、 comparable、 appendableという上位の型を内部で使っていて、組み込みの関数はその型を使っています。
 
-"hello" ++ "world"
-
-position = {x = 10 , y = 10}
-toString position == "{x = 10 , y = 10}"
+numberは`Int`と`Float`
+comparableは `String`, `Char`,`Int`, `Float`, `Time`,`taple`
+appendable は`List` `String`
 
 ```
-
-これらの関数の引数はcomparable、appendable、等となっています。
-組み込まれている型は、裏でこれらに含まれていて以下のようになっています。
-
-comparable `String`, `Char`,`Int`, `Float`, `Time`
-appendable List String
+(+) : number -> number -> number
+(<) : comparable -> comparable -> Bool
+(++) : appendable -> appendable -> appendable
+```
 
 
-
-* do構文がない。
-色んな所で状態の変更がないようにと聞きました。
-メモ：モナドな型には、returnやandThen(bind)な関数が個別に実装されていますので、それらを呼び出して使います。
+###Elmは正格評価です。
 
 
-* Elmは正格評価です。
+あと思いついたら追記します。

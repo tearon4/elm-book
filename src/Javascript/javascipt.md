@@ -1,16 +1,46 @@
-##Htmlやjavascripから見たElm
-JSのライブラリを読むってどうするか気になりますよね？。
-このセクション全体ではHtmlやJSとElmの接続部分について解説したいと思います。
+#Javascriptと連帯する方法
 
-おおまかに以下のような接続部分があります。
+このページでは、JSとElmの連帯する方法をまとめたいと思います。
 
-HtmlにElmファイルを読み込む
+以下のような方法があります。
 
-JSファイルに値を渡す。
-Elmで渡された値を使う。
+* fullscreen/embed
+* Port
+* programWithFlags
+* Native
+* effect module
 
-Nativeモジュールについて
-Elm内でJSを使う。
+
+###fullscreen/embed
+
+
+
+###Port
+
+Portとは、Elmに用意されているJsとのやり取り用の構文です。
+
+```elm
+port hello : String -> Cmd msg
+```
+
+このようにElm側で書き、Js側ではsubscribeと、sendでやり取りします。
+
+```js
+app.ports.test.subscribe(function(a) {
+  console.log(a);
+});
+```
+
+###programWithFlags
+
+programWithFlagsとは、Elmの初期化時にJs側の値を使う方法です。Html.Appのページで解説しています。
+
+```js
+var elm = document.getElementById('elm')
+var app = Elm.MyApp.embed(elm,{
+    userID: 'Tom',
+    token: '12345'})
+```
 
 ###Nativeモジュール
 coreライブラリ内を見ると、Nativeというフォルダがあります。これがNatveモジュールで、直接Elmランタイムの中にJavascriptを展開するように書くことが出来ます。

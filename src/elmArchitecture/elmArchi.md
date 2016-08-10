@@ -1,41 +1,4 @@
-##Program aとは
-
-
-Elmのエントリポイント（main）の型は、SvgやHtmlなどの画面を表現する型か、Progam aという型にしなければなりません。
-SvgやHtmlという型は、静的な画面を表現しています。
-
-このProgramという型はアプリケーション全体を表した特殊な型で、Program型をつくるには現状、Html.Appと、elm-lang/navigationにある関数を使います。
-
-
-##Html.App
-
-
-エントリポイントを見てみます。
-Html.AppのbeginnerProgramという関数を使っています。
-
-```
-import Html.App exposing (beginnerProgram)
-
-main : Program Never
-main =
-  beginnerProgram { model = model, view = view, update = update }
-
-```
-
-beginnerProgram 関数は引数にmodel、view、update関数をとります。
-modelは状態の初期値、
-viewは状態を画面に出す関数、
-updateは(画面をクリックするなどして)イベントが起きた時の処理を書きます。
-
-これらの関数を用意します。（とくに処理などがなければ、そのまま返すだけの関数でよいです。）
-
-Html.Appにある関数は、Elmアーキテクチャという考え方にそっています。
-
-このmodel、view、updateというapiでモジュール化して分割しよう。というのがElmアーキテクチャという構造化手法の基本形になります。
-
-すこしコードを例に見てみます。
-おおまかには、ユーザーの操作でviewでイベントが起きる→updateでそのイベント毎の処理をする→また画面に表示する→最初に戻る、という流れになってます。
-
+ボツ
 
 ###Msg
 

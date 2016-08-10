@@ -1,6 +1,3 @@
 #Basics
 
-組み込みのモジュールです。コンパイルするとき自動でimportされるので、Basicsの中の関数はすぐに使えます。
-
-
-number, comparable, appendable, and compappend
+組み込みのモジュールです。加算、減算、等の基本的な関数があります。

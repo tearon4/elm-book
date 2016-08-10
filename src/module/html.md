@@ -9,25 +9,14 @@ Htmlライブラリは[virtual-dom](https://github.com/Matt-Esch/virtual-dom)を
 パッケージのインストールコマンド
 
 ```
-elm-package install evancz/elm-html --yes
+elm-package install elm-lang/html --yes
 ```
-インストールされるモジュール達
-
-        "Html",
-        "Html.Attributes",
-        "Html.Events",
-        "Html.Lazy"
-
-依存関係
-
-        "elm-lang/core": "1.0.0 <= v < 2.0.0",
-        "evancz/virtual-dom": "1.0.0 <= v < 2.0.0" 　//　本体
 
 使用例ハローワールド
 
 ```hs:Elm
 
-import Html(div,text)
+import Html exposing (div,text)
 
 main = div [] [text "Hello World"]
 ```
@@ -182,50 +171,40 @@ main = div[on "keydown" ...
 
 ##[Html.Events](http://package.elm-lang.org/packages/evancz/elm-html/1.1.0/Html-Events)モジュールのon関数
 
+このモジュール内ある関数を使って、HtmlにイベントのAttributeを付けることが出来ます。
+
 直接使わないですが、on関数の説明です。
 
 ```hs
-
-on : String -> Json.Decoder a -> (a -> Signal.Message) -> Attribute
+on : String -> Json.Decoder msg -> Attribute msg
 ```
+
 on関数を使ってイベントの付いたHTMLを作ることが出来ます。
 
 一引数目は、イベントの種類の指定。(例えば"input"、"click"、"keydown"、、、)
-二引数目に、Json.Decoderを入れ、eventオブジェクトをデコードして値を取り出します。いくつか用意されています。
+二引数目に、Json.Decoderを入れ、eventオブジェクトをデコードして値を取り出します。デコーダはいくつか用意されています。
 (例えば、`event.target.value`が欲しいなら`targetValue`、`event.KeyCode`なら`keyCode`)
-三引数目は、値を渡しつつMessageを発火します。
-返り値は属性です。
 
 ###二引数目のJson.Decoder型
 
-on関数は二引数目に`Json.Decoder a`型を取ります。Jsonライブラリは、Json型のデータ構造を扱うライブラリで、ここにJsonデコーダを入れると、イベントオブジェクトから指定した値を取り出せます。取り出した値は、三引数目に渡されます。
+on関数は二引数目に`Json.Decoder msg`型を取ります。Jsonライブラリは、Json型のデータ構造を扱うライブラリで、ここにJsonデコーダを入れると、イベントオブジェクトから指定した値を取り出せます。
+取り出した値は型構築子に渡されたます。
 
 
 Json.Decode参考
 http://package.elm-lang.org/packages/elm-lang/core/1.1.1/Json-Decode
 http://uehaj.hatenablog.com/entry/2015/02/23/010955
 
-###三引数目の(a -> Signal.Message)
-Signal.MessageはchannelにMessageを送る関数で、(a -> Signal.Message)でaの値をchannelに送ります。
 
-
-###クリックイベント付ける
+###クリックイベント付けるには
 
 onClick関数は、クリックイベントを付ける関数です。
 
-```hs:onClick
-
-messageOn : String -> Signal.Message -> Attribute
-messageOn name msg =
-    on name value (always msg)
-
-onClick : Signal.Message -> Attribute
-onClick = messageOn "click"
+```elm
+onClick : msg -> Attribute msg
+onClick msg =
+  on "click" (Json.succeed msg)
 ```
-
-
-下記のコードでは、helloという文字をクリックすると、コンソールに`[]`（`（）`の内部表現）と表示されます。
-
 
 
 
@@ -242,10 +221,3 @@ lazy = VirtualDom.lazy
 
 一引数目にviewの関数、二引数目に関数の引数になる値を入れます。
 値が変更した時だけviewを更新します。
-
-
-
-##Html.App
-
-
-Htmlライブラリの説明でした。

@@ -1,17 +1,22 @@
-##エラー処理
+##エラー処理 : Maybe Result
 
 純粋関数型言語というものには、理屈上try catch文やgoto文のようなジャンプはないらしいです。
 
-ではエラー処理はどうするかというと、「エラーが起こりえる」という型を使います。ElmではMaybeとResult、Taskという型がこれに当たります。
+ではエラー処理はどうするかというと、「エラーが起こりえる」という型を使います。
+
+ElmではMaybeとResult、Taskという型がこれに当たります。
 
 
-```
+```elm
 type Maybe a = Just a | Nothing
-
 type Result error value = Ok value | Err error
 ```
 
-例えば、Listにはhead関数というListの先頭を返す関数があります。
+これらの型はエラーになるかもしれない、またはエラーが有る処理に付けられる型です。
+定義の中に、エラーが含まれていて、前の処理がエラーになると次の処理をスキップしてエラーを伝える性質があるので、エラー処理をしたい型に付けて利用します。
+
+
+この型を利用している例として、List型のhead関数というListの先頭を返す関数があります。
 
 ```
 head : List a -> Maybe a
@@ -21,8 +26,9 @@ head [] == Nothing
 
 ```
 
-先頭に値がある場合はいいですが、ない場合はNothingを返しています。
+先頭に値がある場合はいいですが、ない場合はNothingを返します。
 
+このように
 
 ```
 
@@ -34,69 +40,5 @@ hoge list =
 
 ```
 
+使うときは、
 
-ポケモンのリスト
-
-```
-type Pokemon = {name : String}
-
-type PokeList = List Pokemon
-
-pockemonList = []
-
-```
-
-バトルが始まる。持っていないとエラーにしたいとする。
-battleを処理する関数はエラーの可能性がある。
-
-```
-
-battle : PokeList -> Result String　Pokemon
-battle list =
-      fromMaybe "ポケモンを持っていない" <| head list
-
-```
-
-
-エラーが出ず、うまく行った時にその値をつかって次の処理をする、
-mapやandThenという関数がある
-
-```
-
-battle : PokeList -> Result String　Pokemon
-battle list =
-      fromMaybe "ポケモンを持っていない" ( head list)
-      |> Result.map battleSystem
-```
-
-
-エラーの時はそれ専用の表示をしたい。
-
-```
-
-battleView : Result String Pokemon -> Html a
-battleView result =
-      case result of
-        Ok  v -> battleStartView v
-        Err err -> errView err
-```
-
-戻って、バトルシステム　にお金がなかったらエラーになるを追加　
-
-```
-import Result
-
-battle : PokeList -> Result String　Pokemon
-battle list =
-      Result.map2
-      always
-      fromMaybe "ポケモンを持っていない" <| head list
-
-
-```
-
-map2は２つのResultが成功だったら、一引数目の関数を実行する。どちらかのResultがエラーになると、エラーを返す
-
-
-```
-```
