@@ -1,4 +1,4 @@
-# Elm Book
+* [Elmの薄い本](README.md)
 
 * [はじめに](README.md)
 * [Elmについて](src/Elm/aboutElm.md)
