@@ -22,7 +22,9 @@ ElmをJs出力し、Html側に読み込むコードと起動するコードを�
 var elmApp =  Elm.Example.fullscreen()
 
 ```
+
 ####fullscreenで起動する
+
 まずElmのMainになるモジュールの先頭行に、モジュール名をつけます。
 
 ```elm
@@ -98,6 +100,7 @@ var app = Elm.MyApp.embed(elm,{
 ```
 
 ###Nativeモジュール
+
 coreライブラリ内を見ると、Nativeというフォルダがあります。これがNatveモジュールで、直接Elmランタイムの中にJavascriptを展開するように書くことが出来ます。
 
 便利ですが、将来的にランタイムが壊れやすくなる要素を組み入れたくないElmはNativeモジュールを非推奨にしています。
@@ -106,4 +109,5 @@ coreライブラリ内を見ると、Nativeというフォルダがあります�
 やり方TODO
 
 ###Effect Module
-PubSubの裏側、Effectモジュールという方法もあります。（まだよくわかってない）
+
+PubSubの裏側、Effectモジュールという方法もあります。
