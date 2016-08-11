@@ -146,17 +146,48 @@ taged2 = Container "hello"
 
 ```elm
 type alias User = {name : String}
+type alias Blog = {id : Int , kizi : String}
+type alias Position a = { a | x : Int , y : Int}
 ```
 
-レコード型はプロパティでアクセスできます。
 
-```
-> user1 = {name = "hiro"}                  
-{ name = "hiro" } : { name : String }
-> user1.name
+プロパティがある型には、自動でアクセス用の関数が作られます。
+
+```elm
+> user1 = {name = "hiro"}                  --レコード型を定義
+{ name = "hiro" } : { name : String }      --
+> user1.name                               --
 "hiro" : String
+> .name user1
+"hiro" : String
+>
 ```
 
+レコードの中の`a|`と言うのは、ここに型が入ることが出来るということです。
+これを使うとレコードを部分的に定義できます。
+
+```elm
+type alias Position a = { a | x : Int , y : Int}
+
+type alias Chara = Position { name :String }
+
+chara : Chara
+chara = {x=0,y=0,name = "piyo"}                --３つのプロパティ
+
+getPosition : Position a -> Int                --
+getPosition {x} = x                            --パターンマッチ
+
+getX : {a| x:Int } -> Int                      --xプロパティのある型を指名
+getX target = target.x
+
+```
+
+レコード型は直積型を定義するのと同じになってます。
+
+```elm
+type alias User = {name : String} -- == type User = User String
+init = User "k"                   -- 型構築子が自動で生成されている。
+```
 
 
 ##まとめ
@@ -171,12 +202,3 @@ type alias Position = (Int,Int) --名前の置き換え
 type alias Model = {test : String}  --レコード型
 
 ```
-
-##おまけ、型の定義失敗パターン
-
-```
-type A = ...
-type Hoge = A | B | C
-```
-
-データ構築子が被っている

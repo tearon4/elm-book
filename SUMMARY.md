@@ -22,13 +22,13 @@
 * [Coreライブラリ](src/module/about.md)
     <!-- * [Basics](src/module/basics.md) -->
     <!-- * [List](src/module/List.md) -->
-    * [Task:非同期処理](src/module/elmTask.md)
+    * [Task:非同期処理](src/module/task.md)
     <!-- * [Error](src/Error/err.md) -->
     * [Dict:辞書](src/module/dict.md)
     <!-- * [Json](src/module/json.md) -->
     * [Debug:デバッグ](src/module/debug.md)
 * [Elm-Architecture](src/elmArchitecture/about.md)
-  * [Cmd/Subバージョン](src/elmArchitecture/cmdSub.md)
+  * [Cmd/Sub](src/elmArchitecture/cmdSub.md)
 * [Javascriptと連帯する方法まとめ](src/Javascript/javascript.md)
 * [Elm Packageで公開されているパッケージ](src/sample/gaibu.md)
   <!-- * [Element/Collage](src/module/element.md) -->

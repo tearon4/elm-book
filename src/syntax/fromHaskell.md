@@ -46,21 +46,23 @@ type alias Name = String   -- type aliasで型に別名をつけることが出�
 
 ###レコード表記の違い。
 
-Elmではレコード型に型構築子を付けなくても定義できます。
+Elmのレコード型はオブジェクトにすこし近いです。(構造的部分型？)
 
 ```elm
 type alias Position = { x : Int , y : Int}  --.x .y関数も作られます。
+type alias User = {name : String}   -- == type User = User String
 
---type alias User = User { name : String }    --型構築子を付けるとエラーになる。
+> position = {x = 10, y = 10}                  --型を明示していない場合
+{ x = 10, y = 10 } : { x : number, y : number' }　--「xとyプロパティのある型」みたいなあつかい
+
 
 position : Position
 position = {x = 10, y = 10}  
 
 position2 : Position
-position2 = Position 5 5   ---レコード表記しないでも型を作ることが出来ます。(型構築子が自動生成されてる？)
+position2 = Position 5 5   ---レコード表記しないでも型を作ることが出来ます。
 ```
 
-Elmのレコード型はオブジェクトにすこし近いです。(構造的部分型？)
 
 こういう型が作れます。
 
@@ -70,18 +72,22 @@ type alias Position a = { a | x : Int , y : Int}
 ```
 
 レコードの中の`a|`と言うのは、ここに型が入ることが出来るということです。
-これを使うと重ねることが出来ます。
+これを使うとレコードを部分的に定義できます。
 
 ```elm
 type alias Position a = { a | x : Int , y : Int}
 
-type alias Chara = Position { name :String }    --別名つける方のtype alias
+type alias Chara = Position { name :String }
 
 chara : Chara
 chara = {x=0,y=0,name = "piyo"}                --３つのプロパティ
 
-getPosition : Position a -> Int                --レコードの部分用の関数
-getPosition {x} = x
+getPosition : Position a -> Int                --
+getPosition {x} = x                            --パターンマッチ
+
+getX : {a| x:Int } -> Int                      --xプロパティのある型を指定
+getX target = target.x
+
 ```
 
 レコードの更新構文
@@ -94,7 +100,7 @@ position = {x = 0, y = 0}
 ##main（エントリポイント）の型の違い
 
 Elmはmainの型がSvg a、Html a、Program aという型になります。SvgやHtmlといったように、Elmは画面構成用の言語です。
-Program a というのはアプリケーション一単位という型で、専用の関数で作るのですが、作るのにはview関数、update関数、初期化関数、Msg型というのを用意する必要があります。それらの関数には例えば、ユーザー操作でアプリケーション状態を変更するには「update関数でしか出来ない」など、フレームワークになっています。
+Program a というのはアプリケーション一単位という型で、専用の関数で作るのですが、作るのにはview関数、update関数、初期化関数、Msg型というのを用意する必要があります。それらの関数には例えば、ユーザー操作でアプリケーション状態を変更するには「update関数でしか出来ない」など、フレームワーク要素になっています。
 
 
 ###Elmには型クラス構文とかがない。

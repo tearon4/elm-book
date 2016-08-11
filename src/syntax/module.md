@@ -1,4 +1,4 @@
-#モジュール:module
+#module:モジュール
 
 Elmのソースコードを分割する仕組みがmoduleです。
 
@@ -57,7 +57,7 @@ mudule Main exposing (hello)           -- hello
 型と型構築子を外に出すには、Hoge(A,B)としなければならないことに注意です。
 
 
-##import 
+##import
 
 importで外部のモジュールの型や関数を使うことが出来ます。
 
