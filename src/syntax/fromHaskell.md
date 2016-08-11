@@ -49,7 +49,7 @@ type alias Name = String   -- type aliasで型に別名をつけることが出�
 Elmのレコード型はオブジェクトにすこし近いです。(構造的部分型？)
 
 ```elm
-type alias Position = { x : Int , y : Int}  --.x .y関数も作られます。
+type alias Position = { x : Int , y : Int}  
 type alias User = {name : String}   -- == type User = User String
 
 > position = {x = 10, y = 10}                  --型を明示していない場合
