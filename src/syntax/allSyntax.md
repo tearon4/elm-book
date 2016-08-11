@@ -21,8 +21,8 @@
 
 ##リテラル
 
-非負値(Bool)は「True」と「False」です。
-メモ：0、1、Nothingは非負値になりません、区別されます。
+真理値(Bool)は「True」と「False」です。
+メモ：0、1、Nothingは真理値になりません、区別されます。
 
 ```elm
 True  : Bool

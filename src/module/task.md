@@ -1,4 +1,4 @@
-# 非同期処理:Task
+# Task:非同期処理
 
 Task型はエラーのある、ひとかたまりの計算プロセスで、非同期処理で、副作用のある処理を表現する型です。  
 Httpアクセスの返り値にもなっていますし、Elmの裏側でたくさん使われています。
@@ -16,7 +16,7 @@ getJson =
     get (jsonDecoder) "test.json"   --ローカルのjsonにアクセスするTask
     |> Task.mapError toString
     |> perform GetErr Get           --実行。Cmdになる。
-    
+
 init = "" ! [getJson]               --初期化後すぐのタイミングでhttpアクセスして値を取ってくる。
 ```
 
