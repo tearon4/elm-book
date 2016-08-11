@@ -138,19 +138,25 @@ taged2 : Container String
 taged2 = Container "hello"
 ```
 
+##type aliasで作れる型
 
 ###レコード型
 
+プロパティがあるレコード型というのを定義できます。
 
-```
-type Fruits = Orange | Melon | Apple
-```
-
-##レコード型用の表記
-
+```elm
+type alias User = {name : String}
 ```
 
+レコード型はプロパティでアクセスできます。
+
 ```
+> user1 = {name = "hiro"}                  
+{ name = "hiro" } : { name : String }
+> user1.name
+"hiro" : String
+```
+
 
 
 ##まとめ

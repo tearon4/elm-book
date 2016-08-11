@@ -14,8 +14,7 @@ elm-package install elm-lang/html --yes
 
 使用例ハローワールド
 
-```hs:Elm
-
+```hs
 import Html exposing (div,text)
 
 main = div [] [text "Hello World"]
@@ -23,22 +22,20 @@ main = div [] [text "Hello World"]
 
 以下モジュールごとの説明になります。
 
-##[Htmlモジュール](http://package.elm-lang.org/packages/evancz/elm-html/1.1.0/Html)でHTML作る。
+##HtmlモジュールでHTML作る。
 
 基本になるモジュールで、Html型があります。
 
 ```hs
-
 type alias Html = VirtualDom.Node
 type alias Attribute = VirtualDom.Property
 
 ```
 
-基本になるnode関数です。
+直接使うことは無いですがベースになっているnode関数です。
 
 ```hs
-
-node : String -> List Attribute -> List Html -> Html
+node : String -> List (Attribute msg) -> List (Html msg) -> Html msg
 node = VirtualDom.node
 ```
 
@@ -50,15 +47,14 @@ node = VirtualDom.node
 divタグを作るには、div関数を使います。
 
 ```hs
-div : List Attribute -> List Html -> Html
+div : List (Attribute msg) -> List (Html msg) -> Html msg
 div = node "div"
 ```
 
 helloというhtmlを作るコードです。
 
 ```hs
-
-import Html(div,text)
+import Html exposing (div,text)
 
 main = div [] [text "hello"] ---textは何もタグで囲まれていない文字列Html a を作る
 
@@ -66,8 +62,7 @@ main = div [] [text "hello"] ---textは何もタグで囲まれていない文�
 
 結果のイメージになります。
 
-```html:
-
+```html
 <div>
     <div>heloo</div>
 </div>
@@ -76,33 +71,32 @@ main = div [] [text "hello"] ---textは何もタグで囲まれていない文�
 inputタグを作ってみます。
 
 ```hs
-import Html(input)
-import Html.Attributes(id)
+import Html exposing (input)
+import Html.Attributes exposing (id)
 
 main = input [id "Input"] [] ---id は id属性を作る関数
 ```
 
-```html:HTML
-
+```html
 <div>
   <input id="Input">
 </div>
 ```
+
 HTMLを作ることが出来ました。
 ほかにも[いろんなタグを作る関数も揃ってます。](http://package.elm-lang.org/packages/evancz/elm-html/1.1.0/Html)
 
 
 
 
-##[Html.Attributesモジュール](http://package.elm-lang.org/packages/evancz/elm-html/1.1.0/Html-Attributes)で属性を付ける。
+##Html.Attributesモジュールで属性を付ける。
 
 Html.AttributesモジュールにあるAttribute型を作る関数で、Htmlに属性を付けます。
 class属性、id属性をつけてみます。
 
 ```hs
-
-import Html(div)
-import Html.Attributes(class,id)
+import Html exposing (div)
+import Html.Attributes exposing (class,id)
 
 main : Html
 main = div [class "test"  
@@ -110,8 +104,7 @@ main = div [class "test"
            []
 ```
 
-```
-
+```html
 <div>
     <div class="test" id="a"></div>
 </div>
@@ -124,15 +117,12 @@ main = div [class "test"
 文字列を改行を設定するcssをつけてみます。
 
 ```hs
-
-style : List (String, String) -> Attribute
-
+style : List (String, String) -> Attribute msg
 ```
 
 ```hs
-
-import Html(div)
-import Html.Attributes(style)
+import Html exposing (div)
+import Html.Attributes exposing (style)
 
 break = ("word-break","break-all")
 spaceWrap = ("white-space","pre-wrap")
@@ -169,7 +159,7 @@ main = div[on "keydown" ...
 
 
 
-##[Html.Events](http://package.elm-lang.org/packages/evancz/elm-html/1.1.0/Html-Events)モジュールのon関数
+##Html.Eventsモジュールのon関数
 
 このモジュール内ある関数を使って、HtmlにイベントのAttributeを付けることが出来ます。
 
@@ -206,18 +196,18 @@ onClick msg =
   on "click" (Json.succeed msg)
 ```
 
+##Html.Lazy
 
-
-##[Html.Lazy](http://package.elm-lang.org/packages/evancz/elm-html/1.1.0/Html-Lazy)
 指定した値が変化した時だけ、その部分を描画するlazy関数があります。
 この関数を使うことで、仮想DOMの力を発揮させて、効率の良い描画ができます。
 
 ```hs
-
 lazy : (a -> Html) -> a -> Html
 lazy = VirtualDom.lazy
-
 ```
 
 一引数目にviewの関数、二引数目に関数の引数になる値を入れます。
 値が変更した時だけviewを更新します。
+
+
+続きます
