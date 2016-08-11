@@ -36,8 +36,3 @@ elm-package install elm-lang/html -y
 elm-package install
 
 ```
-
-
-###パッケージの公開方法
-
-TODO

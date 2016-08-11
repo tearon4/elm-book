@@ -10,5 +10,8 @@
    },
 
   "pluginsConfig": {
+        "fontsettings": {
+            "theme": "white"
+        }
     }
 }

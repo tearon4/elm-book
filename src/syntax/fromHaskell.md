@@ -121,6 +121,3 @@ appendable は`List` `String`
 
 
 ###Elmは正格評価です。
-
-
-あと思いついたら追記します。
