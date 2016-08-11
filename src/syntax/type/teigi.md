@@ -75,16 +75,17 @@ type Position = Position Int Int
 
 `|`を使って型を定義する事ができます。この型はUnion type（ユニオン型、または直和型または代数的データ型）になります。（でも集合の直和とは違うものです。）
 
+あと`|`を使った型はtypeでしか定義できません。
+
 ```elm
 type　Bool =　Ture | False
 ```
 
 上記の場合この型（Bool）は、TrueかFalseどちらかになる。という意味になります。フラグのイメージそのままです。
 
-型構築子はやはり左端になります。`|`で定義した場合は`|`毎に左端が型構築子になります。`|`を使った型はtypeでしか定義できません。
+型構築子はやはり左端になります。`|`で定義した場合は`|`毎に左端が型構築子になります。
 
 ```elm
-
 type GameState = Start String | Main String | End Int
 
 type alias Hoge = Int
