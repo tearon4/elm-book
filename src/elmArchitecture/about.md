@@ -80,6 +80,8 @@ type alias Model = { counter : Int
 
 そしてModelを作る初期化用の関数を作ります。
 
+例
+
 ```elm
 init : Model
 init = {counter = 0,title = "",position = {x =0,y=0}}

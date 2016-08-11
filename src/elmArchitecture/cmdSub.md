@@ -21,7 +21,7 @@ Cmdは外にだす命令、コマンドという意味です。DBへの検索指
 
 Cmdを発行できる場所は、init関数と、update関数です。
 
-```
+```elm
 init : (Model,Cmd msg)
 ```
 
@@ -34,11 +34,68 @@ update関数に渡すと、処理の途中で発行されます。
 Subは外から内にくるイベントを表しています。マウスの入力とかがそうです。
 
 
+```elm
+subscriptions : model -> Sub msg
+```
 
+例えば以下のようなのを用意します。
+
+```elm
+sub model = Mouse.move GetPosition
 ```
-subscriptions : 
-```
+
+Subを返す関数は受け取る型構築子を渡すことが多いと思います。
 
 ##CmdとSubに用意されている関数
 
 Cmdは、Subには同じ関数が用意されています。
+
+```elm
+map
+batch
+none
+(!)
+```
+
+noneは、何もないCmd、Subを返します。Cmd、Subが無いときに設定します。
+batchは、複数のCmd、Subをがっちゃんこして一つにして自分のアプリに送ります。合体したCmdSubが同時に発生したら最初のものが優先されます。
+(!)はbatchの省力記法用の関数です。
+
+```elm
+init : (Model,Cmd msg)
+init = model ! []
+```
+
+
+##Elm-Architectureのモジュラリティ
+
+Elm-Architectureで書かれた、init,update,Model等一連のセットをコンポーネントと呼びます。
+Elm-Architectureで書かれたコンポーネント同士は木構造に組み合わせることが出来ます。
+
+親コンポーネントを定義する時、コンポーネントを使って定義します。
+
+````elm
+import Child1
+import Child2
+
+type Msg   = A Child1.Msg             -- 子供のコンポーネントを使って定義します。
+           | B Child2.Msg
+
+type Model = {child1 : Child1.Model}  
+
+update msg model =
+     case msg of
+       A child1msg ->let child = Child1.update child1msg --子供のMsgは子供のupdateに食わせます。
+
+view = div [] [HtmlApp.map A Child1.view]  --子供のviewのMsgはHtml.Appでキャッチします。
+
+```
+
+Elm Packageにもコンポーネントが公開されています。
+
+##Elm-Architecture
+
+Elmは型付けもあって、updateや型は作ろうと思った通り大きくすることが出来ます。
+
+コンポーネントの組み合わせ方はまだまだ議論や、例が少ない部分です。
+おすすめの記事 :[再利用可能なコンポーネントはアンチパターン - ジンジャー研究室](http://jinjor-labo.hatenablog.com/entry/2016/08/03/031107)  

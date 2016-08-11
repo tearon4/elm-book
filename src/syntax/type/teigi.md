@@ -1,9 +1,8 @@
 #型を定義するには
 
-実際のプログラムでは、プログラムに合わせた新しい型が必要になります。それには基本的な型を組み合わせ、型を新しく定義していく必要があります。
+実際のプログラムでは、プログラムに合わせた型を基本的な型を組み合わせ、新たに定義していく必要があります。
 
-
-型を新しく定義するには`type`と`type aliase`を使います。
+新しい型を定義するには`type`と`type aliase`を使います。
 
 ```elm
 type Fruits = Orange | Melon | Apple
@@ -16,28 +15,28 @@ type alias Age = Int
 
 `type alias` は既存の型に別の型名を付けるときに使います。またレコード型を作るときは特別にこちらを使います。
 
-##型構築子（コンストラクタ）
+##データ構築子（コンストラクタ）
 
-上の例では、Fruits、Msg、User、Ageが新しく定義した「型名」で、そしてOrang、Melon、Apple、Get、の部分が「型構築子（コンストラクタ）」といいいます。
+上の例では、Fruits、Msg、User、Ageが新しく定義した「型名」で、そしてOrang、Melon、Apple、Get、の部分が「データ構築子（コンストラクタ）」といいいます。
 
-型構築子がどこになるのかというのを意識して見てください。
+`type`で新しい型を定義するときは、必ず他と被らないデータ構築子を定義する必要があります。
 
-`type`で新しい型を定義するときは、必ず他と被らない型構築子を定義する必要があります。
+データ構築子がどこになるのかというのを意識して見てください。
 
-既存の型を組み合わせた型を定義した時は、一番左が型構築子になります。
+既存の型を組み合わせた型を定義した時は、一番左がデータ構築子になります。
 
 ```elm
-type ID = ID                --IDが型構築子。
+type ID = ID                --IDがデータ構築子。
 
-type Day = Day Int Int Int  --Dayが型構築子。型名と同じ名前でも構わない。
+type Day = Day Int Int Int  --Dayがデータ構築子。型名と同じ名前でも構わない。
 
 ```
 
-型構築子を関数のように使うと、定義した型となります。
+データ構築子を関数のように使うと、定義した型に成ります。
 
 ```elm
 today : Day
-today = Day 2016 8 10   --Day型構築子を使ってDay型を作っている
+today = Day 2016 8 10   --Dayデータ構築子を使ってDay型を作っている
 
 init : Fruits
 init = Orange
@@ -64,35 +63,54 @@ getX (a,b) = a
 
 ```elm
 type Action = Action
-
 type Position = Position Int Int
 ```
 
-型構築子と既存の型を横に並べて、新しい型を定義できます。
+データ構築子と既存の型を並べて、新しい型を定義できます。
 集合のA×Bのような型なので直積型と呼ばれます。
+
+```elm
+initPosition : Position
+initPosition = Position 0 0
+aPosition : Position
+aPosition = Position 90 23
+```
 
 ###Union type
 
-`|`を使って型を定義する事ができます。この型はUnion type（ユニオン型、または直和型または代数的データ型）といいます。（でも集合の直和とは違うものです。）
-
-あと`|`を使った型はtypeでしか定義できません。
+`|`を使って型を定義する事ができます。この型はUnion type（ユニオン型、または直和型）といいます。（でも集合の直和とは違うものです。）typeでしかUnion typeを定義できません。
 
 ```elm
 type　Bool =　Ture | False
 ```
 
-上記の場合この型（Bool）は、TrueかFalseどちらかになる。という意味になります。フラグのイメージそのままです。
+上記の場合この（Bool）型は、TrueかFalseどちらかになる。という意味になります。フラグのイメージそのままです。
 
-型構築子は同じで左端です。`|`で定義した場合は`|`毎に左端が型構築子になります。
+`|`で定義した場合は`|`毎に左端がデータ構築子になります。
 
 ```elm
-type GameState = Start String | Main String | End Int  --StartとMainとEndが型構築子
+type GameState = Start String | Main String | End Int  --StartとMainとEndがデータ構築子
 
 type alias Hoge = Int
---type Huga = Test | Hoge   -- error!定義できない。型構築子に既存のものは使えない。
+--type Huga = Test | Hoge   -- error!定義できない。データ構築子に既存のものは使えない。
 ```
 
+Union typeは再帰した型を定義できます。場合分けしたした型のうち、終了にあたる型がある必要があります。
 
+```elm
+type List a = Cons a (List a) | Nil  --自分という型を使って定義している。Nilが終了
+
+nil : List a
+nil = Nil
+
+list1 : List Int
+list1 = Cons 1 Nil
+
+list2 : List Int
+list2 = Cons 2 (Cons 1 Nil)   --再帰したデータ構造
+```
+
+木構造などの再帰したデータ構造を定義できます。
 
 Union typeはcase式でスイッチすることが出来ます。
 
@@ -106,12 +124,23 @@ grow fruits =
     Apple ->
 ```
 
+###型変数
+
+型定義の時に、型変数というのを使うことが出来ます。
+
+```elm
+type Container a = Container a
+
+taged : Container Int
+taged = Container 10
+
+taged2 : Container String
+taged2 = Container "hello"
+```
+
 
 ###レコード型
 
-###いろんな型を定義する。
-
-型はUnion typeと直積型に分けられます。多分これらですべての型を表現できます。
 
 ```
 type Fruits = Orange | Melon | Apple
@@ -144,4 +173,4 @@ type A = ...
 type Hoge = A | B | C
 ```
 
-型構築子が新しい型ではない
+データ構築子が被っている
