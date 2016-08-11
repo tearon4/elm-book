@@ -191,6 +191,24 @@ myRecord =
 "Blue" : String
 ```
 
+###Elmの特別な型
+
+number、 comparable、 appendableという多相な型を内部で使っていて、組み込みの関数はその型を使っています。
+
+numberは`Int`と`Float`
+comparableは `String`, `Char`,`Int`, `Float`, `Time`,`taple`
+appendable は`List` `String`
+
+```
+(+) : number -> number -> number
+(<) : comparable -> comparable -> Bool
+(++) : appendable -> appendable -> appendable
+```
+
+```
+
+```
+
 ####　その他
 
 データ構造は様々な特性があるので、場合によったものを選択する必要があります。

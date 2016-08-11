@@ -125,5 +125,12 @@ appendable は`List` `String`
 (++) : appendable -> appendable -> appendable
 ```
 
+```elm
+> [1,2,3] ++ [4,5,6]
+[1,2,3,4,5,6] : List number
+> "hello" ++ "world"
+"helloworld" : String
+```
+
 
 ###Elmは正格評価です。
