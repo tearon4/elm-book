@@ -39,4 +39,4 @@
 <!-- * [よく見るエラー](src/etc/errors.md) -->
 <!-- * [Elmの実績調査](src/etc/zisseki.md) -->
 * [参考になるリンク集](src/etc/sankou.md)
-* [おわりに](src/Elm/owarini.md)
+<!-- * [おわりに](src/Elm/owarini.md) -->

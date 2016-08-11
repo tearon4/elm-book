@@ -20,14 +20,13 @@ type alias Age = Int
 
 上の例では、Fruits、Msg、User、Ageが新しく定義した「型名」で、そしてOrang、Melon、Apple、Get、の部分が「型構築子（コンストラクタ）」といいいます。
 
-型構築子というのを理解するのが近道です。
+型構築子がどこになるのかというのを意識して見てください。
 
 `type`で新しい型を定義するときは、必ず他と被らない型構築子を定義する必要があります。
 
-既存の型を組み合わせた型を定義した時は、一番左が新しく定義する型構築子になります。
+既存の型を組み合わせた型を定義した時は、一番左が型構築子になります。
 
 ```elm
-
 type ID = ID                --IDが型構築子。
 
 type Day = Day Int Int Int  --Dayが型構築子。型名と同じ名前でも構わない。
@@ -41,7 +40,8 @@ today : Day
 today = Day 2016 8 10   --Day型構築子を使ってDay型を作っている
 
 init : Fruits
-init = Orange           
+init = Orange
+
 ```
 
 ##type alias
@@ -73,7 +73,7 @@ type Position = Position Int Int
 
 ###Union type
 
-`|`を使って型を定義する事ができます。この型はUnion type（ユニオン型、または直和型または代数的データ型）になります。（でも集合の直和とは違うものです。）
+`|`を使って型を定義する事ができます。この型はUnion type（ユニオン型、または直和型または代数的データ型）といいます。（でも集合の直和とは違うものです。）
 
 あと`|`を使った型はtypeでしか定義できません。
 
@@ -83,16 +83,28 @@ type　Bool =　Ture | False
 
 上記の場合この型（Bool）は、TrueかFalseどちらかになる。という意味になります。フラグのイメージそのままです。
 
-型構築子はやはり左端になります。`|`で定義した場合は`|`毎に左端が型構築子になります。
+型構築子は同じで左端です。`|`で定義した場合は`|`毎に左端が型構築子になります。
 
 ```elm
-type GameState = Start String | Main String | End Int
+type GameState = Start String | Main String | End Int  --StartとMainとEndが型構築子
 
 type alias Hoge = Int
 --type Huga = Test | Hoge   -- error!定義できない。型構築子に既存のものは使えない。
 ```
 
 
+
+Union typeはcase式でスイッチすることが出来ます。
+
+```elm
+type Fruits = Orange | Melon | Apple
+
+grow fruits =
+  case fruits of
+    Orange ->
+    Melons ->
+    Apple ->
+```
 
 
 ###レコード型
@@ -102,7 +114,7 @@ type alias Hoge = Int
 型はUnion typeと直積型に分けられます。多分これらですべての型を表現できます。
 
 ```
-
+type Fruits = Orange | Melon | Apple
 ```
 
 ##レコード型用の表記

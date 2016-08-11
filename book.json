@@ -3,12 +3,6 @@
 
   "plugins": ["japanese-support"],
 
-  "links": {
-    "sidebar": {
-        "Contact us / Support": "hasegawatann@gmail.com"
-    }
-   },
-
   "pluginsConfig": {
         "fontsettings": {
             "theme": "white"
