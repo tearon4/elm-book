@@ -11,9 +11,11 @@
 * effect module
 
 
-###fullscreen/embed
+##fullscreen/embed
 
-ElmをJs出力し、Html側に読み込むコードと起動するコードを書きます。この時、fullscreenで起動するか、embedで何処かのDOMに埋め込むか、workerで画面を出さないか選ぶことができます。
+ElmをJsで出力し、起動する方法です。
+
+ElmをJs出力した後、Html側に読み込むコードと起動するコードを書きます。この時、fullscreenで起動するか、embedで何処かのDOMに埋め込むか、workerで画面を出さないか選ぶことができます。
 
 ```js
 <script type="text/javascript" src="Example.js"></script>
@@ -70,9 +72,9 @@ embedを使うと指定したDOMの内部にElmを展開できます。
 ```
 
 
-###Port
+##Port
 
-Portとは、Elmに用意されているJsとのやり取り用の構文です。
+Portとは、Elmに用意されている外とやり取りするための構文です。
 
 ```elm
 port hello : String -> Cmd msg
@@ -88,7 +90,7 @@ app.ports.test.subscribe(function(a) {
 
 syntaxのportのページで解説しています。
 
-###programWithFlags
+##programWithFlags
 
 programWithFlagsとは、Elmの初期化時にJs側の値を使う方法です。Html.Appのページで解説しています。
 
@@ -99,15 +101,37 @@ var app = Elm.MyApp.embed(elm,{
     token: '12345'})
 ```
 
-###Nativeモジュール
+##Nativeモジュール
 
-coreライブラリ内を見ると、Nativeというフォルダがあります。これがNatveモジュールで、直接Elmランタイムの中にJavascriptを展開するように書くことが出来ます。
+coreライブラリ内を見ると、Nativeというフォルダがあります。これがNatveモジュールで、直接Elmランタイムの中にJavascriptを展開することが出来ます。
 
-便利ですが、将来的にランタイムが壊れやすくなる要素を組み入れたくないElmはNativeモジュールを非推奨にしています。
-とはいえ、すぐにJavascript用apiをElmで叩いたり必要になったりもします。
+ElmはNativeモジュールを非推奨にしています。jsだけじゃなくwebassemblyを見越していること、Elm内に将来的にランタイムの堅実さを壊すものを入れたくないこと、などが理由です。
 
-やり方TODO
+とはいえ、すぐにJavascript用apiをElmで叩いたり必要になったりします。
 
-###Effect Module
+###利用の仕方
 
-PubSubの裏側、Effectモジュールという方法もあります。
+elm-package.jsonに以下のオプションを加えます。するとNativeモジュールがコンパイル出来ます。
+
+```
+"native-modules": true,
+```
+
+Nativeモジュールは以下の様な書式になります。｛ユーザー名｝とかは置き換えてください
+
+```
+var _{ユーザー名}${パッケージ名}$Native_{ライブラリ名} = function(elm) {
+
+    var test = "hello"
+
+    return  { test: test };
+}();
+```
+
+##Effect Module
+
+PubSubの裏側、Effectモジュールです。Pub、Subを提供するライブラリは、CmdとSubのリストとTaskをどう処理するかをEffectモジュールで管理します。しかしまだ理解が及んでいないのでわかりしだい書きたいと思います。
+
+##まとめ
+
+以上のような方法があります。この中ならportが一番堅実で楽かなと思いました。
