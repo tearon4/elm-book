@@ -54,7 +54,7 @@ mudule Main exposing (Hoge(A,B),hello) -- Hoge , A , B , hello
 mudule Main exposing (hello)           -- hello
 ```
 
-型と型構築子を外に出すには、Hoge(A,B)としなければならないことに注意です。
+型とデータ構築子を外に出すには、Hoge(A,B)としなければならないことに注意です。
 
 
 ##import

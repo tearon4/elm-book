@@ -97,7 +97,7 @@ type Msg = TextInput String | MouseMove Position | Click | ...
 
 （型の定義方法は、「新しい型を定義する」のページで解説しています。）
 
-上記の例ではTextInputやMouseMoveやClickが型構築子というものにあたります。TextInputを見ると横にStringがあるので、この型はTetxtInput "hello"とか、TextInput "hogehoge"とかになることが予想されます。つまりこの型構築子がコンテナになって、操作自体と入力された値を画面側からアプリ内部へ送る役割を担います。
+上記の例ではTextInputやMouseMoveやClickがデータ構築子というものにあたります。TextInputを見ると横にStringがあるので、この型はTetxtInput "hello"とか、TextInput "hogehoge"とかになることが予想されます。つまりこのデータ構築子がコンテナになって、操作自体と入力された値を画面側からアプリ内部へ送る役割を担います。
 
 Html.Eventモジュールには、型構築を受けとる関数があります。
 
@@ -160,7 +160,7 @@ view model = div [onClick Click] [text model.titel]
 
 ```
 
-これでMsg型の型構築子がコンテナになり、イベントが発火した時はupdate関数に必要な情報が渡ります。
+これでMsg型のデータ構築子がコンテナになり、イベントが発火した時はupdate関数に必要な情報が渡ります。
 
 Eventに関してはHtmlを参照してください。
 

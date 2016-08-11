@@ -186,7 +186,7 @@ getX target = target.x
 
 ```elm
 type alias User = {name : String} -- == type User = User String
-init = User "k"                   -- 型構築子が自動で生成されている。
+init = User "k"                   -- データ構築子が自動で生成されている。
 ```
 
 

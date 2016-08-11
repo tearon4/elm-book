@@ -44,7 +44,7 @@ subscriptions : model -> Sub msg
 sub model = Mouse.move GetPosition
 ```
 
-Subを返す関数は受け取る型構築子を渡すことが多いと思います。
+Subを返す関数は受け取るデータ構築子を渡すことが多いと思います。
 
 ##CmdとSubに用意されている関数
 

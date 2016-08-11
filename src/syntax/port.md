@@ -1,4 +1,4 @@
-##Jsとやり取りする:Port
+##Port:Jsとやり取りする
 
 PortとはElmに用意されているJsとのやり取り用の構文と仕組みです。
 
@@ -102,7 +102,7 @@ port jsHello : (String -> msg) -> Sub msg
 ```
 
 定義した関数をsubscriptionsで使います。
-一引数目にJsからくる値をMsgにする関数（つまりはMsgの型構築子）を入れ使います。
+一引数目にJsからくる値をMsgにする関数（つまりはMsgのデータ構築子）を入れ使います。
 
 ```elm
 type Msg = GetHello Strign  --受け取るMsgを定義！
