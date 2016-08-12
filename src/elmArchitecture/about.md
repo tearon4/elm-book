@@ -1,22 +1,20 @@
 
-Elmのmainの型は、Html a かProgram aである必要があります。
+#Elmで動くアプリケーションを作るには？
 
-Program aは入力や操作ができる画面のあるアプリケーションになります。
+Elmの`main`の型は、`Html a`か`Program a`である必要があります。
 
-これは一般的な汎用プログラミング言語と比べると変わっているところです。他のプログラミング言語では、画面を操るライブラリを用意して、それらを適切に操らなければならず、さらにソースコードが巨大になるならフレームワークを導入したりする必要があります。
+Html aは静的な画面になり、`Program a`はさらに入力や操作ができるアプリケーションになります。
 
-ElmではHtml.Appにある関数を使いProgram aを作ります。
+Elmではelm-lang/htmlパッケージのHtml.Appモジュールにある関数を使い`Program a`を作ります。
 
 Html.Appの関数を使うには、init、update、view、Msg、といった関数を用意する必要があります。
 
-Elmではこれらの関数を用意すると画面を持ったアプリケーションを作れるようになっています。
-
-その考え方がElm Architectureです。
+Elmではこれらの関数を用意すると画面を持ったアプリケーションを作れるようになっています。それらの関数の役割がElm Architectureという考え方で決められています。
 
 # Elm Architectureとは？
 
 ElmアーキテクチュアとはElmと、Elmで実現する設計や構造化の手法、みたいなのを指します。
-例えば、MVCならmodelとviewとControllerを記述するように、Elmではどういう関数を用意して、アプリケーションのソースコードをどう分けて構造化して、それをどう実現するか、みたいな話になります。
+例えば、MVCならmodelとviewとControllerを記述するように、Elmではどういう関数を用意して、アプリケーションのソースコードをどう分けて構造化して、それをどう実現するか、みたいなことを議論しています。
 
 初めて提案され、詳しいドキュメントがあるレポジトリがこちらになります。
 https://github.com/evancz/elm-architecture-tutorial
@@ -29,29 +27,27 @@ Elm-Architectureには発案初期のバージョンと現在の二種類のバ�
 
 Elmではそれぞれ用に関数を用意しています。(beginerProgram、program)
 
-一つは今ではビギナー用になっている、Elm-Architecture初期のバージョンです。
+一つはElm-Architecture初期のバージョンです。今ではビギナー用になっています。
 model、view、update、Msgという関数と型を用意する必要があります。
 
-もう一つは、Cmd/Subがついた現行のバージョンです。内外からの入力（マウスなど）や非同期処理を網羅したバージョンなのです。
+もう一つは、Cmd/Subがついた現行のバージョンです。内外からの入力（マウスなど）や非同期処理を網羅したバージョンです。
 こちらではmodel、update、view、cmd、subscriptions、Msgを用意します。
 
-まずビギナーバージョンでなれると良いでしょう。
+まずビギナーバージョンで慣れると良いでしょう。
 画面にボタンなどのインターフェースがあるアプリケーションが作れます。
 
-そしてCmd/Subバージョンは、ビギナーバージョンを内包しているので、慣れた後は普段からこちらを使います。
+Cmd/Subバージョンは、ビギナーバージョンを内包しているので、慣れた後はこちらを使ってみましょう。
 
 
 ##実行される順番
 
-流れについて確認しておきます。
+各関数が実行される順番ついて確認しておきます。
 
-まずElmが起動してアプリケーション全体を構築するとき、アプリケーションに初期値をセットします。このとき`init`関数が使われます。次に画面が構築された後、利用者が画面を操作します。このとき画面から起きたアクションや値がMsgになって`update`送られます。`update`関数が起動し、状態を更新し、新しい状態を返します。これは画面を操作されるたびに実行されます。
+まずElmが起動してアプリケーション全体を構築するとき、アプリケーションに初期値をセットします。このとき`init`関数が使われます。次に画面が構築された後、利用者が画面を操作します。このとき画面から起きたアクションや値が`Msg`になって`update`に送られます。`Msg`がある度、`update`関数が起動し、状態を更新し新しい状態を返します。状態によって画面が変わります。あとは利用者が画面を操作しループします。
 
 以上が基本の流れになります。
 
-
 次に、model、update、view、cmd、subscriptions、Msgそれぞれについて解説します。
-
 
 ##Model
 
@@ -97,9 +93,7 @@ type Msg = TextInput String | MouseMove Position | Click | ...
 
 （型の定義方法は、「新しい型を定義する」のページで解説しています。）
 
-上記の例ではTextInputやMouseMoveやClickがデータ構築子というものにあたります。TextInputを見ると横にStringがあるので、この型はTetxtInput "hello"とか、TextInput "hogehoge"とかになることが予想されます。つまりこのデータ構築子がコンテナになって、操作自体と入力された値を画面側からアプリ内部へ送る役割を担います。
-
-Html.Eventモジュールには、型構築を受けとる関数があります。
+上記の例ではTextInputやMouseMoveやClickがデータ構築子というものにあたります。TextInputを見ると横にStringがあるので、この型はTetxtInput "hello"とか、TextInput "hogehoge"とかになることが予想されます。つまりこのデータ構築子がコンテナになって、操作と入力された値を画面側からアプリ内部へ運びます。
 
 ##update
 
@@ -128,14 +122,14 @@ update msg model =
     _ ->
 ```
 
-updateの型は、`Msg -> Model -> Model`なので、それぞれの処理がModelを返すようにします。
+updateの型は、`Msg -> Model -> Model`なので、`Model`を返すようにします。
 レコード表記が有効です。
 
 ```elm
 update : Msg -> Model -> Model
 update msg model =
   case msg of
-    TextInput str -> {model | titel = str}
+    TextInput str -> {model | titel = str}    --titleを変化
     Click -> aresite model |> koresite |> soresite
     _ ->
 ```
@@ -148,11 +142,11 @@ viewとはモデルを受け取り画面を作る関数です。
 
 ```elm
 view : Model -> Html a
-view model = div [] [text model.titel]
+view model = div [] [text model.titel]  --titleデータを表示しています。
 
 ```
 
-このとき画面上でクリックや入力のイベントがあるなら、Html.Eventの関数などを使いHtmlに設定します。
+クリックや入力の出来る画面を作りたいなら、HtmlやHtml.Eventの関数を使います。
 
 ```elm
 view : Model -> Html a
@@ -160,9 +154,8 @@ view model = div [onClick Click] [text model.titel]
 
 ```
 
-これでMsg型のデータ構築子がコンテナになり、イベントが発火した時はupdate関数に必要な情報が渡ります。
+ここでonClick関数にMsg型のデータ構築子を渡しています。Msg型のデータ構築子がコンテナになり、イベントが発火した時はupdate関数に必要な情報が渡ります。
 
-Eventに関してはHtmlを参照してください。
 
 ##ビギナーバージョン
 

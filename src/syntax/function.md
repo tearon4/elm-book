@@ -12,7 +12,7 @@ twice n = 2 * n
 tasu a b = a + b
 ```
 
-関数を使うには、定義した関数名と、関数にいれる値を並べます。すると処理が行われ結果が返ります。
+関数を使うには、定義した関数名と、関数に入れる値を並べます。すると処理が行われ結果が返ります。
 
 ```elm
 > twice n = 2 * n
@@ -56,9 +56,9 @@ as構文とは引数部分に別名をつけることが出来る構文です。
 ```elm
 model = {counter : Int}
 
-update msg ({counter} as model) =              -- パターンマッチとas構文
-             let counter' = counter + 1        --counter変数を使っている。
-             in {model | counter = counter'}   -- model変数を使っている。
+update msg ({counter} as model) =            -- パターンマッチとas構文
+             let counter' = counter + 1      --counter変数を使っている。
+             in {model | counter = counter'} -- model変数を使っている。
 
 ```
 
@@ -141,7 +141,7 @@ in
 
 名前のない関数を定義できます。
 
-関数の名前が必要ないとき、省略して書きたい時、
+関数の名前が必要ない時、省略して書きたい時、
 関数だけの要素がほしい時に使います。
 
 かっこで包んで、`\`アンダーバーを書いて、引数を書かいて、イコールの代わりに矢印を使います。
@@ -153,7 +153,7 @@ tasu = (\a b -> a + b)
 
 ```
 
-関数が必要なところに書くと便利です。
+関数が必要なところに書くときに便利です。
 
 ```elm
 List.indexdMap (\idx a -> idx * a) [2..5]

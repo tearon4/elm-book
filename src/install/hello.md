@@ -7,7 +7,7 @@
 
 * Hallo Worldのコードを書く
 * 必要なライブラリをインストールする。
- - ブラウザに表示するには、Coreライブラリに含まれていない「Htmlライブラリ」を使うので、elm-packageを使いインストールする必要があります。
+ - ブラウザに表示するには、Coreライブラリに含まれていないelm-lang/htmlの`Html`ライブラリを使うので、elm-packageを使いインストールする必要があります。
 * コンパイル。
 * ブラウザで開く。
 
@@ -23,7 +23,7 @@ main = text "Hello World"
 
 次にhtmlライブラリをインストールします。コマンドプロンプト（またはターミナル）を開き以下のコマンドを打ちます。
 
-```
+```bash
 elm-package install elm-lang/html -y
 ```
 
@@ -31,7 +31,7 @@ elm-package install elm-lang/html -y
 
 hello.elmファイルをコンパイルします。
 
-```
+```bash
 elm-make hello.elm
 ```
 
