@@ -1,4 +1,4 @@
-##パッケージング:elm-package
+##elm-package:パッケージング
 
 elm-packageはElmのパッケージ管理システムです。
 
