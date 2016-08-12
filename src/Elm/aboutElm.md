@@ -21,11 +21,9 @@ Elmランタイムのみの出力も出来ます。そうすると、画面を�
 またHTML周りは仮想DOMという技術を使い、画面上で多くのDOM変更があれば負担を減らして描画することが出来ます。 使い方を[elm-lang/html:Html](src/module/html.md)で解説しています。
 
 
-###Elm-Architectureフレームワークになる。
+###Elm-Architectureという設計方針
 
-Elmは一つの設計方針で記述していきます。これがElm-Architectureです。
-なのでElmは言語ですが、使うとフレームワークにもなります。
-そしてElm-Architectureは他のフレームワークに影響を与えたりしている新しいGUIの構築手法だったりします。
+GUIアプリケーションを作るのに、MVCやMVVMなどの設計方針がありますが、ElmではElm-Architectureという考え方で記述していきます。この考え方でElmはたった３つか４つの関数でGUIアプリケーションを表現します。そしてElm-Architectureは他のJSフレームワーク（redux、Cycle.js）に影響を与えたりしている新しいGUIの構築手法だったりします。
 [Elm-Architecture](src/elmArchitecture/about.md)で解説しています。
 
 ###Elmはシンプルで小さな関数型言語
