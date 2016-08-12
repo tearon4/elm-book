@@ -1,9 +1,9 @@
-#Html
+#elm-lang/html : Html
 
-[Htmlライブラリ](http://package.elm-lang.org/packages/evancz/elm-html)の説明になります。
+Htmlライブラリのあるelm-lang/htmlパッケージの説明になります。
 
-このライブラリを使うことでHtmlを作ることが出来ます。
-Htmlライブラリは[virtual-dom](https://github.com/Matt-Esch/virtual-dom)をElm用にそのままラップしたものなので、仮想DOMという描画方法を自然に使うことが出来ます。
+このパッケージのライブラリを使うことでHtmlを作ることが出来ます。
+また、Htmlライブラリは[virtual-dom](https://github.com/Matt-Esch/virtual-dom)をElm用にそのままラップしたものなので、仮想DOMという描画方法を自然に使うことが出来ます。
 
 
 パッケージのインストールコマンド
