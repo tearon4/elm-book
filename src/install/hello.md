@@ -3,7 +3,7 @@
 「Hello World」と表示するプログラムを作ります。
 ここでElmのコンパイルまでの過程を解説したいと思います。
 
-以下のステップが必要です。（elm-packageなどのツールの説明はセクションで行います。）
+以下のステップが必要です。（elm-packageなどのツールの説明は次のセクションで行います。）
 
 * Hallo Worldのコードを書く
 * 必要なライブラリをインストールする。
@@ -27,7 +27,7 @@ main = text "Hello World"
 elm-package install elm-lang/html -y
 ```
 
-成功したらelm-package.jsonというファイルが作られます。
+成功したらパッケージの入ったフォルダと、依存パッケージ情報が書き込まれたelm-package.jsonというファイルが作成されます。
 
 hello.elmファイルをコンパイルします。
 
@@ -35,7 +35,7 @@ hello.elmファイルをコンパイルします。
 elm-make hello.elm
 ```
 
-エラー無くコンパイルが出来たら、index.htmlファイルが作られます。
+エラー無くコンパイルが出来たら、index.htmlというファイルが作られます。
 
 index.htmlファイルをブラウザで開くと、hellow worldが表示されていると思います！
 

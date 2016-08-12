@@ -13,9 +13,9 @@
 
 ##fullscreen/embed
 
-ElmをJsで出力し、起動する方法です。
+ElmをJSで出力し、起動する方法です。
 
-ElmをJs出力した後、Html側に読み込むコードと起動するコードを書きます。この時、fullscreenで起動するか、embedで何処かのDOMに埋め込むか、workerで画面を出さないか選ぶことができます。
+ElmをJS出力した後、Html側に読み込むコードと起動するコードを書きます。この時、fullscreenで起動するか、embedで何処かのDOMに埋め込むか、workerで画面を出さないか選ぶことができます。
 
 ```js
 <script type="text/javascript" src="Example.js"></script>
@@ -34,7 +34,7 @@ module Example exposing (...)
 
 ```
 
-次にJsファイルとしてコンパイルします。
+次にJSファイルとしてコンパイルします。
 
 ```
 elm-make Example.elm --output=Example.js
@@ -80,7 +80,7 @@ Portとは、Elmに用意されている外とやり取りするための構文�
 port hello : String -> Cmd msg
 ```
 
-このようにElm側で書き、Js側ではsubscribeと、sendでやり取りします。
+このようにElm側は書き、JS側からはsubscribeと、sendという関数でやり取りを行います。
 
 ```js
 app.ports.test.subscribe(function(a) {
@@ -92,7 +92,7 @@ syntaxのportのページで解説しています。
 
 ##programWithFlags
 
-programWithFlagsとは、Elmの初期化時にJs側の値を使う方法です。Html.Appのページで解説しています。
+programWithFlagsとは、Elmの初期化時にJS側の値を使う方法です。Html.Appのページで解説しています。
 
 ```js
 var elm = document.getElementById('elm')
