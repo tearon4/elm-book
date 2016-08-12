@@ -21,8 +21,8 @@
 
 ##リテラル
 
-真理値(Bool)は「True」と「False」です。
-メモ：0、1、Nothingは真理値になりません、区別されます。
+真理値(Bool)は`True`と`False`です。  
+メモ：`0`、`1`、`Nothing`は真理値になりません、区別されます。
 
 ```elm
 True  : Bool
@@ -36,7 +36,7 @@ False : Bool
 3.14  : Float
 ```
 
-シングルコーテーションで一文字を表現するChar型
+シングルコーテーションで一文字を表現するChar型に、  
 ダブルコーテーションで文字列型（String）になります。
 
 ```elm
@@ -60,9 +60,9 @@ mark =
 
 ```
 
-##List
+###List
 
-'[]'でListになります。
+`[]`と`,`でList型になります。
 
 ```elm
 [1..4]           
@@ -71,8 +71,16 @@ mark =
 1 :: 2 :: 3 :: 4 :: []
 ```
 
+###Taple
 
-##変数、関数の定義
+`()`と`,`でタプル型になります。
+
+```elm
+> (1,"hello",4)
+(1,"hello",4) : ( number, String, number' )
+```
+
+###変数、関数の定義
 
 変数
 
@@ -92,7 +100,15 @@ helloWorld name name2 = "hello , " ++ name ++ " " ++ name2
 
 ```
 
-##関数の適用
+###関数の適用
+
+```elm
+> twice n = 2 * n
+<function> : number -> number
+> twice 10
+20 : number
+```
+
 
 関数を\`でくるむと中置き記法ができます。
 
@@ -102,7 +118,7 @@ max 5 10 ==
 
 ```
 
-##型の表記
+###型の表記
 
 変数や関数には、型を明示することが出来ます。
 
@@ -117,7 +133,7 @@ add10 : Int -> Int
 add10 n = n + 10
 ```
 
-##型の定義
+###型の定義
 
 新しい型を定義することができます。
 
@@ -137,7 +153,9 @@ type User = User Age Name
 isOver15 : Age -> Bool
 ```
 
-##レコード型
+「新しい型を定義する」のページで解説しています。
+
+###レコード型
 
 レコード表記という構文を使うと、レコード型を定義できます。
 レコード型はjavasciptのオブジェクトに近いものです。
@@ -151,31 +169,33 @@ init = {id = 10 , name = ""}
 
 ###レコード構文
 
-レコード型で型を定義すると、自動で関数が用意されます。
-レコード型には専用の更新用の構文があります。
+レコード型には専用のアクセスと、更新用の構文があります。
 
 値を取り出す。
 
 ```elm
-> .hp {hp = 10}
+> hiro = {hp=10}
+{ hp = 10 } : { hp : number }
+> hiro.hp
+10 : number
+> .hp hiro
 10 : number
 ```
 
 レコード型を更新する。
 
 ```elm
-> hoge = {hp = 100}
+> hiro = {hp = 100}
 { hp = 100 } : { hp : number }
-> {hoge | hp = hoge.hp + 20}
+> {hiro | hp = hiro.hp + 20}
 { hp = 120 } : { hp : number }
 ```
 
-##case式、if式、
+###case式、if式、
 
 case式とif式で処理を分岐します。
 
-if式　
-条件によって処理が分岐します。
+if式は、条件によって処理が分岐します。
 
 ```elm
 if a < 200 then
@@ -185,8 +205,7 @@ else
 
 ```
 
-case式
-パターンによって処理を分岐します。
+case式は、パターンによって処理を分岐します。
 
 ```elm
 case {知りたいもの} of
@@ -199,7 +218,7 @@ case n of
     _ -> --_（アンダーバー）はすべてにマッチします。
 ```
 
-case式は型を必ず網羅しないといけません。
+case式は必ず型を網羅しないといけません。
 
 ```elm
 type Msg
@@ -210,13 +229,13 @@ update msg state =
   case msg of
     Get ->
       --
-    Move ->
+    Move ->      --全てのパターンを網羅する必要がある
       --
 ```
 
-##Let in 式
+###Let in 式
 
-関数の中でletin式を使うと、内部変数を定義できます。
+letin式を使うと、内部変数を定義できます。
 
 ```elm
 test a y =
@@ -225,9 +244,9 @@ test a y =
       in  x + y
 ```
 
-##モジュール:module
+###モジュール:module
 
-Elmはソースコードを別ファイルに分け、読み込むことが出来ます。
+Elmはソースコードを別ファイルに分ける仕組みがあります。
 
 ```elm
 module Test exposing (..) --モジュール名を付けて外にだす。
@@ -236,13 +255,12 @@ import Hoge exposing (hello) --モジュールをインポート
 
 ```
 
-exposingの書き方で、どの関数やデータ構築子を出すか指定できます。
+exposingの書き方で、内外に出す関数やデータ構築子を細かく指定できます。
 
 ```elm
--- モジュール内で定義した型と値をエクスポート
 module Hello exposing
-    ( Hoge(A,B) --型とその構築子を指定
-    , hello
+    ( Hoge(A,B)         --型とその構築子を指定
+    , hello             --関数を指定
     )
 
 type Hoge
@@ -252,8 +270,8 @@ hello = ""
 world = ""
 ```
 
-import
-モジュールをインポートします。書き方でインポートの仕方が変わります。
+import  
+モジュールをインポートします。書き方によりインポートの仕方が変わります。
 
 ```elm
 -- qualified imports
@@ -267,6 +285,8 @@ import Hello exposing ( Hoge )            -- Hoge
 import Hello exposing ( Hoge(..) )        -- Hoge, A , B
 import Hello exposing ( Hoge(A) )         -- Hoge, A
 ```
+
+「Module:モジュールシステム」のページでも解説しています。
 
 
 ###関数の適用順、パイプ演算子
@@ -331,7 +351,7 @@ update msg state =
 
 
 
-##JavaScript とのやりとり : port
+###port
 
 ```elm
 -- Elmに入ってくる値
@@ -342,7 +362,7 @@ port time : Float -> Cmd msg
 
 ```
 
-Js側でportを使って値や関数を、送ったり受け取ったりすることが出来ます。
+JS側でportを使って値や関数を、送ったり受け取ったりすることが出来ます。「Port:JSとやり取りする」のページで解説しています。
 
 ```js
 var app = Elm.Example.worker();

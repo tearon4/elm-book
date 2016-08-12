@@ -12,7 +12,7 @@ elm-reactor
 
 するとサーバーが立ち上がります。
 
-```
+```bash
 elm reactor 0.17.0
 Listening on http://localhost:8000/
 ```

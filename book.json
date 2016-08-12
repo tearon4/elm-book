@@ -4,9 +4,6 @@
   "plugins": ["japanese-support"],
 
   "pluginsConfig": {
-        "fontsettings": {
-            "theme": "white"
-        }
     },
     "structure":{
       "summary" : "SUMMARY.md"
