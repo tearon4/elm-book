@@ -33,7 +33,7 @@
 * [Elm Packageで公開されているパッケージ](src/sample/gaibu.md)
   <!-- * [Element/Collage](src/module/element.md) -->
   * [elm-lang/html:HTML](src/module/html.md)
-  * [Html.App](src/module/htmlapp.md)
+  * [elm-lang/html(2):Html.App](src/module/htmlapp.md)
   <!-- * [Test](src/Test/test.md) -->
   * [Bogdanp/elm-combine:パーサーコンビネータ](src/sample/combinater.md)
 <!-- * [よく見るエラー](src/etc/errors.md) -->
