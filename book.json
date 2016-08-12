@@ -8,8 +8,12 @@
             "theme": "white"
         }
     },
+    "structure":{
+      "summary" : "SUMMARY.md"
+    },
 
     "pdf": {
-        "fontFamily": "IPAGothic"
+        "fontFamily": "IPAGothic",
+        "paperSize" : "b5"
     }
 }
