@@ -100,7 +100,7 @@ position = {x = 0, y = 0}
 
 ##main（エントリポイント）の型の違い
 
-Elmはmainの型がSvg a、Html a、Program aという型になります。SvgやHtmlといったように、Elmは画面構成用の言語です。
+Elmはmainの型がSvg a、Html a、Program aという型になります。SvgやHtmlというように、Elmは画面構成用の言語です。
 Program a というのはアプリケーション一単位という型で、専用の関数で作るのですが、作るのにはview関数、update関数、初期化関数、Msg型というのを用意する必要があります。ユーザー操作でアプリケーション状態を変更するには「update関数でしか出来ない」など、フレームワークとなっています。
 
 
@@ -120,7 +120,7 @@ numberは`Int`と`Float`
 comparableは `String`, `Char`,`Int`, `Float`, `Time`,`taple`  
 appendable は`List` `String`  
 
-```
+```elm
 (+) : number -> number -> number
 (<) : comparable -> comparable -> Bool
 (++) : appendable -> appendable -> appendable
