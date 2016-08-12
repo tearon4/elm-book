@@ -1,6 +1,6 @@
-##Port:Jsとやり取りする
+#Port:JSとやり取りする
 
-PortとはElmに用意されているJsとのやり取り用の構文と仕組みです。
+PortとはElmに用意されているJSとのやり取り用の構文と仕組みです。
 
 ```elm
 port hello : String -> Cmd msg
@@ -8,13 +8,13 @@ port jsHello : (String -> msg) -> Sub msg
 ```
 
 このように書けば、JSから利用できるインターフェースが用意されます。
-Js側ではportを以下のように利用します。
+JS側ではportを以下のように利用します。
 
 ```js
 var elm = document.getElementById('elm');
 var app = Elm.Test.embed(elm);
 
-//Elm -> Js
+//Elm -> JS
 app.ports.hello.subscribe(function(a) {
   console.log(a);
   app.ports.jsHello.send("Hi!");
@@ -22,14 +22,14 @@ app.ports.hello.subscribe(function(a) {
 
 setTimeout(function () {  　　　　//subscribeの外だと、setTimeoutで囲う必要があるっぽい。次のバージョンで直ります。
 
-　　//Js -> Elm
+　　//JS -> Elm
    app.ports.jsHello.send("Elm! hellooooo");
 
 }, 0);
 
 ```
 
-ElmとJsの型は合わせる必要があります。以下が対応表です。
+ElmとJSの型は合わせる必要があります。以下が対応表です。
 
 | Elm | Javascript |
 |------------|-----|
@@ -45,7 +45,7 @@ ElmとJsの型は合わせる必要があります。以下が対応表です。
 | Json.Encode.Value | JSON |
 
 
-メモ：portを使っているパッケージは公開できません。（同時にjsのインストールも必要になるため）
+メモ：portを使っているパッケージはElm Packageで公開できません。（同時にJSのインストールも必要になるため）
 
 
 ##Portの書き方。
@@ -73,9 +73,9 @@ msgは小文字指定です。
 ```elm
 init = "" ! [hello "Js! Hello!"]
 ```
-（initに書くとElm初期化後すぐのタイミング時でjsへ値を送ります。）
+（initに書くとElm初期化後すぐのタイミング時でJSへ値を送ります。）
 
-js側は`ports.定義した関数名.subscribe`に関数を登録して受け取ります。
+JS側は`ports.定義した関数名.subscribe`に関数を登録して受け取ります。
 
 ```js
 var elm = document.getElementById('elm');
@@ -87,7 +87,7 @@ app.ports.hello.subscribe(function(str) {
 });
 ```
 
-##JsからElmへ
+##JSからElmへ
 
 Elm側
 
@@ -102,7 +102,7 @@ port jsHello : (String -> msg) -> Sub msg
 ```
 
 定義した関数をsubscriptionsで使います。
-一引数目にJsからくる値をMsgにする関数（つまりはMsgのデータ構築子）を入れ使います。
+一引数目にJSからくる値をMsgにする関数（つまりはMsgのデータ構築子）を入れ使います。
 
 ```elm
 type Msg = GetHello Strign  --受け取るMsgを定義！
@@ -115,7 +115,7 @@ main = program {subscriptions = subscriptions}
 
 JS側
 
-js側は、`app名.ports.関数名.send(送る値)`で送ります。
+JS側は、`app名.ports.関数名.send(送る値)`で送ります。
 例
 ```js
 app.ports.jsHello.send("hellooooo"); //Elmへ送る
@@ -130,4 +130,4 @@ setTimeout(function () {
 
 ```
 
-以上になります。他にJSとの連帯方法が知りたい場合は「Jsとの連帯方法まとめへ」
+以上になります。他にJSとの連帯方法が知りたい場合は「Jsとの連帯方法まとめ」へ

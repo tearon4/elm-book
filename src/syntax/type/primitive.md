@@ -1,6 +1,6 @@
 ## Primitives
 
-Elmに始めから用意されている基本的な型を紹介します。詳しくはCoreライブラリ内の各モジュールを参照してみてください。
+Elmに始めから用意されている基本的な型を紹介します。詳しくはCoreライブラリ内の各モジュールの説明を参照してみてください。
 
 ####Int
 
@@ -86,7 +86,7 @@ Elmに最初から用意されている専用の構文があるデータ構造�
 ["a","b","c"] : List String   --stringの入ったList
 ```
 
-リストは先頭に当たるheadと、先頭以外に当たるtailという概念が連続した構造になっています。この構造が再帰関数と相性がよく、Listモジュールに連続した処理がそろっています。
+リストは先頭に当たるheadと、先頭以外に当たるtailという概念が連続した構造になっています。この構造が再帰関数と相性がよく、Listモジュールには連続した処理を行う関数がそろっています。
 
 ```elm
 --headを取り出す。
@@ -120,6 +120,7 @@ Just [2,3] : Maybe.Maybe (List number)
 List用の関数はCoreライブラリのListを参照してください。
 
 #### Tuples
+
 '()'で囲み、型をコロンで並べるとタプル型になります。
 Listと違い、複数の種類の型でもタプルにすることが出来ます。
 
@@ -195,21 +196,24 @@ myRecord =
 
 number、 comparable、 appendableという多相な型を内部で使っていて、組み込みの関数はその型を使っています。
 
-numberは`Int`と`Float`
-comparableは `String`, `Char`,`Int`, `Float`, `Time`,`taple`
-appendable は`List` `String`
+numberは`Int`と`Float`  
+comparableは `String`, `Char`,`Int`, `Float`, `Time`,`taple`  
+appendable は`List` `String`  
 
-```
+```elm
 (+) : number -> number -> number
 (<) : comparable -> comparable -> Bool
 (++) : appendable -> appendable -> appendable
 ```
 
-```
-
+```elm
+> [1,2,3] ++ [4,5,6]
+[1,2,3,4,5,6] : List number
+> "hello" ++ "world"
+"helloworld" : String
 ```
 
 ####　その他
 
-データ構造は様々な特性があるので、場合によったものを選択する必要があります。
+データ構造は様々な特性があるので、場合にあったものを選択する必要があります。
 他にも`Array`、`Dict`、`Set`といった型がCoreライブラリにあります。

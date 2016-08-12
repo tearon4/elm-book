@@ -13,11 +13,11 @@
     * [全体](src/syntax/allSyntax.md)
     * [関数](src/syntax/function.md)
     * [型](src/syntax/type/type.md)
-        * [型の明示](src/syntax/type/meizi.md)
+        * [型表記](src/syntax/type/meizi.md)
         * [基本的な型](src/syntax/type/primitive.md)
         * [新しい型を定義する](src/syntax/type/teigi.md)
     * [Module:モジュールシステム](src/syntax/module.md)
-    * [Port:Jsとやり取りする](src/syntax/port.md)
+    * [Port:JSとやり取りする](src/syntax/port.md)
     * [コラム:HaskellからみたElm](src/syntax/fromHaskell.md)
 * [Coreライブラリ](src/module/about.md)
     <!-- * [Basics](src/module/basics.md) -->
