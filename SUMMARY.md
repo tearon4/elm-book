@@ -5,9 +5,9 @@
     * [インストール](src/install/install.md)
     * [Hello World](src/install/hello.md)
 * [ツール](src/Tool/tool.md)
-    * [elm-repl:REPL](src/Tool/repl.md)
     * [elm-make:コンパイル](src/Tool/make.md)
     * [elm-package:パッケージング](src/Tool/elmPackage.md)
+    * [elm-repl:REPL](src/Tool/repl.md)
     * [elm-reactor:ファイル監視サーバー](src/Tool/reactor.md)
 * [Elmの構文](src/syntax/syntax.md)
     * [全体](src/syntax/allSyntax.md)
@@ -28,7 +28,7 @@
     <!-- * [Json](src/module/json.md) -->
     * [Debug:デバッグ](src/module/debug.md)
 * [Elm-Architecture](src/elmArchitecture/about.md)
-  * [Cmd/Sub](src/elmArchitecture/cmdSub.md)
+    * [Cmd/Sub](src/elmArchitecture/cmdSub.md)
 * [Javascriptと連帯する方法まとめ](src/Javascript/javascript.md)
 * [Elm Packageで公開されているパッケージ](src/sample/gaibu.md)
   <!-- * [Element/Collage](src/module/element.md) -->

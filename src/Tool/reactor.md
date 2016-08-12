@@ -6,7 +6,7 @@ Elmファイルを変更すると、変更を感知してElmファイルを再�
 
 elm reactor / elm-reactor
 
-```
+```bash
 elm-reactor
 ```
 

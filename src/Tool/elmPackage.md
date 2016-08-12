@@ -19,7 +19,7 @@ diff
 
 ###パッケージのインストール
 
-```
+```bash
 #パッケージのインストール
 elm-package install elm-lang/html
 
@@ -30,8 +30,7 @@ elm-package install elm-lang/html -y
 ###elm-package.jsonでライブラリの依存関係を管理する
 
 
-
-```
+```bash
 #elm-package.jsonに記述してある依存ライブラリを自動インストール
 elm-package install
 
