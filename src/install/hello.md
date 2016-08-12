@@ -37,6 +37,6 @@ elm-make hello.elm
 
 エラー無くコンパイルが出来たら、index.htmlというファイルが作られます。
 
-index.htmlファイルをブラウザで開くと、hellow worldが表示されていると思います！
+index.htmlファイルをブラウザで開くと、Hello Worldと表示されていると思います！
 
 さらにElmを知りたくなったら、Elm構文へ進んでみてください。
