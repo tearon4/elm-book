@@ -23,13 +23,13 @@ Elmランタイムのみの出力も出来ます。そうすると、画面を�
 
 ###Elm-Architectureという設計方針
 
-GUIアプリケーションを作るのに、MVCやMVVMなどの設計方針がありますが、ElmではElm-Architectureという考え方で記述していきます。この考え方でElmはたった３つか４つの関数でGUIアプリケーションを表現します。Elm-Architectureは他のJSフレームワーク（redux、Cycle.js）に影響を与えたりしています。
+GUIアプリケーションを作るのに、MVCやMVVMなどの設計方針がありますが、ElmではElm-Architectureという考え方で記述していきます。この考え方でElmはたった３つか４つの関数でGUIアプリケーションのすべてを表現します。Elm-Architectureは他のJSフレームワーク（redux、Cycle.js）に影響を与えたりしています。
 書き方を[Elm-Architecture](src/elmArchitecture/about.md)のページで解説しています。
 
 ###Elmはシンプルで小さな関数型言語
 
 ElmはHaskellやいろんな関数型言語を参考にして、言語仕様がとても小さく強力なものになっています。
-コードを眺めてみるとわかりやすそうと感じるのではないでしょうか。[Elmの構文](src/syntax/syntax.md)で解説しています。
+コードを眺めてみるとわかりやすそうと感じるのではないでしょうか。[Elmの構文](src/syntax/syntax.md)のページで解説しています。
 
 ###学習を始めて続けやすい
 
