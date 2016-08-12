@@ -1,4 +1,4 @@
-#REPL（対話環境）
+#elm-repl : REPL（対話環境）
 
 todo ここに画面
 

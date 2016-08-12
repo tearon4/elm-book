@@ -1,9 +1,5 @@
 ##Elmとは
 
-
-
-
-
 ##Hello World
 
 早速Hello worldを書いてみましょう。公式サイトにも載っています。
