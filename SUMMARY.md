@@ -14,7 +14,7 @@
     * [関数](src/syntax/function.md)
     * [型](src/syntax/type/type.md)
         * [型表記](src/syntax/type/meizi.md)
-        * [基本的な型](src/syntax/type/primitive.md)
+        * [基本の型](src/syntax/type/primitive.md)
         * [新しい型を定義する](src/syntax/type/teigi.md)
     * [Module:モジュールシステム](src/syntax/module.md)
     * [Port:JSとやり取りする](src/syntax/port.md)
