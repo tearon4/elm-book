@@ -9,7 +9,7 @@ Htmlライブラリのあるelm-lang/htmlパッケージの説明になります
 パッケージのインストールコマンド
 
 ```
-elm-package install elm-lang/html --yes
+elm-package install elm-lang/html --y
 ```
 
 使用例ハローワールド
@@ -155,7 +155,7 @@ main = div[on "keydown" ...
 
 ```
 
-それらはHTMLにインライン展開される。なのでElm中のCSSはモジュール性がある。
+メモ：Elm内で、styleを使いCSSを適用する方法はHTMLにインライン展開されます。これは速度が遅くなりHtmlが不格好になるといいます。しかしEｌｍでCSSを記述するとCSSが意図とは違うタグを汚染したりといったことがなくElm内でCSSを管理できます。CSSの文字列をすべて関数に置き換えたパッケージも公開されています(seanhess/elm-style)。外部のCSSの管理方法も含めるとCSSには色々なやり方があり議論があるところです。
 
 
 
