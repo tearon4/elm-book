@@ -233,9 +233,9 @@ update msg state =
       --
 ```
 
-###Let in 式
+###Let in
 
-letin式を使うと、内部変数を定義できます。
+letinを使うと、内部変数を定義できます。
 
 ```elm
 test a y =

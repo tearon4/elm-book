@@ -95,7 +95,7 @@ getNantoka |> aresite |> koresite
 ```
 
 
-##let in式
+##let in
 
 let inを使うと、内部変数を定義できます。
 
