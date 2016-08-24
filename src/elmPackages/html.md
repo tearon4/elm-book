@@ -35,9 +35,9 @@ node : String -> List (Attribute msg) -> List (Html msg) -> Html msg
 node = VirtualDom.node
 ```
 
-一引数目は、htmlタグの種類を文字列で指定、
-二引数目で、属性と値を設定します。（Html.Attributesモジュールに作る関数があります。）
-三引数目は、子のHtmlです。
+一引数目は、htmlタグの種類を文字列で指定、  
+二引数目で、属性と値を設定します。（Html.Attributesモジュールに作る関数があります。）  
+三引数目は、子のHtmlです。  
 
 このnodeタグをラップした関数が用意されています。
 divタグを作るには、div関数を使います。
@@ -131,9 +131,7 @@ main = div [lineBreak] [text "helllllllloooooooooooo"]
 メモ：文字列中の改行がそのまま適応されるpreタグというのもあります。
 画面の枠にそって自動で収まるようにするには、flexというcssもあります。
 
-[他にもいろんな属性が揃ってます。](http://package.elm-lang.org/packages/evancz/elm-html/1.1.0/Html-Attributes)
-
-書くときの注意；
+メモ：書くときの注意
 
 Htmlの規格通り一つのタグに２つ同じ属性をつけたりは出来ません。
 
@@ -150,40 +148,15 @@ main = div[on "keydown" ...
 
 ```
 
-メモ：Elm内で、styleを使いCSSを適用する方法はHTMLにインライン展開されます。これは速度が遅くなりHtmlが不格好になるといいます。しかしEｌｍでCSSを記述するとCSSが意図とは違うタグを汚染したりといったことがなくElm内でCSSを管理できます。CSSの文字列をすべて関数に置き換えたパッケージも公開されています(seanhess/elm-style)。外部のCSSの管理方法も含めるとCSSには色々なやり方があり議論があるところです。
+メモ：SassやPostCss、外部のCSSの管理方法も含めるとCSSには色々な適用の仕方、運用方法があり議論があるところです。Elm内で、styleを使いCSSを適用する方法はHTMLにインライン展開されます。これはHtmlが不格好になり、速度が遅くなるそうですが、EｌｍでCSSを記述するとCSSが意図とは違うタグを汚染したりといったことがなくElm内でCSSを管理できます。プロトタイピングには最適かと思います。CSSの文字列をすべて関数に置き換えたパッケージも公開されています(seanhess/elm-style)。googleのMaterial Design LiteをElmで使えるようにしたパッケージもあります。(debois/elm-mdl)
 
 
 
-##Html.Eventsモジュールのon関数
+##Html.Eventsモジュール
 
-このモジュール内ある関数を使って、HtmlにイベントのAttributeを付けることが出来ます。
+Html.Eventsモジュール内ある関数を使って、HtmlにイベントのAttributeを付けることが出来ます。
 
-直接使わないですが、on関数の説明です。
-
-```hs
-on : String -> Json.Decoder msg -> Attribute msg
-```
-
-on関数を使ってイベントの付いたHTMLを作ることが出来ます。
-
-一引数目は、イベントの種類の指定。(例えば"input"、"click"、"keydown"、、、)
-二引数目に、Json.Decoderを入れ、eventオブジェクトをデコードして値を取り出します。デコーダはいくつか用意されています。
-(例えば、`event.target.value`が欲しいなら`targetValue`、`event.KeyCode`なら`keyCode`)
-
-###二引数目のJson.Decoder型
-
-on関数は二引数目に`Json.Decoder msg`型を取ります。Jsonライブラリは、Json型のデータ構造を扱うライブラリで、ここにJsonデコーダを入れると、イベントオブジェクトから指定した値を取り出せます。
-取り出した値はデータ構築子に渡されたます。
-
-
-Json.Decode参考
-http://package.elm-lang.org/packages/elm-lang/core/1.1.1/Json-Decode
-http://uehaj.hatenablog.com/entry/2015/02/23/010955
-
-
-###クリックイベント付けるには
-
-onClick関数は、クリックイベントを付ける関数です。
+例えばクリックイベント付けるにはonClick関数を使います。
 
 ```elm
 onClick : msg -> Attribute msg
@@ -191,18 +164,28 @@ onClick msg =
   on "click" (Json.succeed msg)
 ```
 
+イベントを付ける関数はon関数が元になっています。
+
+```hs
+on : String -> Json.Decoder msg -> Attribute msg
+```
+
+一引数目は、イベントの種類の指定。(例えば"input"、"click"、"keydown"、、、)  
+二引数目に、Json.Decoderを入れ、eventオブジェクトをデコードして値を取り出します。
+
+Jsonデコーダを入れると、イベントオブジェクトから指定した値を取り出せます。`event.target.value`の値が欲しいなら`targetValue`、`event.KeyCode`なら`keyCode`といったデコードが、このモジュール内に用意されています。自分で作るには、CoreライブラリのJsonモジュールを使います。
+
+イベントが発生して取り出した値はデータ構築子に渡され、updateに渡ります。Elm-Architectureのページも参考にしてみてください。
+
+
 ##Html.Lazy
 
-指定した値が変化した時だけ、その部分を描画するlazy関数があります。
-この関数を使うことで、仮想DOMの力を発揮させて、効率の良い描画ができます。
+Html.Lazyモジュールにあるlazy関数を使うことで、仮想DOMの力を発揮させて、効率の良い描画ができます。
+指定した値が変化した時だけ、その部分を再描画する事ができます。
 
 ```hs
 lazy : (a -> Html) -> a -> Html
 lazy = VirtualDom.lazy
 ```
 
-一引数目にviewの関数、二引数目に関数の引数になる値を入れます。
-値が変更した時だけviewを更新します。
-
-
-続きます
+一引数目にviewの関数、二引数目の値が変更した時だけviewを更新します。
