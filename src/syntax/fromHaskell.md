@@ -1,6 +1,7 @@
 #コラム：Haskellから見たElm
 
 ElmはF#やOcamlやHaskellを参考にしています。
+
 ElmとHaskellはどのように違うか、ということを考えてみました。（あまりHaskell知らないので間違っているかもしれません。。）
 
 
@@ -21,12 +22,14 @@ answer = 42
 
 ・関数を並べるタイプのパターンマッチはないです。case式を使います。
 
-・headとtailがMaybeを返します。
+・ListのheadとtailがMaybeを返します。
 
 ```elm
 head : List a -> Maybe a
 tail : List a -> Maybe (List a)
 ```
+
+メモ:組み込みのListモジュールには必要最低限の関数しかないので、必要ならElm Packagesに公開されているlist-extraといった○○-extraという名前の拡張ライブラリを使います。
 
 ・do構文がない。  
 色んな所で状態の変更がないようにするためと聞きました。

@@ -1,10 +1,12 @@
 #elm-lang/html : Html
 
-Htmlライブラリのあるelm-lang/htmlパッケージの説明になります。
+elm-lang/htmlパッケージの説明になります。
+このパッケージのライブラリを使うことでElmでHtmlを作ることが出来ます。
 
-このパッケージのライブラリを使うことでHtmlを作ることが出来ます。
-また、Htmlライブラリは[virtual-dom](https://github.com/Matt-Esch/virtual-dom)をElm用にそのままラップしたものなので、仮想DOMという描画方法を自然に使うことが出来ます。
+Htmlライブラリは[virtual-dom](https://github.com/Matt-Esch/virtual-dom)をElm用にそのままラップしたものなので、仮想DOMという描画方法を自然に使うことが出来ます。
 
+イベントを使うときは、Elm-Architectureにそって使うので、Elm-Architectureのページも参考にしてみてください。
+よい作例として、Elm公式のexsampleページや、Elm公式のTODOリスト[evancz/elm-todomvc](https://github.com/evancz/elm-todomvc)があります。
 
 パッケージのインストールコマンド
 
@@ -22,15 +24,9 @@ main = div [] [text "Hello World"]
 
 以下モジュールごとの説明になります。
 
-##HtmlモジュールでHTML作る。
+##Htmlモジュール
 
 基本になるモジュールで、Html型があります。
-
-```hs
-type alias Html = VirtualDom.Node
-type alias Attribute = VirtualDom.Property
-
-```
 
 直接使うことは無いですがベースになっているnode関数です。
 
@@ -84,14 +80,13 @@ main = input [id "Input"] [] ---id は id属性を作る関数
 ```
 
 HTMLを作ることが出来ました。
-ほかにも[いろんなタグを作る関数も揃ってます。](http://package.elm-lang.org/packages/evancz/elm-html/1.1.0/Html)
+ほかにもいろんなタグを作る関数も揃ってます。
 
 
+##Html.Attributesモジュール
 
+Html.Attributesモジュールにある関数で、Htmlに属性を付けます。
 
-##Html.Attributesモジュールで属性を付ける。
-
-Html.AttributesモジュールにあるAttribute型を作る関数で、Htmlに属性を付けます。
 class属性、id属性をつけてみます。
 
 ```hs
