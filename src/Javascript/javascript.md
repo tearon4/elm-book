@@ -1,33 +1,29 @@
 #Javascriptと連帯する方法
 
-このページでは、JSとElmの連帯する方法をまとめたいと思います。
+Elmにはまだまだライブラリが足りていません。しかしjavascript（以JS）には膨大なコードが世界に存在し今も生まれています。
+Elmを使用すると、ElmからJSライブラリを使ったり、JS側に繋げたりする必要が出てきます。
 
-以下のような方法があります。
+このページでは、Elmにある、JSとElmを繋げる方法と部分という視点でElmを横断します。
 
-* fullscreen/embed
-* Port
+* fullscreen、embed、workerモード
+* Port構文
 * programWithFlags
 * Native
 * effect module
 
 
-##fullscreen/embed
+Elmは指定してコンパイルすると一つのJSファイルになりますが、これをElmランタイムといいます。（ElmをHTML出力した時は、Elmランタイムと、ランタイムを読み込むコードが入ったHtmlを出力しています。）
 
-ElmをJSで出力し、起動する方法です。
+Elmランタイム出力すれば、Elmランタイムに対していろいろなことが出来るようになっています。
+値を渡したり（programWithFlags）、ElmをどこかのDOMに適応したり（embedモード）、画面を出さずにElmランタイムを利用したり（workerモード）、Elm側でport構文を使って記述しておけば、JS側でsendやsubscribeといった関数でやりとりできます。
 
-ElmをJS出力した後、Html側に読み込むコードと起動するコードを書きます。この時、fullscreenで起動するか、embedで何処かのDOMに埋め込むか、workerで画面を出さないか選ぶことができます。
+JSライブラリを使うときは、基本的にport構文かNativeモジュールを使います。
 
-```js
-<script type="text/javascript" src="Example.js"></script>
-...
+##fullscreen、embed、workerモードでElmを起動する
 
-var elmApp =  Elm.Example.fullscreen()
+準備
 
-```
-
-####fullscreenで起動する
-
-まずElmのMainになるモジュールの先頭行に、モジュール名をつけます。
+ElmのMainになるモジュールの先頭行に、モジュール名をつけます。
 
 ```elm
 module Example exposing (...)
@@ -36,11 +32,11 @@ module Example exposing (...)
 
 次にJSファイルとしてコンパイルします。
 
-```
+```bash
 elm-make Example.elm --output=Example.js
 ```
 
-そしてHtmlファイルを用意して、出来たJSを読み込んで起動するコードを書きます。
+そのJSファイルを読み込むHTMLを書いて、指定したモードで起動します。
 
 ```html
 ...
@@ -72,9 +68,9 @@ embedを使うと指定したDOMの内部にElmを展開できます。
 ```
 
 
-##Port
+##Port構文
 
-Portとは、Elmに用意されている外とやり取りするための構文です。
+Port構文とは、Elmに用意されている外とやり取りするための構文です。
 
 ```elm
 port hello : String -> Cmd msg
@@ -88,7 +84,7 @@ app.ports.test.subscribe(function(a) {
 });
 ```
 
-syntaxのportのページで解説しています。
+詳しくはElmの構文のportのページで解説しています。
 
 ##programWithFlags
 
@@ -103,11 +99,11 @@ var app = Elm.MyApp.embed(elm,{
 
 ##Nativeモジュール
 
-coreライブラリ内を見ると、Nativeというフォルダがあります。これがNatveモジュールで、直接Elmランタイムの中にJavascriptを展開することが出来ます。
+coreライブラリ内を見ると、Nativeというフォルダがあります。これがNatveモジュールです。Nativeモジュール内のJSは直接Elmランタイムの中に展開されます。なので単純にJSをElmでラップして使うことが出来ます。
 
-ElmはNativeモジュールを非推奨にしています。jsだけじゃなくwebassemblyを見越していること、Elm内に将来的にランタイムの堅実さを壊すものを入れたくないこと、などが理由です。
+しかし注意として、Elm公式はNativeモジュールを使うことを非推奨にしています。それはElm内に将来的にランタイムの堅実さを壊すものを入れたくないことや、Elmのコンパイル結果がJS以外（webassemblyなど）になることを見越しているから、などが理由です。
 
-とはいえ、すぐにJavascript用apiをElmで叩いたりしたい時などに必要になったりします。
+とはいえ、すぐにJSのapiをElmで叩いたりしたい時などに必要になったりします。
 
 ###利用の仕方
 
@@ -117,9 +113,9 @@ elm-package.jsonに以下のオプションを加えます。するとNativeモ�
 "native-modules": true,
 ```
 
-Nativeモジュールは以下の様な書式になります。｛ユーザー名｝とかは置き換えてください
+Nativeモジュールを書くときは以下の様な書式で書きます。｛ユーザー名｝とかは置き換えてください
 
-```
+```js
 var _{ユーザー名}${パッケージ名}$Native_{ライブラリ名} = function(elm) {
 
     var test = "hello"
@@ -135,5 +131,6 @@ PubSubの裏側、Effectモジュールです。Pub、Subを提供するライ�
 ##まとめ
 
 以上のような方法があります。  
-Nativeモジュールは楽ですが、Elmランタイムが壊れるバグに繋がり、バージョンアップ時の互換性が保証されない。  
-portは堅実だがややJS側が面倒。と感じました。
+NativeモジュールはさっとJSを使いたいときは便利です。しかし、Elmランタイムが壊れるバグに繋がったり、公式からユーザーへ配慮しないことを表明しているので、バージョンアップ時の互換性が保証されなかったりします。
+
+port構文は堅実だがややJS側が面倒。と感じました。
