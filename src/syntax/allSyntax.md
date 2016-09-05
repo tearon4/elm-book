@@ -63,8 +63,6 @@ mark =
 
 ```
 
-###List
-
 `[]`と`,`でList型になります。
 
 ```elm
@@ -74,8 +72,6 @@ mark =
 1 :: 2 :: 3 :: 4 :: []
 ```
 
-###Taple
-
 `()`と`,`でタプル型になります。
 
 ```elm
@@ -83,7 +79,7 @@ mark =
 (1,"hello",4) : ( number, String, number' )
 ```
 
-###変数、関数の定義
+##変数、関数の定義
 
 変数
 
@@ -103,7 +99,7 @@ helloWorld name name2 = "hello , " ++ name ++ " " ++ name2
 
 ```
 
-###関数の適用
+##関数の適用
 
 ```elm
 > twice n = 2 * n
@@ -121,80 +117,7 @@ max 5 10 ==
 
 ```
 
-###型の表記
-
-変数や関数には、型を明示することが出来ます。
-
-```elm
-age : Int
-age = 15
-
-word : String
-word = "hello"
-
-add10 : Int -> Int
-add10 n = n + 10
-```
-
-###型の定義
-
-新しい型を定義することができます。
-
-```elm
-type Id = Id Int
-type Fruit = Orange | Peach
-```
-
-type alias を使うと型に別名を付ける事ができます。
-
-```elm
-type alias Age = Int
-type alias Name = String
-
-type User = User Age Name
-
-isOver15 : Age -> Bool
-```
-
-「新しい型を定義する」のページで解説しています。
-
-###レコード型
-
-レコード表記という構文を使うと、レコード型を定義できます。
-レコード型はjavasciptのオブジェクトに近いものです。
-
-```elm
-type alias User = {id : Int , name : String}
-
-init : User
-init = {id = 10 , name = ""}
-```
-
-###レコード構文
-
-レコード型には専用のアクセスと、更新用の構文があります。
-
-値を取り出す。
-
-```elm
-> hiro = {hp=10}
-{ hp = 10 } : { hp : number }
-> hiro.hp
-10 : number
-> .hp hiro
-10 : number
-```
-
-レコード型を更新する。
-
-```elm
-> hiro = {hp = 100}
-{ hp = 100 } : { hp : number }
-> {hiro | hp = hiro.hp + 20}
-{ hp = 120 } : { hp : number }
-```
-
-###case式、if式、
+##case式、if式、
 
 case式とif式で処理を分岐します。
 
@@ -236,9 +159,9 @@ update msg state =
       --
 ```
 
-###Let in
+##let in式
 
-letinを使うと、内部変数を定義できます。
+let in式を使うと、内部変数を定義できます。
 
 ```elm
 test a y =
@@ -247,7 +170,82 @@ test a y =
       in  x + y
 ```
 
-###モジュール:module
+
+##型の表記
+
+変数や関数には、型を明示することが出来ます。
+
+```elm
+age : Int
+age = 15
+
+word : String
+word = "hello"
+
+add10 : Int -> Int
+add10 n = n + 10
+```
+
+##型の定義
+
+新しい型を定義することができます。
+
+```elm
+type Id = Id Int
+type Fruit = Orange | Peach
+```
+
+type alias を使うと型に別名を付ける事ができます。
+
+```elm
+type alias Age = Int
+type alias Name = String
+
+type User = User Age Name
+
+isOver15 : Age -> Bool
+```
+
+「新しい型を定義する」のページで解説しています。
+
+##レコード型
+
+レコード型を定義できます。
+レコード型はjavasciptのオブジェクトに近いものです。
+
+```elm
+type alias User = {id : Int , name : String}
+
+init : User
+init = {id = 10 , name = ""}
+```
+
+##レコード構文
+
+レコード型には専用のアクセスと、更新用の構文があります。
+
+値を取り出す。
+
+```elm
+> hiro = {hp=10}
+{ hp = 10 } : { hp : number }
+> hiro.hp
+10 : number
+> .hp hiro
+10 : number
+```
+
+レコード型を更新する。
+
+```elm
+> hiro = {hp = 100}
+{ hp = 100 } : { hp : number }
+> {hiro | hp = hiro.hp + 20}
+{ hp = 120 } : { hp : number }
+```
+
+
+##モジュール:module
 
 Elmはソースコードを別ファイルに分ける仕組みがあります。
 
@@ -273,7 +271,7 @@ hello = ""
 world = ""
 ```
 
-import  
+###import  
 モジュールをインポートします。書き方によりインポートの仕方が変わります。
 
 ```elm
@@ -292,7 +290,7 @@ import Hello exposing ( Hoge(A) )         -- Hoge, A
 「Module:モジュールシステム」のページでも解説しています。
 
 
-###関数の適用順、パイプ演算子
+##関数の適用順、パイプ演算子
 
 関数には適用される順番がありますが、それを操作するパイプ演算子(<|)、(|>)というのがあります。
 
@@ -314,7 +312,7 @@ dot' =
     |> scale 2
 ```
 
-###パターンマッチ
+##パターンマッチ
 
 パターンマッチとは、表記を合わせれば型から値を取り出すことができる、という構文です。
 
@@ -354,7 +352,9 @@ update msg state =
 
 
 
-###port
+##Port構文
+
+JS側でportを使って値や関数を、送ったり受け取ったりすることが出来ます。「Port:JSとやり取りする」のページで解説しています。
 
 ```elm
 -- Elmに入ってくる値
@@ -364,8 +364,6 @@ port prices : (Float -> msg) -> Sub msg
 port time : Float -> Cmd msg
 
 ```
-
-JS側でportを使って値や関数を、送ったり受け取ったりすることが出来ます。「Port:JSとやり取りする」のページで解説しています。
 
 ```js
 var app = Elm.Example.worker();
