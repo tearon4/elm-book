@@ -1,33 +1,35 @@
-#Javascriptと連帯する方法
+#Javascriptと連帯する方法まとめ
 
 Elmにはまだまだライブラリが足りていません。しかしjavascript（以JS）には膨大なコードが世界に存在し今も生まれています。
-Elmを使用すると、ElmからJSライブラリを使ったり、JS側に繋げたりする必要が出てきます。
+現状Elmを使用すると、ElmからJSライブラリを使ったり、JS側に繋げたりする必要があります。
 
-このページでは、Elmにある、JSとElmを繋げる方法と部分という視点でElmを横断します。
+このページでは、Elmにある、「JSとElmを繋げる方法と部分」という視点でElmを横断します。
 
 * fullscreen、embed、workerモード
 * Port構文
 * programWithFlags
-* Native
+* Nativeモジュール
 * effect module
-
 
 Elmは指定してコンパイルすると一つのJSファイルになりますが、これをElmランタイムといいます。（ElmをHTML出力した時は、Elmランタイムと、ランタイムを読み込むコードが入ったHtmlを出力しています。）
 
-Elmランタイム出力すれば、Elmランタイムに対していろいろなことが出来るようになっています。
-値を渡したり（programWithFlags）、ElmをどこかのDOMに適応したり（embedモード）、画面を出さずにElmランタイムを利用したり（workerモード）、Elm側でport構文を使って記述しておけば、JS側でsendやsubscribeといった関数でやりとりできます。
+Elmランタイムに対していろいろなことが出来ます。
+値を渡したり（programWithFlags）、ElmをどこかのDOMに適応したり（embedモード）、画面を出さずにElmランタイムを利用したり（workerモード）、Elm側でport構文を使って記述しておけば、JS側でsendやsubscribeといった関数でやりとりしたりできます。
 
-JSライブラリを使うときは、基本的にport構文かNativeモジュールを使います。
+サーバーサイドからElmに初期値を与えたい時はprogramWithFlagsを使います。
 
-##fullscreen、embed、workerモードでElmを起動する
+JSライブラリをElmで使いたい時は、基本的にport構文かNativeモジュールを使います。
 
-準備
+##Elmランタイム(JSファイル)出力する
 
-ElmのMainになるモジュールの先頭行に、モジュール名をつけます。
+JSファイルとのよりとりの説明のために、ElmをElmランタイム(JSファイル)出力して、自分でfullscreenモードで起動するまでを書いてみます。
+(fullscreenモードで起動するだけならElmをHTMLにコンパイルするだけでOKです。）
+
+
+まずElmのMainになるモジュールの先頭行に、モジュール名をつけます。
 
 ```elm
 module Example exposing (...)
-
 ```
 
 次にJSファイルとしてコンパイルします。
@@ -36,7 +38,7 @@ module Example exposing (...)
 elm-make Example.elm --output=Example.js
 ```
 
-そのJSファイルを読み込むHTMLを書いて、指定したモードで起動します。
+そのJSファイルを読み込むHTMLを書きます。そして指定したモードで起動します。
 
 ```html
 ...
@@ -51,10 +53,12 @@ var elmApp =  Elm.Example.fullscreen()
 
 呼び出し方は３つあります。
 * fullscreen　--全画面
-* embed　--どこかのDOM内で展開
-* worker　--画面なし
+* embed　     --どこかのDOM内で展開
+* worker　    --画面なし
 
-####DOMに紐付けて起動する。(embed)
+##fullscreen、embed、workerモードでElmを起動する
+
+###DOMに紐付けて起動する。(embed)
 
 embedを使うと指定したDOMの内部にElmを展開できます。
 
@@ -67,28 +71,38 @@ embedを使うと指定したDOMの内部にElmを展開できます。
 </script>
 ```
 
+###workerモードで起動する。
+
+画面がないモード(worker)で起動できます。
+
+```js
+var app = Elm.App.worker();
+```
 
 ##Port構文
 
 Port構文とは、Elmに用意されている外とやり取りするための構文です。
+この構文で書くと、JS側(Elmランタイム)にsendやsubcribeといったやり取り用の関数が用意されます。
+
 
 ```elm
 port hello : String -> Cmd msg
 ```
 
-このようにElm側は書き、JS側からはsubscribeと、sendという関数でやり取りを行います。
+Elm側を書くと、JS側からはsubscribeと、sendという関数でやり取りを行います。
 
 ```js
-app.ports.test.subscribe(function(a) {
+app.ports.hello.subscribe(function(a) {
   console.log(a);
 });
+
 ```
 
 詳しくはElmの構文のportのページで解説しています。
 
 ##programWithFlags
 
-programWithFlagsとは、Elmの初期化時にJS側の値を使う方法です。Html.Appのページで解説しています。
+programWithFlagsとは、Elmの初期化時にJS側の値を使う方法です。
 
 ```js
 var elm = document.getElementById('elm')
@@ -96,6 +110,8 @@ var app = Elm.MyApp.embed(elm,{
     userID: 'Tom',
     token: '12345'})
 ```
+
+Html.Appのページで解説しています。
 
 ##Nativeモジュール
 
@@ -126,7 +142,7 @@ var _{ユーザー名}${パッケージ名}$Native_{ライブラリ名} = functi
 
 ##Effect Module
 
-PubSubの裏側、Effectモジュールです。Pub、Subを提供するライブラリは、CmdとSubのリストとTaskをどう処理するかをEffectモジュールで管理します。しかしまだ理解が及んでいないのでわかりしだい書きたいと思います。
+Elm-ArchitectureのPub/Subライブラリの裏側にあるのが、Effectモジュールです。Pub、Subを提供するライブラリは、CmdとSubのリストと状態と、Taskをどう処理するかをEffectモジュールで管理します。この機能でNativeモジュールの副作用がElmに及ばないようにしたり、依存したりしないようにします。まだ理解が及んでいないのでわかりしだい書きたいと思います。
 
 ##まとめ
 
