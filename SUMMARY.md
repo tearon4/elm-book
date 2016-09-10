@@ -28,7 +28,8 @@
     <!-- * [Json](src/module/json.md) -->
     * [Debug:デバッグ](src/module/debug.md)
 * [Elm-Architecture](src/elmArchitecture/about.md)
-    * [Cmd/Sub](src/elmArchitecture/cmdSub.md)
+    * [Cmd/Subバージョン](src/elmArchitecture/cmdSub.md)
+    * [Elm-Architectureのモジュラリティ](src/elmArchitecture/scale.md)
 * [Javascriptと連帯する方法のまとめ](src/Javascript/javascript.md)
 * [Elm Packageで公開されているパッケージ](src/elmPackages/about.md)
   <!-- * [Element/Collage](src/module/element.md) -->
