@@ -21,7 +21,6 @@ app.ports.hello.subscribe(function(a) {
 });
 
 setTimeout(function () {  　　　　//subscribeの外だと、setTimeoutで囲う必要があるっぽい。次のバージョンで直ります。
-
 　　//JS -> Elm
    app.ports.jsHello.send("Elm! hellooooo");
 
@@ -91,37 +90,42 @@ app.ports.hello.subscribe(function(str) {
 
 Elm側
 
+```elm
+port jsHello : (String -> msg) -> Sub msg
+```
+
 ```
 port 関数名 ： (受け取る型-> msg) -> Sub msg
 ```
 と書いて関数を定義します。(msgは小文字)
 
-例
-```elm
-port jsHello : (String -> msg) -> Sub msg
-```
+定義した関数をsubscriptionsで使います。(subscriptionsはElm-Architectureのページで解説しています。)
 
-定義した関数をsubscriptionsで使います。
-一引数目にJSからくる値をMsgにする関数（つまりはMsgのデータ構築子）を入れ使います。
+一引数目にMsgのデータ構築子を入れ使います。
 
 ```elm
-type Msg = GetHello Strign  --受け取るMsgを定義！
+type Msg = GetHello Strign                     --Msgの定義
+
+port jsHello : (String -> msg) -> Sub msg      --JS -> Elm のport
+
+main = program {subscriptions = subscriptions} --subscriptions関数に使う。
 
 subscriptions : Model -> Sub Msg
-subscriptions model = inComingHello GetHello  --Msgを渡して受け取る！
+subscriptions model = jsHello GetHello         --例。
 
-main = program {subscriptions = subscriptions}
 ```
 
 JS側
 
 JS側は、`app名.ports.関数名.send(送る値)`で送ります。
+
 例
+
 ```js
 app.ports.jsHello.send("hellooooo"); //Elmへ送る
 ```
 
-あと今のところ、sendをsubscribeの中に書かない場合は、以下のようにsetTimeoutで囲う必要があるようです。(Elm v0.17.1)
+メモ : 現在のバージョンでは、sendを以下のようにsetTimeoutで囲う必要があるようです。(Elm v0.17.1)(このページの先頭の例のようなsubscribe内のsendでは必要ない。)
 
 ```js
 setTimeout(function () {
