@@ -1,16 +1,18 @@
 {
   "title":"Elmの薄い本",
 
-  "plugins": ["japanese-support"],
+  "plugins": ["japanese-support","snippet@git+https://github.com/cucumber-ltd/gitbook-plugin-snippet.git"],
 
   "pluginsConfig": {
-    },
-    "structure":{
-      "summary" : "SUMMARY.md"
-    },
+    "snippet": {
+      "problem": "fail"
+    }
+  },
+    "structure": {
+      "summary": "SUMMARY.md"
+  },
 
-    "pdf": {
-        "fontFamily": "IPAGothic",
-        "paperSize" : "b5"
+  "pdf": {
+      "fontFamily": "IPAGothic",      "paperSize" : "b5"
     }
 }

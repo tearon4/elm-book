@@ -18,9 +18,9 @@ answer = 42
 1 :: [2,3,4]
 ```
 
-・where構文は無く、let式しかありません。
+・where構文が無いです。let式はあります。
 
-・関数を並べるタイプのパターンマッチはないです。case式を使います。
+・関数を並べるタイプのパターンマッチ構文はありません。case式を使います。
 
 ・ListのheadとtailがMaybeを返します。
 
@@ -29,12 +29,12 @@ head : List a -> Maybe a
 tail : List a -> Maybe (List a)
 ```
 
-メモ:組み込みのListモジュールには必要最低限の関数しかないので、必要ならElm Packagesに公開されているlist-extraといった○○-extraという名前の拡張ライブラリを使います。
+メモ:組み込みのモジュールには必要最低限の関数があります、それ以上の便利な関数が必要ならElm Packagesに公開されている「○○-extra」という名前の拡張ライブラリを使います。
 
-・do構文がない。  
+・do構文がありません。  
 色んな所で状態の変更がないようにするためと聞きました。
 
-・elmのreplでは、:typeとか打たなくても改行で型が出ます。letとか書かなくても変数とか定義できます。
+・replに関してです。Elmのreplでは改行で型が出て、letとか書かなくても変数が定義できます。
 
 
 ###型表記の違い。
@@ -59,7 +59,6 @@ type alias User = {name : String}   -- == type User = User String
 > position = {x = 10, y = 10}                  --型を明示していない場合
 { x = 10, y = 10 } : { x : number, y : number' }　--「xとyプロパティのある型」みたいなあつかい
 
-
 position : Position
 position = {x = 10, y = 10}  
 
@@ -76,7 +75,7 @@ type alias Position a = { a | x : Int , y : Int}
 ```
 
 レコードの中の`a|`と言うのは、ここに型が入ることが出来るということです。
-これを使うとレコードを部分的に定義できます。
+この構文を使うとレコード型を部分的に定義できます。
 
 ```elm
 type alias Position a = { a | x : Int , y : Int}
@@ -94,17 +93,17 @@ getX target = target.x
 
 ```
 
-レコードの更新構文
+レコード型を更新する構文があります。
 
 ```elm
 position = {x = 0, y = 0}
-{ position | x = position.x + 1}　  -- == {x = 1 , y = 0}  x = x + 1 みたいなもの
+{ position | x = position.x + 1}　  -- 結果は {x = 1 , y = 0} になります。 x = x + 1 みたいなものです。
 ```
 
 ##main（エントリポイント）の型の違い
 
 Elmはmainの型がSvg a、Html a、Program aという型になります。SvgやHtmlというように、Elmは画面構成用の言語です。
-Program a というのはアプリケーション一単位という型で、専用の関数で作るのですが、作るのにはview関数、update関数、初期化関数、Msg型というのを用意する必要があります。ユーザー操作でアプリケーション状態を変更するには「update関数でしか出来ない」など、フレームワークとなっています。
+Program a というのはアプリケーション一単位という型で、専用の関数で作るのですが、作るのにはview関数、update関数、初期化関数、Msg型というのを用意するElm-Architectureというパラダイムで書きます。なので、Elmで作ることは、フレームワークを使うことと同じとなっています。
 
 
 ###Elmには型クラス構文とかがない。
