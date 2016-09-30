@@ -13,14 +13,14 @@ https://giisyu.gitbooks.io/elm_usui_book/content/
 
 ###Elmとは
 
-Elmとは、コンパイルするとHTML、CSS、Javascriptを生成するというプログラミング言語です。altJSの一つとも言えます。
+Elmとは、コンパイルするとHTML、CSS、Javascriptを生成するというプログラミング言語です。altJSとも言えますし、React+Fluxのようなフレームワークのようなものでもあります。
 Evan Czaplickiという方が大学での論文で発表したのがElmの始まりで、以降Evanさんがコミュニティと一緒にElmを作っています。
 
 Elmを使うとロジックを書くだけでブラウザアプリケーションを作ることが出来ます。
 
 Elmは強力でシンプルな構文を持っています。関数型言語の多くを参考にしていて、特にHaskellの影響を受けたものとなっています。純粋関数型の静的型付き言語で、型推論、型検査の機能があります。
 
-Elmは発展の中でElm-Architectureという設計と考え方、を生み出しました。これはGUIアプリケーションを構成する新しい手法だと言われて注目されています。Elm-Architectureのページで解説します。
+Elmは発展の中でElm-Architectureという設計と考え方を生み出しました。これはGUIアプリケーションを構成する新しい手法だと言われて注目されています。Elm-Architectureのページで解説します。
 
 Elmを使うと、純粋型付き言語の特性と、Elm-Architectureにより、コード全体を見渡しやすく楽に開発できます。ElmはこれからのWeb開発に必要な物を備えていると思います。
 
