@@ -1,12 +1,12 @@
 #elm-lang/html : Html
 
 elm-lang/htmlパッケージの説明になります。
-このパッケージのライブラリを使うことでElmでHtmlを作ることが出来ます。
+ElmでHTMLを作るときの基本のパッケージになります。
 
 Htmlライブラリは[virtual-dom](https://github.com/Matt-Esch/virtual-dom)をElm用にそのままラップしたものなので、仮想DOMという描画方法を自然に使うことが出来ます。
 
-イベントを使うときは、Elm-Architectureにそって使うので、Elm-Architectureのページも参考にしてみてください。
-よい作例として、Elm公式のexsampleページや、Elm公式のTODOリスト[evancz/elm-todomvc](https://github.com/evancz/elm-todomvc)があります。
+Htmlをクリック出来るようにするなどイベント系を使うときは、Elm-Architectureのページも参考にしてみてください。
+使い方の参考になるよい作例として、Elm公式のexsampleページや、Elm公式のTODOリスト[evancz/elm-todomvc](https://github.com/evancz/elm-todomvc)があります。
 
 パッケージのインストールコマンド
 
@@ -22,30 +22,23 @@ import Html exposing (div,text)
 main = div [] [text "Hello World"]
 ```
 
-以下モジュールごとの説明になります。
 
 ##Htmlモジュール
 
-基本になるモジュールで、Html型があります。
+基本になるモジュールで、Html型があって、divタグなどのHTMLを作る関数があります。
 
-直接使うことは無いですがベースになっているnode関数です。
+以下は直接使うことは無いですがDOMを作る関数のベースになっているnode関数です。
 
 ```hs
 node : String -> List (Attribute msg) -> List (Html msg) -> Html msg
 node = VirtualDom.node
 ```
 
-一引数目は、htmlタグの種類を文字列で指定、  
+一引数目は、htmlタグの種類を文字列で指定、    
 二引数目で、属性と値を設定します。（Html.Attributesモジュールに作る関数があります。）  
 三引数目は、子のHtmlです。  
 
-このnodeタグをラップした関数が用意されています。
-divタグを作るには、div関数を使います。
-
-```hs
-div : List (Attribute msg) -> List (Html msg) -> Html msg
-div = node "div"
-```
+divタグを作るには、コレを使ったdiv関数を使います。
 
 helloというhtmlを作るコードです。
 
@@ -60,7 +53,7 @@ main = div [] [text "hello"] ---textは何もタグで囲まれていない文�
 
 ```html
 <div>
-    <div>heloo</div>
+    <div>hello</div>
 </div>
 ```
 
@@ -84,6 +77,7 @@ HTMLを作ることが出来ました。
 
 
 ##Html.Attributesモジュール
+
 
 Html.Attributesモジュールにある関数で、Htmlに属性を付けます。
 
