@@ -15,37 +15,42 @@ Cmd/Subは副作用の取り扱いをCmd/Sub利用者に見えないように行
 
 Cmdは外にだす命令、コマンドという意味です。DBへの検索指示であったり、Taskの実行であったりといった、こちらから非同期で実行して結果が返ってくるものがCmd型になっています。
 
-Cmdを発行できる場所は決まっています。init関数と、update関数です。
+Cmdを発行できる場所は決まっています。init関数と、update関数の結果部分です。
 
 ```elm
 init : (Model,Cmd msg)
+update : Msg -> Model -> (Model,Cmd msg)
 ```
 
-init関数に行いたいコマンドを渡した場合、Modelの初期化が終わって「すぐ」に実行されます。例えば、ElmがDomに展開された後すぐhttpで確認したいなどという時にinitに設定します。
+init関数に行いたいコマンドを渡した場合は、Modelの初期化が終わって「すぐ」に実行されます。例えば、ElmがDomに展開された後すぐhttpでサーバーに確認したいなどという時にinitに設定します。
 
+update関数に設定した場合は、update処理の途中または結果時にCmdは実行されます。。updateの分岐の後、httpにアクセスしたり、といったことが出来ます。
 
-update関数の処理の途中で、Cmdを実行したいなら、updateに設定します。updateの分岐の後、httpにアクセスしたり、といったことが出来ます。
+Cmdが実行されると結果はMsg型になって、updateに(つまりアプリ内に)帰ってきます。dbアクセスの結果や、httpアクセスの結果などですね。なのでCmd型を作る関数はMsg型のデータ構築子を取るようになっています。
 
 ###Sub
 
-Subは外から内に非同期にくるイベントを表しています。マウスやキーボードの入力とかがそうです。
+Subは外から内に非同期にくるイベントを表しています。マウスやキーボードの入力などがそれにあたります。
 
+まず、SubはsubscriptionsというHtml.Appの関数の結果になるようにします。
 
 ```elm
 subscriptions : model -> Sub msg
 ```
 
-例えば以下のようにsubscriptions
-に渡す関数を用意します。
+例えば以下のようにsubscriptionsにマウスの移動入力Subを設定します。
+
 
 ```elm
 subscriptions : Model -> Sub Msg
 subscriptions model = Mouse.move GetPosition
+
+main =
+  program { ... , subscriptions = subscriptions}
+
 ```
 
-そしてHtml.Appの関数に渡します。
-
-
+Subの結果もまた、Msgのデータ構築子になって、updateに入ってきます。
 
 
 ##CmdとSubに用意されている関数
@@ -59,13 +64,18 @@ none
 (!)
 ```
 
-mapはCmd型の中を変化させます。
-batchは、複数のCmd、Subを一つに合体します。Elm-Architectureで作られたほかの部品を自分のアプリケーションに合体するときに使います。合体したCmdSubが複数同時に発生したらそれぞれがちゃんと発火します。
-noneは、何もないCmd、Subを返します。Cmd、Subが無いときに設定します。
+`map`はCmd型の中を変化させます。
 
-(!)はCmd.batchの省力記法用の関数です。
+`batch`は、複数のCmd、Subを一つに合体します。アプリケーションにCmdSubが複数ある時や、他のElm-Architectureで書かれたコンポーネントを自分のコンポーネントに融合させる時に使います。
+合体したCmdSubが複数同時に発生したらそれぞれがちゃんと発火します。
+
+`none`は、何もないCmd、Subということです。Cmd、Subが無いときに設定します。
+
+`(!)`は記述が簡単になる関数です。
 
 ```elm
 init : (Model,Cmd msg)
 init = model ! []           --空のリストだとCmd.noneになる。
 ```
+
+上記の`(!)`の右側のリストにCmdを並べると、batchで融合してくれますし、`(model , nanntokaCmd)`みたいにわざわざタプル型を書かなくてすむようになる便利関数です。
