@@ -72,16 +72,14 @@ Elmの中から、外のJSを呼び出す方法です。
 port hello : String -> Cmd msg
 ```
 
-portと書いて関数を定義します。
-型を`送る型->Cmd msg`とします。
-msgは小文字指定です。
+portと書いて関数名と型を定義します。この時、型は`送る型->Cmd msg`とします。（msgは小文字で書かなければなりません。）
 
 そしてこの関数をinit関数や、update関数で使います。（init等に関してはElm-Architectureへ）
 
 ```elm
 init = "" ! [hello "Js! Hello!"]
 ```
-（initに書くとElm初期化後すぐのタイミング時でJSへ値を送ります。）
+上記のように書くと、Elm初期化後すぐのタイミング時でJSへ値を送っています。
 
 ###JS側
 
@@ -99,7 +97,7 @@ app.ports.hello.subscribe(function(str) {
 
 ##JSからElmへ
 
-JS側からElmアプリに値を渡す方法です。
+次は反対にJS側からElmアプリに値を渡す方法です。
 
 ###Elm側
 
@@ -110,13 +108,7 @@ port jsHello : (String -> msg) -> Sub msg
 ```
 port 関数名 ： (JSからやってくる型-> msg) -> Sub msg
 ```
-と書いて関数を定義します。(msgは小文字)
-
-定義した関数をsubscriptionsで使います。(subscriptionsはElm-Architectureのページで解説しています。)
-
-一引数目にMsgのデータ構築子を入れ使います。
-
-送られてきた値はElm側では、Msgになります。
+と書いて関数を定義します(msgは小文字)。一引数目にMsgのデータ構築子を入れ使います。
 
 ```elm
 type Msg = GetHello Strign                     --Msgの定義
@@ -144,7 +136,7 @@ JS側は、`app名.ports.関数名.send(送る値)`で送ります。
 app.ports.jsHello.send("hellooooo"); //Elmへ送る
 ```
 
-メモ : 現在のバージョンでは、sendを以下のようにsetTimeoutで囲う必要があるようです。(Elm v0.17.1)(このページの先頭の例のようなsubscribe内のsendでは必要ない。)
+メモ : 現在のバージョンでは、sendを単体で使うには以下のようにsetTimeoutで囲う必要があるようです。(Elm v0.17.1)(このページの先頭の例のようなsubscribe内のsendでは必要ない。)
 
 ```js
 setTimeout(function () {
