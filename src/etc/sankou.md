@@ -58,3 +58,9 @@ PostdのElmタグの記事。
 [Elm Advent Calendar 2014 - Qiita](http://qiita.com/advent-calendar/2014/elm)
 [Elm Advent Calendar 2015 - Qiita](http://qiita.com/advent-calendar/2015/elm)
 これでElm知った人も多いアドベントカレンダー。次のアドベントカレンダーは君も書いて。
+
+#Tool
+
+[mbylstra/html-to-elm: An online tool for converting HTML to elm-html. Go to](https://github.com/mbylstra/html-to-elm)
+
+HTMLからElmのコードに変換するツール。

@@ -1,26 +1,30 @@
 #Port:JSとやり取りする
 
 PortとはElmに用意されているJSとのやり取り用の構文と仕組みです。
+このportという穴を通じてElmとJSが値を渡したり、関数を呼び出しあったりすることができます。
+
+メモ：portを使っているパッケージはElm Packageで公開できません。（同時にJSのインストールも必要になるため）
 
 ```elm
 port hello : String -> Cmd msg
 port jsHello : (String -> msg) -> Sub msg
 ```
 
-このように書けば、JSから利用できるインターフェースが用意されます。
+Elm側で上記のように書けば、JSから利用できるインターフェースが用意されます。
 JS側ではportを以下のように利用します。
 
 ```js
 var elm = document.getElementById('elm');
-var app = Elm.Test.embed(elm);
+var app = Elm.Test.embed(elm);   //Elmアプリケーションを起動
 
-//Elm -> JS
+//Elm -> JSへはsubscribe
 app.ports.hello.subscribe(function(a) {
   console.log(a);
+  //JS -> Elmへはsend
   app.ports.jsHello.send("Hi!");
 });
 
-setTimeout(function () {  　　　　//subscribeの外だと、setTimeoutで囲う必要があるっぽい。次のバージョンで直ります。
+setTimeout(function () {  　　　　//send関数をsubscribeの外で使う場合だと、setTimeoutで囲う必要がある。次のバージョンで直ります。
 　　//JS -> Elm
    app.ports.jsHello.send("Elm! hellooooo");
 
@@ -44,10 +48,12 @@ ElmとJSの型は合わせる必要があります。以下が対応表です。
 | Json.Encode.Value | JSON |
 
 
-メモ：portを使っているパッケージはElm Packageで公開できません。（同時にJSのインストールも必要になるため）
 
 
-##Portの書き方。
+
+#Portの書き方。
+
+##port moduleに変更する
 
 まず先頭行をmoduleからport moduleに変更します。
 
@@ -57,6 +63,11 @@ port module Test exposing (..)
 
 ##ElmからJsへ
 
+Elmの中から、外のJSを呼び出す方法です。
+
+###Elm側
+
+
 ```elm
 port hello : String -> Cmd msg
 ```
@@ -65,14 +76,14 @@ portと書いて関数を定義します。
 型を`送る型->Cmd msg`とします。
 msgは小文字指定です。
 
-そしてこの関数をCmdを取るinitや、updateで使います。（init等に関してはElm-Architectureへ）
-
-例
+そしてこの関数をinit関数や、update関数で使います。（init等に関してはElm-Architectureへ）
 
 ```elm
 init = "" ! [hello "Js! Hello!"]
 ```
 （initに書くとElm初期化後すぐのタイミング時でJSへ値を送ります。）
+
+###JS側
 
 JS側は`ports.定義した関数名.subscribe`に関数を登録して受け取ります。
 
@@ -88,20 +99,24 @@ app.ports.hello.subscribe(function(str) {
 
 ##JSからElmへ
 
-Elm側
+JS側からElmアプリに値を渡す方法です。
+
+###Elm側
 
 ```elm
 port jsHello : (String -> msg) -> Sub msg
 ```
 
 ```
-port 関数名 ： (受け取る型-> msg) -> Sub msg
+port 関数名 ： (JSからやってくる型-> msg) -> Sub msg
 ```
 と書いて関数を定義します。(msgは小文字)
 
 定義した関数をsubscriptionsで使います。(subscriptionsはElm-Architectureのページで解説しています。)
 
 一引数目にMsgのデータ構築子を入れ使います。
+
+送られてきた値はElm側では、Msgになります。
 
 ```elm
 type Msg = GetHello Strign                     --Msgの定義
@@ -113,9 +128,13 @@ main = program {subscriptions = subscriptions} --subscriptions関数に使う。
 subscriptions : Model -> Sub Msg
 subscriptions model = jsHello GetHello         --例。
 
+update msg model =
+  case msg of
+    GetHello str -> ...                        --JSからの値はMsgになる。
+
 ```
 
-JS側
+###JS側
 
 JS側は、`app名.ports.関数名.send(送る値)`で送ります。
 

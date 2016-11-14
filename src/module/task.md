@@ -145,7 +145,7 @@ Javascriptはシングルスレッド処理ということですが、非同期�
 ```
 parallel : List (Task error value) -> Task error (List Process.Id)
 parallel tasks =
-sequence (List.map spawn tasks)
+    sequence (List.map spawn tasks)
 ```
 
 CoreライブラリのProcessのspawn関数を使っています。spawnはどこまでを別スレッドで実行するかの区切りになります。返す値はsetTimeoutが返すプロセスidです。
