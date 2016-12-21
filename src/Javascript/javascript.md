@@ -142,7 +142,7 @@ var _{ユーザー名}${パッケージ名}$Native_{ライブラリ名} = functi
 
 ##Effect Module
 
-Elm-ArchitectureのPub/Subライブラリの裏側にあるのが、Effectモジュールです。Pub、Subを提供するライブラリは、CmdとSubのリストと状態と、Taskをどう処理するかをEffectモジュールで管理します。この機能でNativeモジュールの副作用がElmに及ばないようにしたり、依存したりしないようにします。まだ理解が及んでいないのでわかりしだい書きたいと思います。
+The Elm ArchitectureのPub/Subライブラリの裏側にあるのが、Effectモジュールです。Pub、Subを提供するライブラリは、CmdとSubのリストと状態と、Taskをどう処理するかをEffectモジュールで管理します。この機能でNativeモジュールの副作用がElmに及ばないようにしたり、依存したりしないようにします。まだ理解が及んでいないのでわかりしだい書きたいと思います。
 
 ##まとめ
 

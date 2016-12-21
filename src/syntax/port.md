@@ -74,7 +74,7 @@ port hello : String -> Cmd msg
 
 portと書いて関数名と型を定義します。この時、型は`送る型->Cmd msg`とします。（msgは小文字で書かなければなりません。）
 
-そしてこの関数をinit関数や、update関数で使います。（init等に関してはElm-Architectureへ）
+そしてこの関数をinit関数や、update関数で使います。（init等に関してはThe Elm Architectureへ）
 
 ```elm
 init = "" ! [hello "Js! Hello!"]

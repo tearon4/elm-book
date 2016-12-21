@@ -6,7 +6,7 @@
 Elmのエントリポイント（main）の型は、`Svg`や`Html`などの画面を表現する型か、`Progam a`という型にしなければなりません。
 
 `Program a`を渡せば、何かしらの動作があるアプリケーションになります。
-`Program a`という型はアプリケーション全体を表した特殊な型で、Program型をつくるには現状、Html.AppにあるbeginnerProgram、program、programWithFlags関数を使います。これらの関数はElm-Architectureという考えにそっています。
+`Program a`という型はアプリケーション全体を表した特殊な型で、Program型をつくるには現状、Html.AppにあるbeginnerProgram、program、programWithFlags関数を使います。これらの関数はThe Elm Architectureという考えにそっています。
 
 
 ##Html.App
@@ -31,7 +31,7 @@ updateは(画面をクリックするなどして)イベントが起きた時の
 
 ###program
 
-program関数です。引数に用意するのは、Elm-Architectureの非同期処理や外部からの入力に対応したバージョンです。
+program関数です。引数に用意するのは、The Elm Architectureの非同期処理や外部からの入力に対応したバージョンです。
 
 ```
 program

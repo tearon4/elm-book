@@ -8,7 +8,7 @@
 公式ホームページ。ドキュメントやサンプルコードを見ることが出来ます。
 
 [Introduction · An Introduction to Elm](http://guide.elm-lang.org/)  
-ドキュメントの中にある、ElmとElm-Architectureについて説明したガイドページ。
+ドキュメントの中にある、ElmとThe Elm Architectureについて説明したガイドページ。
 
 [evancz/elm-todomvc: Proper implementation of the TodoMVC app](https://github.com/evancz/elm-todomvc)  
 Elmで作られたtodoリストのサンプル。

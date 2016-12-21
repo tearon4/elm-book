@@ -21,15 +21,15 @@ Elmでは、Elm ArchitectureというパラダイムでGUIアプリケーショ�
 https://github.com/evancz/elm-architecture-tutorial
 
 
-##二種類のElm-Architecture
+##二種類のThe Elm Architecture
 
-Elm-Architectureには二種類のバージョンがあります。そしてElmはそれぞれ用に関数を用意しています。(beginerProgram、program)
+The Elm Architectureには二種類のバージョンがあります。そしてElmはそれぞれ用に関数を用意しています。(beginerProgram、program)
 
 これは最初に大きなアプリケーションを構成して書くための方法としてElm製作者のEvanが発案したときのバージョンと、その後Elmが発展して非同期処理について固まった後に、それに対応して生まれた現行のバージョンと発表タイミングが２つに別れたためです。
 
 初期を初期バージョン、現行をCmd/Subバージョンと呼ぶことにします。
 
-余談：余談ですが、reduxやcycle.jsといったフレームワークの作者がElm-Architectureを参考にした時、つまり世に広まった時は、Cmd/Subバージョンが確立する前でした、なので各フレームワークは非同期処理についてばらつきがあるようです。
+余談：余談ですが、reduxやcycle.jsといったフレームワークの作者がThe Elm Architectureを参考にした時、つまり世に広まった時は、Cmd/Subバージョンが確立する前でした、なので各フレームワークは非同期処理についてばらつきがあるようです。
 
 初期のバージョンは今ではビギナー用になっています。
 model、view、update、Msgという関数と型を用意する必要があります。
@@ -44,7 +44,7 @@ Cmd/Subバージョンは、ビギナーバージョンを内包しているの�
 
 ##Hello World
 
-Elm-Architecture（現行のバージョン）で書かれた、Helloと表示するだけで何もしないコードは以下のようになります。
+The Elm Architecture（現行のバージョン）で書かれた、Helloと表示するだけで何もしないコードは以下のようになります。
 （下記のupdate関数のように、なにもしないならそのまま返す関数でOKです。）
 
 ```elm
@@ -167,7 +167,7 @@ view model = div [onClick Click] [text model.titel]
 
 ##一旦のまとめ。ビギナーバージョン
 
-ここまでの説明でビギナーバージョンのElm-Architectureを書くことが出来ます。
+ここまでの説明でビギナーバージョンのThe Elm Architectureを書くことが出来ます。
 beginerProgram関数を使い、model、view、updateを記述すれば、後は関数に渡すだけです。
 
 ```elm
