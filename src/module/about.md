@@ -11,10 +11,14 @@ import Basics exposing (..)
 import List exposing ( List, (::) )
 import Maybe exposing ( Maybe( Just, Nothing ) )
 import Result exposing ( Result( Ok, Err ) )
+import String
+import Tuple
+
+import Debug
+
 import Platform exposing ( Program )
 import Platform.Cmd exposing ( Cmd, (!) )
 import Platform.Sub exposing ( Sub )
-
 ```
 
 ライブラリには必要最低限の関数しかありません。より発展的な関数が必要なら、Elm Packagesに｛Coreモジュール名｝-extraという名前で、Coreライブラリの拡張ライブラリが公開されているので参照してみてください。
