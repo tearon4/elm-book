@@ -1,24 +1,47 @@
 module Main exposing (..)
 
-import Html exposing (text)
-import Html.App exposing (program)
+import Html exposing (..)
 
 
+-- MODEL
+
+
+type alias Model =
+    Int
+
+
+
+-- Msg
+
+
+type Msg
+    = Hello
+
+
+
+-- APP
+
+
+main : Program Never Int Msg
 main =
-    program { init = init, update = update, view = view, subscriptions = subscriptions }
+    Html.program { init = init, view = view, update = update, subscriptions = subscriptions }
 
 
+subscriptions : Model -> Sub Msg
+subscriptions model =
+    Sub.none
+
+
+init : ( Model, Cmd Msg )
 init =
-    "" ! []
+    0 ! []
 
 
+update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     model ! []
 
 
+view : Model -> Html Msg
 view model =
     text "hello"
-
-
-subscriptions model =
-    Sub.none

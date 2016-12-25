@@ -29,7 +29,7 @@ init = "" ! [getJson]               --initにCmdを渡すと、初期化後す�
 
 #計算のひと塊
 
-Task型は「タスク」という名前の通り計算のステップという性質があります。
+Task型には計算のステップという性質があります。
 
 ##Task型を作る。
 
@@ -116,7 +116,7 @@ Taskのエラー用の関数について説明します。
 mapError関数を使うとTaskのエラーを変化させることが出来ます。
 以下では、Taskの階層の中でエラーを文字列にして、どこのエラーかわかりやすくしています。
 
-```
+```elm
 getJson : Cmd Msg
 getJson =
     ((get (Decode.list Decode.string) "test.json" |> Task.mapError (\_ -> "通信エラー！"))  --getのTaskのエラーを変化。
