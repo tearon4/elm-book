@@ -4,6 +4,22 @@ ElmはF#やOcamlやHaskellを参考にしています。
 
 ElmとHaskellはどのように違うか、ということを考えてみました。（あまりHaskell知らないので間違っているかもしれません。。）
 
+###Elmは正格評価です。
+
+遅延評価を行うには専用のモジュールを使います。
+
+###Elmには型クラスがない。
+
+型クラスがないので、ジェネリックプログラミングみたいなことが出来ないです。
+実装される話もあるようですが、あまり乗り気ではないそうです。
+
+型クラス等がほしいならpuresciptとか、scala-js、ghc-js、typescriptとかを検討したほうがいいかもしれないです。
+
+##main（エントリポイント）の型の違い
+
+Elmはmainの型がSvg a、Html a、Program aという型のブラウザアプリケーションを生成する言語です。GUI用DSLのような言語です。
+Elmではアプリケーションアーキテクチャも規定しています。（The Elm Architecture）。作るのにはview関数、update関数、初期化関数、Msg型というのを用意してつくります。
+
 
 ###表記の違い
 
@@ -100,20 +116,6 @@ position = {x = 0, y = 0}
 { position | x = position.x + 1}　  -- 結果は {x = 1 , y = 0} になります。 x = x + 1 みたいなものです。
 ```
 
-##main（エントリポイント）の型の違い
-
-Elmはmainの型がSvg a、Html a、Program aという型になります。SvgやHtmlというように、Elmは画面構成用の言語です。
-Program a というのはアプリケーション一単位という型で、専用の関数で作るのですが、作るのにはview関数、update関数、初期化関数、Msg型というのを用意するThe Elm Architectureというパラダイムで書きます。なので、Elmで作ることは、フレームワークを使うことと同じとなっています。
-
-
-###Elmには型クラス構文とかがない。
-
-型クラスがないので、ジェネリックプログラミングみたいなことが出来ないです。
-実装される話もあるようですが、あまり乗り気ではないそうです。
-
-型クラス等がほしいならpuresciptとか、scala-js、ghc-js、typescriptとかを検討したほうがいいかもしれないです。
-
-
 ###余談：Elmの特別な型
 
 Elmでは、number、 comparable、 appendableという多相な型を内部で使っていて、組み込みの関数はその型を使っています。
@@ -134,6 +136,3 @@ appendable は`List` `String`
 > "hello" ++ "world"
 "helloworld" : String
 ```
-
-
-###Elmは正格評価です。
