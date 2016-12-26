@@ -30,14 +30,10 @@
 * [The Elm Architecture](src/elmArchitecture/about.md)
     * [Cmd/Subバージョン](src/elmArchitecture/cmdSub.md)
     * [The Elm Architectureのモジュラリティ](src/elmArchitecture/scale.md)
-* [Javascriptと連帯する方法のまとめ](src/Javascript/javascript.md)
+<!-- * [Javascriptと連帯する方法のまとめ](src/Javascript/javascript.md) -->
 * [Elm Packageで公開されているパッケージ](src/elmPackages/about.md)
-  <!-- * [Element/Collage](src/module/element.md) -->
   * [elm-lang/html:HTML](src/elmPackages/html.md)
   * [elm-lang/html(2):Html.App](src/elmPackages/htmlapp.md)
   <!-- * [Test](src/Test/test.md) -->
   * [Bogdanp/elm-combine:パーサーコンビネータ](src/elmPackages/combinater.md)
-<!-- * [よく見るエラー](src/etc/errors.md) -->
-<!-- * [Elmの実績調査](src/etc/zisseki.md) -->
 * [参考になるリンク集](src/etc/sankou.md)
-<!-- * [おわりに](src/Elm/owarini.md) -->

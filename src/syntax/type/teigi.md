@@ -1,6 +1,6 @@
 #型を定義するには
 
-プログラムに合わせて、基本的な型を組み合わせ新しい型を定義する必要があります。
+プログラムに合わせて、基本的な型を組み合わせ新しい型を定義することが出来ます。
 
 新しい型を定義するには`type`と`type aliase`というキーワードを使います。
 
@@ -11,42 +11,54 @@ type alias User = { id : Int , name : String } --レコード型という種類�
 type alias Age = Int
 ```
 
-`type`は新しい型を作るときに使います。
+`type`は新しい型を定義するときに使います。
 
-`type alias` は既存の型に別の型名を付けるときに使います。またレコード型を作るときは特別にこちらを使います。
+`type alias`は既存の型に別の型名を付けるときに使います。またレコード型を定義するときは特別にこちらを使います。
+
+型名は大文字から始まる必要があります。
 
 ##データ構築子（コンストラクタ）
 
-上の例では、Fruits、Msg、User、Ageが新しく定義した「型名」で、そしてOrang、Melon、Apple、Get、の部分が「データ構築子（コンストラクタ）」といいいます。
+`type`で新しい型を定義するときは、必ず他と被らない新しいデータ構築子も定義される必要があります。
 
-`type`で新しい型を定義するときは、必ず他と被らないデータ構築子を定義する必要があります。
+データ構築子を使うことで、定義した新しい型の値（インスタンス）を生成することが出来ます。
 
-データ構築子がどこになるのかというのを意識して見てください。
 
-既存の型を組み合わせた型を定義した時は、一番左がデータ構築子になります。
+```elm
+type User = User String   --User型を新しく定義！
+
+user : User
+user = User "elm"         --User型の値を生成！
+
+type Fruits = Orange | Melon | Apple  --Fruits型を新しく定義！
+
+fruits : Fruits
+fruits = Orange          --Fruits型の値を生成！
+```
+
+データ構築子がどこになるのかというのを意識してみてください。
+
+上の例では、`User`、`Fruits`が新しく定義した型で、そして`User`、`Orange`、`Melon`、`Apple`、の部分がそれぞれの型のデータ構築子になります。
+
+型を定義した時は、一番左がデータ構築子になります。
+
 
 ```elm
 type ID = ID                --IDがデータ構築子。
 
-type Day = Day Int Int Int  --Dayがデータ構築子。型名と同じ名前でも構わない。
+type Day = Day Int Int Int  --Dayがデータ構築子。型名と同じ名前でも別名でも構わない。
 
-```
-
-データ構築子を関数のように使うと、定義した型に成ります。
-
-```elm
 today : Day
-today = Day 2016 8 10   --Dayデータ構築子を使ってDay型を作っている
+today = Day 2016 8 10       --Dayデータ構築子を使ってDay型の値を作っている
 
-init : Fruits
-init = Orange
+nextday = Day 2016 8 11     --Day型の別の値
 
 ```
 
 ##type alias
 
 `type alias`は型に別名をつけることが出来ます。
-別名を付けてわかりやすく出来ます。
+別名を付けることで、読みやすくすることが出来ます。
 
 ```elm
 type alias Money = Float
@@ -58,6 +70,8 @@ getX (a,b) = a
 ```
 
 ##typeで作れる型
+
+typeで作れる型についてもう少し詳しく見ていきます。
 
 ###直積型
 
@@ -86,7 +100,7 @@ type　Bool =　Ture | False
 
 上記の場合この（Bool）型は、TrueかFalseどちらかになる。という意味になります。フラグのイメージそのままです。
 
-`|`で定義した場合は`|`毎に左端がデータ構築子になります。
+`|`で定義した場合は`|`毎に左端がデータ構築子になります。（つまり直積型とユニオン型の組み合わせ）
 
 ```elm
 type GameState = Start String | Main String | End Int  --StartとMainとEndがデータ構築子
@@ -95,7 +109,24 @@ type alias Hoge = Int
 --type Huga = Test | Hoge   -- error!定義できない。データ構築子に既存のものは使えない。
 ```
 
-Union typeは再帰した型を定義できます。場合分けしたした型のうち、終了にあたる型がある必要があります。
+Union typeはcase式を使うことで、処理を分岐することが出来ます。
+
+```elm
+type Fruits = Orange | Melon | Apple
+
+grow : Fruits ->
+grow fruits =
+  case fruits of             --case式で分岐
+    Orange ->
+    Melons ->
+    Apple ->
+```
+
+
+###再帰した型
+
+Union typeは再帰した型を定義できます。
+木構造などの再帰したデータ構造を定義できます。
 
 ```elm
 type List a = Cons a (List a) | Nil  --自分という型を使って定義している。Nilが終了
@@ -104,32 +135,21 @@ nil : List a
 nil = Nil
 
 list1 : List Int
-list1 = Cons 1 Nil
+list1 = Cons 1 Nil             --ListはConsを使って繋げたデータ型
 
 list2 : List Int
-list2 = Cons 2 (Cons 1 Nil)   --再帰したデータ構造
+list2 = Cons 2 (Cons 1 Nil)   --どんどん繋げる。
 ```
 
-木構造などの再帰したデータ構造を定義できます。
-
-Union typeはcase式でスイッチすることが出来ます。
-
-```elm
-type Fruits = Orange | Melon | Apple
-
-grow fruits =
-  case fruits of
-    Orange ->
-    Melons ->
-    Apple ->
-```
 
 ###型変数
 
-型定義の時に、型変数というのを使うことが出来ます。
+上記で使っていましたが、型定義の時に型変数というのを使うことが出来ます。
+
+型変数は、どの型をいれても良い空白スペースになっています。
 
 ```elm
-type Container a = Container a
+type Container a = Container a    -- a が型変数
 
 taged : Container Int
 taged = Container 10
@@ -138,18 +158,59 @@ taged2 : Container String
 taged2 = Container "hello"
 ```
 
+上記のContainerは、Container Int、Container Stringとしても使うことが出来ます。
+このように型変数を使うと、IntやFloatそれぞれの型用に個別に定義する必要がなくなり、`Container a`と定義するだけでよくなります。
+
+List型なども、`List a`として定義されており、`List Int`、`List Float`など、色々な型を格納するListになることが出来ます。
+
+```elm
+> [1,2,3]
+[1,2,3] : List number
+> ["a","b"]
+["a","b"] : List String
+```
+
+List方のように型変数を使うと、型を格納するデータ構造の型を定義できます。
+
 ##type aliasで作れる型
+
+`type alias`の構文で、型に別名をつけることが出来ます。またレコード型を作ることも出来ます。
 
 ###レコード型
 
 プロパティがあるレコード型というのを定義できます。
 
 ```elm
-type alias User = {name : String}
-type alias Blog = {id : Int , kizi : String}
-type alias Position a = { a | x : Int , y : Int}
+type alias User = { name : String }
+type alias Blog = { id : Int , kizi : String }
+type alias Position a = { a | x : Int , y : Int }
+```
+プロパティは直積型の場所に名前がついたもので、nameやidといった小文字部分です。
+
+例えば沢山の型を並べる必要がある場合、型の意味がわかりにくくなりますが、レコード型で定義するとプロパティを使ってわかりやすく型を作ることが出来ます。
+
+```elm
+---直積型の場合
+
+type User = User Int String ( Int, Int )
+
+user1 = User 1 "elm" ( 0, 0 )
+
+---レコード型を使った場合
+type alias User2 = { id : Int, name : String, position : ( Int, Int ) }
+
+user2 = { id = 2, name = "elm2", position = ( 0, 0 ) }  -- 型の意味がわかりやすい
 ```
 
+
+またレコード型は直積型のシンタックスシュガーでもあるので、以下のようにデータ構築子を使った生成も出来ます。
+
+```elm
+type alias User = {name : String , id : Int}
+user = User "k" 1                                -- データ構築子が自動で生成されている。
+```
+
+###プロパティへのアクセス関数
 
 プロパティがある型には、自動でアクセス用の関数が作られます。
 
@@ -163,6 +224,18 @@ type alias Position a = { a | x : Int , y : Int}
 >
 ```
 
+###パターンマッチ
+
+レコード型もパターンマッチをすることが可能です。
+
+```elm
+getPosition : Position a -> Int                --
+getPosition {x} = x                            --パターンマッチ xプロパティを取り出す。
+```
+
+
+###構造的部分型
+
 レコードの中の`a|`と言うのは、ここに型が入ることが出来るということです。
 これを使うとレコードを部分的に定義できます。
 
@@ -172,22 +245,17 @@ type alias Position a = { a | x : Int , y : Int}
 type alias Chara = Position { name :String }
 
 chara : Chara
-chara = {x=0,y=0,name = "piyo"}                --３つのプロパティ
+chara = {x=0 , y=0 , name = "piyo"}                --３つのプロパティ
 
-getPosition : Position a -> Int                --
-getPosition {x} = x                            --パターンマッチ
-
-getX : {a| x:Int } -> Int                      --xプロパティのある型を指名
+getX : {a| x:Int } -> Int                      --xプロパティのある型を指定
 getX target = target.x
 
 ```
 
-レコード型は直積型を定義するのと同じになってます。
+`{a| x:Int }`という型があった場合、この型は「xという名前のプロパティを持つ型」という意味になります。
 
-```elm
-type alias User = {name : String} -- == type User = User String
-init = User "k"                   -- データ構築子が自動で生成されている。
-```
+
+
 
 
 ##まとめ

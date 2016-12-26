@@ -1,20 +1,17 @@
-#Html.App
+#Html
 
 
 ##Program aとは
 
 Elmのエントリポイント（main）の型は、`Svg`や`Html`などの画面を表現する型か、`Progam a`という型にしなければなりません。
 
-`Program a`を渡せば、何かしらの動作があるアプリケーションになります。
-`Program a`という型はアプリケーション全体を表した特殊な型で、Program型をつくるには現状、Html.AppにあるbeginnerProgram、program、programWithFlags関数を使います。これらの関数はThe Elm Architectureという考えにそっています。
+`Program a`という型はアプリケーション全体を表した特殊な型で、Program型を作る基本の関数がHtmlにあるbeginnerProgram、program、programWithFlagsです。これらの関数はThe Elm Architectureという考えにそっています
 
 
-##Html.App
+##beginnerProgram
 
-###beginnerProgram
-
-```
-import Html.App exposing (beginnerProgram)
+```elm
+import Html exposing (beginnerProgram)
 
 main : Program Never
 main =
@@ -33,7 +30,7 @@ updateは(画面をクリックするなどして)イベントが起きた時の
 
 program関数です。引数に用意するのは、The Elm Architectureの非同期処理や外部からの入力に対応したバージョンです。
 
-```
+```elm
 program
   : { init : (model, Cmd msg)
     , update : msg -> model -> (model, Cmd msg)
@@ -47,12 +44,20 @@ program app =
 
 ```
 
+使用例
+
+```elm
+main : Program Never Model Msg
+main =
+    Html.program { init = init, view = view, update = update, subscriptions = subscriptions }
+```
+
 initやupdateがCmdを返すようになっていて、subscriptionsという関数が必要になります。
 
 
 ###programWithFlags
 
-programWithFlagsは、Elmが起動する時、JSから初期値を渡す場合に使います。
+programWithFlagsは、Elmが起動する時にJSから初期値を受け取る場合に使います。
 
 ```elm
 programWithFlags
@@ -68,8 +73,10 @@ programWithFlags =
 
 渡すinit関数をflagsを受けるようにします。
 
-```
-init : { userID : String, token : String } -> ...
+例
+
+```elm
+init : { userID : String, token : String } -> (Model, Cmd Msg)
 init flag = ...
 ```
 
@@ -83,12 +90,4 @@ var app = Elm.MyApp.fullscreen({
     userID: 'Tom',
     token: '12345'
 });
-
-// embedの場合
-
-var elm = document.getElementById('elm')
-var app = Elm.MyApp.embed(elm,{
-    userID: 'Tom',
-    token: '12345'})
-
 ```
