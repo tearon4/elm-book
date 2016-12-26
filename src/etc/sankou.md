@@ -8,7 +8,7 @@
 公式ホームページ。ドキュメントやサンプルコードを見ることが出来ます。
 
 [Introduction · An Introduction to Elm](http://guide.elm-lang.org/)  
-ドキュメントの中にある、ElmとThe Elm Architectureについて説明したガイドページ。
+公式ホームページのドキュメントの中にある、ElmとThe Elm Architectureについて説明したガイドページ。
 
 [evancz/elm-todomvc: Proper implementation of the TodoMVC app](https://github.com/evancz/elm-todomvc)  
 Elmで作られたtodoリストのサンプル。
@@ -30,9 +30,12 @@ tokyo elm meetup
 
 
 
-##チートシート等
+##チュートリアル、チートシート等
 
-[izdi/elm-cheat-sheet](https://github.com/izdi/elm-cheat-sheet)　  
+[Elm Tutorial · GitBook](https://www.gitbook.com/book/sporto/elm-tutorial/details)  
+\@sebasportoさんによるチュートリアル。そしてuehajさんによる日本語翻訳[イントロダクション · Elm Tutorial](https://www.elm-tutorial.org/jp/)
+
+[izdi/elm-cheat-sheet](https://github.com/izdi/elm-cheat-sheet)　   
 Elmチートシート
 
 [Elm FAQ](http://faq.elm-community.org/)  
@@ -52,15 +55,16 @@ Elmのツールなどをすごいたくさん開発しているjinjorさんの�
 [「Elmでやってみる」シリーズのまとめエントリ - uehaj's blog](http://uehaj.hatenablog.com/entry/2015/01/08/234207)
 Elmを最初期から追っているuehajさんの記事。
 
-[Elm | POSTD](http://postd.cc/tag/elm/)
+[Elm | POSTD](http://postd.cc/tag/elm/)  
 PostdのElmタグの記事。
 
-[Elm Advent Calendar 2014 - Qiita](http://qiita.com/advent-calendar/2014/elm)
-[Elm Advent Calendar 2015 - Qiita](http://qiita.com/advent-calendar/2015/elm)
+[Elm Advent Calendar 2014 - Qiita](http://qiita.com/advent-calendar/2014/elm)  
+[Elm Advent Calendar 2015 - Qiita](http://qiita.com/advent-calendar/2015/elm)  
+[Elm Advent Calendar 2016 - Qiita](http://qiita.com/advent-calendar/2016/elm)  
 これでElm知った人も多いアドベントカレンダー。次のアドベントカレンダーは君も書いて。
 
 #Tool
 
-[mbylstra/html-to-elm: An online tool for converting HTML to elm-html. Go to](https://github.com/mbylstra/html-to-elm)
+[mbylstra/html-to-elm: An online tool for converting HTML to elm-html. Go to](https://github.com/mbylstra/html-to-elm)  
 
 HTMLからElmのコードに変換するツール。
