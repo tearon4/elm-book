@@ -2,7 +2,7 @@
 
 elm-makeはElmで書かれたファイル（.elm）を依存関係を解決してコンパイルします。
 
-コマンド(mac / win)  
+コマンド
 
 elm make / elm-make
 
@@ -23,6 +23,11 @@ elm-make Hello.elm --output ../dist/test.html
 
 ```
 
+##オプション
+
+--debug    デバッグ機能を付与してコンパイルします。デバッグ機能については、elm-reactorにて解説しています。
+--warn     コンパイルエラーほどではない注意レベルのエラーを表示します。（importして使っていない型があるなど）
+
 ##依存関係の解決
 
 外部のモジュールを使っていたら、elm-makeは自動で検索してコンパイルします。
@@ -32,7 +37,7 @@ import Html  --elm-stuffフォルダの中に探しに。
 import Hoge  --ユーザーが作ったモジュール
 ```
 
-elm-makeが検索する場所をelm-package.jsonで指定することができます。
+elm-makeがソースコードを検索する場所をelm-package.jsonで指定することができます。
 
 
 ```json
@@ -93,4 +98,4 @@ module Test.Hoge exposing (..)
 import Test.Hoge
 ```
 
-すると検索されてコンパイル出来ます。
+するとTestフォルダ下のHogeモジュールは検索されてコンパイル出来ます。
