@@ -1,7 +1,9 @@
 {
   "title":"Elmの薄い本",
 
-  "plugins": ["japanese-support","snippet@git+https://github.com/cucumber-ltd/gitbook-plugin-snippet.git"],
+  "plugins": ["japanese-support",
+              "snippet@git+https://github.com/cucumber-ltd/gitbook-plugin-snippet.git",
+              "numbered-headings"],
 
   "pluginsConfig": {
     "snippet": {
