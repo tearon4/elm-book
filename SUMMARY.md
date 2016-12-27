@@ -11,7 +11,7 @@
     * [elm-reactor:ファイル監視サーバー](src/Tool/reactor.md)
 * [Elmの構文全体](src/syntax/syntax.md)
     * [全体](src/syntax/allSyntax.md)
-    * [型](src/syntax/type/type.md)
+    * [型・型検査](src/syntax/type/type.md)
 　　   * [型表記](src/syntax/type/meizi.md)
     * [基本の型](src/syntax/type/primitive.md)
     * [関数](src/syntax/function.md)
@@ -19,6 +19,9 @@
     * [Port:JSとやり取りする](src/syntax/port.md)
     * [新しい型を定義する](src/syntax/type/teigi.md)
 * [コラム:HaskellからみたElm](src/syntax/fromHaskell.md)
+* [The Elm Architecture](src/elmArchitecture/about.md)
+    * [Cmd/Subバージョン](src/elmArchitecture/cmdSub.md)
+    * [The Elm Architectureのモジュラリティ](src/elmArchitecture/scale.md)
 * [Coreライブラリ](src/module/about.md)
     <!-- * [Basics](src/module/basics.md) -->
     <!-- * [List](src/module/List.md) -->
@@ -27,9 +30,6 @@
     * [Dict:辞書](src/module/dict.md)
     <!-- * [Json](src/module/json.md) -->
     * [Debug:デバッグ](src/module/debug.md)
-* [The Elm Architecture](src/elmArchitecture/about.md)
-    * [Cmd/Subバージョン](src/elmArchitecture/cmdSub.md)
-    * [The Elm Architectureのモジュラリティ](src/elmArchitecture/scale.md)
 * [Elm Packageで公開されているパッケージ](src/elmPackages/about.md)
   * [elm-lang/html](src/elmPackages/html.md)
   * [elm-lang/html(2)](src/elmPackages/htmlapp.md)

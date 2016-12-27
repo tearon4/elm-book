@@ -1,53 +1,58 @@
 
-#Cmd/Subバージョン
+#Cmd/Sub
 
-アプリケーションには、避けられない副作用処理があります。The Elm Architectureはそれらの処理に、Cmd/Subというインターフェースを提供しています。、マウスなどの入力や、DBアクセスや、httpアクセスや、別スレッドで実行されるTaskなどを扱えるようになります。
+The Elm Architectureで非同期、副作用のある処理を管理する仕組みがCmd/Subです。
 
-Cmd/Subは、どちらも別スレッド実行される非同期の処理と理解するといいと思います。Task型の理解が役に立ちます。
+Cmd/Subは、The Elm Architectureで集めた副作用の取り扱いをThe Elm Architecture利用者に見えないように行います。例えばイベント登録が必要なSubが重なったら一つにしてくれたり、websocketライブラリは、通信がエラーになって接続が切れても、メインの処理とは別に独立して復旧したりするようになっています。
 
-Cmd/Subは副作用の取り扱いをCmd/Sub利用者に見えないように行います。例えばwebsocketライブラリなどは、通信エラーになってもメインの処理とは別に独立して復旧したりするようになっているそうです。
+##Cmd
 
+Cmdは外にだす命令、コマンドという意味です。Taskの実行といった、こちらから非同期で実行するものをCmd型になるようになっています。
 
+Task型の実行関数
 
-##Cmd/Sub利用の仕方
+```elm
+perform : (a -> msg) -> Task Never a -> Cmd msg
+```
 
-###Cmd
-
-Cmdは外にだす命令、コマンドという意味です。DBへの検索指示であったり、Taskの実行であったりといった、こちらから非同期で実行して結果が返ってくるものがCmd型になっています。
-
-Cmdを発行できる場所は決まっています。init関数と、update関数の結果部分です。
+CmdをElmに渡す場所は決まっています。init関数と、update関数の結果部分です。
 
 ```elm
 init : (Model,Cmd msg)
 update : Msg -> Model -> (Model,Cmd msg)
 ```
 
-init関数に行いたいコマンドを渡した場合は、Modelの初期化が終わって「すぐ」に実行されます。例えば、ElmがDomに展開された後すぐhttpでサーバーに確認したいなどという時にinitに設定します。
+init関数でコマンドを渡した場合は、Modelの初期化が終わって「すぐ」に実行されます。
 
-update関数に設定した場合は、update処理の途中または結果時にCmdは実行されます。。updateの分岐の後、httpにアクセスしたり、といったことが出来ます。
+update関数に設定した場合は、update処理の途中または結果時にCmdは実行されます。
 
-Cmdが実行されると結果はMsg型になって、updateに(つまりアプリ内に)帰ってきます。dbアクセスの結果や、httpアクセスの結果などですね。なのでCmd型を作る関数はMsg型のデータ構築子を取るようになっています。
+Cmdが実行されると、結果はMsg型になってupdateに帰ってきます。なのでCmd型を作る関数は、Msg型のデータ構築子を取るようになっています。
 
-###Sub
+Httpのリクエスト発行関数。結果を受け取るMsgを渡す必要がある。
+```elm
+send : (Result Error a -> msg) -> Request a -> Cmd msg
+```
+
+
+##Sub
 
 Subは外から内に非同期にくるイベントを表しています。マウスやキーボードの入力などがそれにあたります。
 
-まず、SubはsubscriptionsというHtml.Appの関数の結果になるようにします。
+Subはsubscriptions関数でElmに渡すようにします。
 
 ```elm
 subscriptions : model -> Sub msg
+
+main =
+  program { ... , subscriptions = subscriptions}
 ```
 
 例えば以下のようにsubscriptionsにマウスの移動入力Subを設定します。
 
-
 ```elm
 subscriptions : Model -> Sub Msg
-subscriptions model = Mouse.move GetPosition
-
-main =
-  program { ... , subscriptions = subscriptions}
-
+subscriptions model =
+  Mouse.move GetPosition
 ```
 
 Subの結果もまた、Msgのデータ構築子になって、updateに入ってきます。
@@ -64,18 +69,16 @@ none
 (!)
 ```
 
-`map`はCmd型の中を変化させます。
+`map`は主に、Elm Architectureを重ねる場合に、子Elm ArchitectureのMsgを親に合わせて変化させる時に使います。
 
-`batch`は、複数のCmd、Subを一つに合体します。アプリケーションにCmdSubが複数ある時や、他のThe Elm Architectureで書かれたコンポーネントを自分のコンポーネントに融合させる時に使います。
-合体したCmdSubが複数同時に発生したらそれぞれがちゃんと発火します。
+`batch`は、複数のCmd、Subを一つに合体します。アプリケーションにCmdSubが複数ある時に使います。
+合体したCmdSubが複数同時に発生したら一つづつそれぞれが発火します。
 
 `none`は、何もないCmd、Subということです。Cmd、Subが無いときに設定します。
 
-`(!)`は記述が簡単になる関数です。
+`(!)`は記述が簡単になる関数です。`(!)`の右側のリストにCmdを並べると、batchで融合してくれます。タプルで書く手間が省けます。
 
 ```elm
 init : (Model,Cmd msg)
 init = model ! []           --空のリストだとCmd.noneになる。
 ```
-
-上記の`(!)`の右側のリストにCmdを並べると、batchで融合してくれますし、`(model , nanntokaCmd)`みたいにわざわざタプル型を書かなくてすむようになる便利関数です。

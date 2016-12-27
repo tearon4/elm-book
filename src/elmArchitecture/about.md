@@ -1,23 +1,21 @@
 
 ##Elmで動くアプリケーションを作るには？
 
-Elmの`main`の型は、`Html a`か`Program a`である必要があります。
+Elmの`main`の型は、SvgやHtmlなどの画面を表現する型か、`Program`型である必要があります。
 
-`Html a`型は静的な画面になり、`Program a`型はさらに入力や操作ができるアプリケーションになります。
+`Html`型は静的な画面になり、`Program`型はさらに入力や操作ができるアプリケーションになります。
 
-Elmではelm-lang/htmlパッケージのHtml.Appモジュールにある関数を使い`Program a`型を作ります。
+Elmではelm-lang/htmlパッケージのHtmlモジュールにあるprogram、beginerProgram、programWithFlags関数を使い`Program a`型を作ります。
 
-Html.Appの関数を使うには、init、update、view、Msg、といった関数を用意する必要があります。
+そしてそれらの関数は、The Elm Architectureというアプリケーションアーキテクチャに基いて使用します。
 
-Elmではこれらの関数を用意すると画面を持ったアプリケーションを作れるようになっています。それらの関数の役割がElm Architectureという考え方で決められています。
+#The Elm Architectureとは？
 
-#Elm Architectureとは？
+Elmでは、The Elm ArchitectureというアプリケーションアーキテクチャでGUIアプリケーションを記述します。
 
-Elmでは、Elm ArchitectureというパラダイムでGUIアプリケーションを記述します。
-パラダイムとは設計や構造化の手法、書き方みたいなのを指します。
-過去にあったパラダイムとして、ゲームで使われるメインループ方式や、Webフレームワークにも採用されたMVC、MVC2、マイクロソフトが作ったMVVMといったものがあります。
+アプリケーションアーキテクチャとは、設計や構造化の手法、書き方みたいなのを指します。他のアーキテクチャとして、ゲームで使われるメインループ方式や、Webフレームワークにも採用されたMVC、MVC2、マイクロソフトが作ったMVVMといったものがあります。
 
-初めて提案され、詳しいドキュメントがあるレポジトリがこちらになります。
+The Elm Architectureが初めて提案され、詳しいドキュメントがあるレポジトリがこちらになります。
 https://github.com/evancz/elm-architecture-tutorial
 
 
