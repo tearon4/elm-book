@@ -6,7 +6,7 @@ HTMLのような自然な記述で書くことが出来ます。
 
 使用例ハローワールド
 
-```hs
+```elm
 import Html exposing (div,text)
 
 main =
@@ -33,7 +33,7 @@ Htmlモジュールは、基本になるモジュールでHtml型があって、
 
 例えばdiv関数は以下のように定義されています。
 
-```hs
+```elm
 div : List (Attribute msg) -> List (Html msg) -> Html msg
 div =
   node "div"
@@ -45,7 +45,7 @@ div =
 
 hello worldというhtmlを作るコードです。
 
-```hs
+```elm
 import Html exposing (div,text)
 
 hello =
@@ -71,7 +71,7 @@ main =
 
 例えばid属性があるinputタグを作るには以下のようになります。
 
-```hs
+```elm
 import Html exposing (input)
 import Html.Attributes exposing (id)
 
@@ -94,7 +94,7 @@ HTMLに属性を付けるには、Html.Attributesモジュールにある関数�
 
 class属性、id属性をつけてみます。
 
-```hs
+```elm
 import Html exposing (div)
 import Html.Attributes exposing (class,id)
 
@@ -116,7 +116,7 @@ main = div [class "test"
 
 CSSは、Html.Attributesモジュールにあるstyle属性を使うと、HTMLに直接インラインでCSSを付けることができます。
 
-```hs
+```elm
 style : List (String, String) -> Attribute msg
 ```
 
