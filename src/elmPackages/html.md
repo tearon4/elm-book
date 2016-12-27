@@ -1,4 +1,4 @@
-#elm-lang/html : Html
+#elm-lang/html
 
 elm-lang/htmlパッケージは、ElmでHTMLを作るときの基本のパッケージになります。
 
