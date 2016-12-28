@@ -5,7 +5,7 @@ Elmの`main`の型は、SvgやHtmlなどの画面を表現する型か、`Progra
 
 `Html`型は静的な画面になり、`Program`型はさらに入力や操作ができるアプリケーションになります。
 
-Elmではelm-lang/htmlパッケージのHtmlモジュールにあるprogram、beginerProgram、programWithFlags関数を使い`Program a`型を作ります。
+Elmではelm-lang/htmlパッケージのHtmlモジュールにあるprogram、beginerProgram、programWithFlags関数を使い`Program`型を作ります。
 
 そしてそれらの関数は、The Elm Architectureというアプリケーションアーキテクチャに基いて使用します。
 
@@ -13,7 +13,7 @@ Elmではelm-lang/htmlパッケージのHtmlモジュールにあるprogram、be
 
 Elmでは、The Elm ArchitectureというアプリケーションアーキテクチャでGUIアプリケーションを記述します。
 
-アプリケーションアーキテクチャとは、設計や構造化の手法、書き方みたいなのを指します。他のアーキテクチャとして、ゲームで使われるメインループ方式や、Webフレームワークにも採用されたMVC、MVC2、マイクロソフトが作ったMVVMといったものがあります。
+アプリケーションアーキテクチャとは、大きなアプリケーションを構成して書くための設計や構造化の手法みたいなのを指します。他のアーキテクチャには、ゲームで使われるメインループ方式や、Webフレームワークにも採用されたMVC、MVC2、マイクロソフトが作ったMVVMといったものがあります。
 
 The Elm Architectureが初めて提案され、詳しいドキュメントがあるレポジトリがこちらになります。
 https://github.com/evancz/elm-architecture-tutorial
@@ -21,15 +21,13 @@ https://github.com/evancz/elm-architecture-tutorial
 
 ##二種類のThe Elm Architecture
 
-The Elm Architectureには二種類のバージョンがあります。そしてElmはそれぞれ用に関数を用意しています。(beginerProgram、program)
-
-これは最初に大きなアプリケーションを構成して書くための方法としてElm製作者のEvanが発案したときのバージョンと、その後Elmが発展して非同期処理について固まった後に、それに対応して生まれた現行のバージョンと発表タイミングが２つに別れたためです。
+The Elm Architectureには初期のバージョンと、非同期について考慮された現行のバージョンの２つがあります。（初期のバージョンもbeginerProgram関数で使える）
 
 初期を初期バージョン、現行をCmd/Subバージョンと呼ぶことにします。
 
-余談：余談ですが、reduxやcycle.jsといったフレームワークの作者がThe Elm Architectureを参考にした時、つまり世に広まった時は、Cmd/Subバージョンが確立する前でした、なので各フレームワークは非同期処理についてばらつきがあるようです。
+余談：余談ですが、reduxやcycle.jsといったフレームワークの作者がThe Elm Architectureを参考にして世に広まった時は、Cmd/Subバージョンが確立する前でした、なので各フレームワークは非同期処理についてばらつきがあるようです。
 
-初期のバージョンは今ではビギナー用になっています。
+初期バージョンは今ではビギナー用になっています。
 model、view、update、Msgという関数と型を用意する必要があります。
 
 Cmd/Subがついた現行のバージョンは、内外からの入出力（マウスなど）や非同期処理、副作用を網羅したものです。
@@ -42,8 +40,7 @@ Cmd/Subバージョンは、ビギナーバージョンを内包しているの�
 
 ##Hello World
 
-The Elm Architecture（現行のバージョン）で書かれた、Helloと表示するだけで何もしないコードは以下のようになります。
-（下記のupdate関数のように、なにもしないならそのまま返す関数でOKです。）
+The Elm Architecture（現行のバージョン）で書かれた、Helloと表示するだけのコードは以下のようになります。
 
 ```elm
 [snippet](../sample/test.elm)

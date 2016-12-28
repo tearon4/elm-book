@@ -15,7 +15,8 @@ type alias Model =
 
 
 type Msg
-    = TaskResult String
+    = TaskMsg Int
+    | TaskResult (Result String String)
 
 
 
@@ -36,8 +37,8 @@ subscriptions model =
 ---Proce.sleepは指定した時間待機する関数
 
 
-heavyTask : Task x String
-heavyTask =
+longTask : Task x String
+longTask =
     Process.sleep 5000
         |> Task.map (always "完了！")
 
@@ -55,9 +56,26 @@ task3 =
         |> Task.andThen (\n -> Task.succeed (n + 5))
 
 
+task4 =
+    Process.spawn longTask
+        |> Task.andThen (\str -> Task.succeed (toString str ++ "結果！"))
+
+
+errorTask : Task String a
+errorTask =
+    Task.fail "失敗！"
+
+
+errorsTask : Task String String
+errorsTask =
+    Task.succeed "成功"
+        |> Task.andThen (\x -> Task.fail "失敗！")
+        |> Task.andThen (\x -> Task.succeed (x ++ "!!!!"))
+
+
 init : ( Model, Cmd Msg )
 init =
-    0 ! [ Task.perform TaskResult heavyTask ]
+    0 ! [ Task.attempt TaskResult errorsTask ]
 
 
 update msg model =
