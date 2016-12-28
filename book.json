@@ -16,5 +16,9 @@
 
   "pdf": {
       "fontFamily": "IPAGothic",      "paperSize" : "b5"
-    }
+    },
+
+  "styles":{
+    "pdf" : "pdf.css"
+  }
 }
