@@ -52,7 +52,7 @@
   <!-- * [Test](src/Test/test.md) -->
   * [Bogdanp/elm-combine:パーサーコンビネータ](src/elmPackages/combinater.md)
 
----
+-----
 
 
 * [参考になるリンク集](src/etc/sankou.md)
