@@ -3,23 +3,12 @@
 
   "plugins": ["japanese-support",
               "snippet@git+https://github.com/cucumber-ltd/gitbook-plugin-snippet.git",
-              "numbered-headings",
-              "autocover"],
+              "numbered-headings"],
 
   "pluginsConfig": {
     "snippet": {
       "problem": "fail"
-    },
-    "autocover": {
-            "font": {
-                "size": null,
-                "family": "Yu Gothic",
-                "color": "#FFF"
-            },
-            "size": {
-                "w": 1800,
-                "h": 2360
-            }
+    }
   },
     "structure": {
       "summary": "SUMMARY.md"
