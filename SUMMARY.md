@@ -1,3 +1,8 @@
+# Summary
+
+
+### Part I
+
 
 * [はじめに](README.md)
 * [Elmについて](src/Elm/aboutElm.md)
@@ -9,6 +14,10 @@
     * [elm-package:パッケージング](src/Tool/elmPackage.md)
     * [elm-repl:REPL](src/Tool/repl.md)
     * [elm-reactor:ファイル監視サーバー](src/Tool/reactor.md)
+
+### Part II
+
+
 * [Elmの構文](src/syntax/syntax.md)
     * [全体](src/syntax/allSyntax.md)
     * [型・型推論・型検査](src/syntax/type/type.md)
@@ -18,9 +27,17 @@
     * [Port:JSとやり取りする](src/syntax/port.md)
     * [新しい型を定義する](src/syntax/type/teigi.md)
     * [コラム:HaskellからみたElm](src/syntax/fromHaskell.md)
+
+### Part Ⅲ
+
+
 * [The Elm Architecture](src/elmArchitecture/about.md)
     * [Cmd/Sub](src/elmArchitecture/cmdSub.md)
     * [The Elm Architectureのモジュラリティ](src/elmArchitecture/scale.md)
+
+
+### Part Ⅳ
+
 * [Coreライブラリ](src/module/about.md)
     <!-- * [Basics](src/module/basics.md) -->
     <!-- * [List](src/module/List.md) -->
@@ -34,4 +51,8 @@
   * [elm-lang/html(2)](src/elmPackages/htmlapp.md)
   <!-- * [Test](src/Test/test.md) -->
   * [Bogdanp/elm-combine:パーサーコンビネータ](src/elmPackages/combinater.md)
+
+---
+
+
 * [参考になるリンク集](src/etc/sankou.md)
