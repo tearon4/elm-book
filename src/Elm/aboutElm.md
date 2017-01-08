@@ -4,7 +4,7 @@
 
 Elmとは、コンパイルするとHTML、Javascript、CSSで出来たブラウザアプリケーションを生成するプログラミング言語です。
 Evan Czaplickiという方が大学での論文で発表したのがElmの始まりで、以降Evanさんがコミュニティと一緒にElmを作っています。
-。
+
 
 公式サイトのリンクになります。
 [http://elm-lang.org/](http://elm-lang.org/)
@@ -13,8 +13,7 @@ Evan Czaplickiという方が大学での論文で発表したのがElmの始ま
 
 Elm一つでHTML、Javascript、CSSを生成することが出来ます。
 
-また、Elmはアプリケーションのアーキテクチャも規定していて、The Elm Architectureといいます。
-なのでElmはブラウザフレームワークにもなります。
+また、Elmはアプリケーションのアーキテクチャも規定していて、The Elm Architectureといいます。これにそって作るので、Elmはブラウザフレームワークにもなっています。
 
 ###Elmはシンプルで小さな関数型言語
 
@@ -26,7 +25,7 @@ ElmはHaskellやいろんな関数型言語を参考にしていて、言語仕�
 構文の詳しくは、Elmの構文のページで解説しています。
 
 
-###The Elm Architectureというパラダイム
+###The Elm Architecture
 
 GUIアプリケーションを作るのに、MVCやMVVMなどの設計方針がありますが、ElmではThe Elm Architectureという方針で書きます。
 
@@ -34,7 +33,7 @@ GUIアプリケーションを作るのに、MVCやMVVMなどの設計方針が�
 
 このパラダイムは、他のパラダイムに比べて非常に状態の変更や副作用がわかりやすく、拡張性が高いものとなっています。
 
-The Elm Architectureは他のJSフレームワーク（redux、Cycle.js）に影響を与えてた考え方です。
+The Elm Architectureは他のJSフレームワーク（redux、Cycle.js）に影響を与えた考え方です。
 書き方をThe Elm Architectureのページで解説しています。
 
 
