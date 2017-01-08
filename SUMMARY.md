@@ -54,5 +54,5 @@
 
 ### Part Ⅴ
 
-* [環境構築](src/develop/about.md)
+* [開発環境構築](src/develop/about.md)
 * [参考になるリンク集](src/etc/sankou.md)
