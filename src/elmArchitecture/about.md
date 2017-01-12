@@ -21,21 +21,20 @@ https://github.com/evancz/elm-architecture-tutorial
 
 ##二種類のThe Elm Architecture
 
-The Elm Architectureには初期のバージョンと、非同期について考慮された現行のバージョンの２つがあります。（初期のバージョンもbeginerProgram関数で使える）
+The Elm Architectureには初期のバージョンと、非同期について考慮された現行のバージョンの２つがあります。（初期のバージョンもbeginerProgram関数で使えます）
 
 初期を初期バージョン、現行をCmd/Subバージョンと呼ぶことにします。
 
 初期バージョンは今ではビギナー用になっています。
 model、view、update、Msgという関数と型を用意する必要があります。
 
-Cmd/Subがついた現行のバージョンは、内外からの入出力（マウスなど）や非同期処理、副作用を網羅したものです。
+現行のCmd/Subがついたバージョンは、外からの入出力（マウスなど）や非同期処理、副作用を網羅したものです。
 こちらではmodel、update、view、cmd、subscriptions、Msgを用意します。
 
 まずビギナーバージョンで慣れると良いでしょう。
 画面にボタンなどのインターフェースがあるアプリケーションが作れます。
 
 Cmd/Subバージョンは、ビギナーバージョンを内包しているので、慣れた後はこちらを使ってみましょう。
-
 
 余談：余談ですが、reduxやcycle.jsといったフレームワークの作者がThe Elm Architectureを参考にして世に広まった時は、Cmd/Subバージョンが確立する前でした、なので各フレームワークは非同期処理についてばらつきがあるようです。
 

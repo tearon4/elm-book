@@ -26,33 +26,9 @@ Nodeの公式ページに行き、インストーラをダウンロードして�
 
 Node自体のバージョンも管理する必要がありますが、今回は扱いません。必要になったら調べてみてください。
 
-
-##プロジェクトフォルダを作る。
-
-プロジェクトフォルダを作ります。
-
-```
-mkdir my-elm-project
-cd my-elm-project
-```
-
-
 ##npm
 
 npmはNodeに搭載されたパッケージ管理システムです。
-
-プロジェクトを作ったら、package.jsonファイルを作ります。簡単に作るためのコマンドがnpmに用意されています。
-
-```
-npm init
-```
-
-質問に答えるとpackage.jsonが作られます。
-
-使用するライブラリのバージョンなど、このプロジェクトフォルダ内で統一する必要があります。
-
-npmはpackage.jsonという設定ファイルで管理します。package.jsonには、プロジェクトの名前やバージョン、連絡先、このプロジェクトに入っているパッケージのリストが管理されています。
-npmはデフォルトで、設定ファイルがあるフォルダをプロジェクトフォルダとして認識します。
 
 
 ###npmスクリプト
@@ -60,6 +36,7 @@ npmはデフォルトで、設定ファイルがあるフォルダをプロジ�
 package.jsonファイルを眺めてみます。
 
 ```
+todo
 ```
 
 ##elm-format
@@ -105,8 +82,7 @@ webpackとは、フロントエンド環境のソースコード全般を管理�
 
 ###elm-webpack-starter
 
-elm-webpack-starterはwebpackを使ったElm開発環境ボイラープレートです。
-こちらのプロジェクトを参考すると、webpackの設定方法や、webpackでのElmの構成がわかって大変勉強になります。
+elm-webpack-starterはwebpackを使ったElm開発環境ボイラープレートです。webpackの設定方法や、webpackでのElmの構成がわかって大変勉強になります。
 
 [moarwick/elm-webpack-starter](https://github.com/moarwick/elm-webpack-starter)
 
