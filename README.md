@@ -26,7 +26,7 @@ Elmは発展の中でThe Elm Architectureという設計と考え方を生み出
 
 ##本書の対象環境
 
-現在Elm0.18にバージョンアップ中
+Elm0.18
 
 ##対象読者
 
@@ -34,6 +34,35 @@ Elmは発展の中でThe Elm Architectureという設計と考え方を生み出
 * Elmを知らない人
 * Elmを使ってる人（向けにいくつかまとめ記事があります。）
 * JSフレームワークを知っているが、Elmがどんなものか知りたい人。
+
+##サンプルコード（仮）
+
+src/sampleフォルダに、作中のコードを集めています。一部は実行して動作を確認できます。
+
+
+実行するには、（gitとElm0.18をインストールした環境で）
+
+1. この本のリポジトリをクローン（クローンする時のフォルダ名は任意）
+
+```
+git clone git@github.com:giisyu/elm_book.git elm_book
+```
+
+2. フォルダに移動
+
+```
+cd elm_book
+```
+
+3. elm-reactorを起動
+
+```
+elm-reactor
+```
+
+そしてhttp://localhost:8000/src/sample/clickSample.elmにブラウザでアクセスします。
+
+実行したclickSample.elmは、画面をクリックするとそこに四角のHTMLを置くというコードです。
 
 ##著者欄
 

@@ -100,7 +100,7 @@ type Msg = TextInput String | MouseMove Position | Click | ...
 
 （型の定義方法は、「新しい型を定義する」のページで解説しています。）
 
-上記の例では`TextInput`や`MouseMove`や`Click`が**データ構築子**というものにあたります。`TextInput`を見ると横に`String`があるので、この型は`TetxtInput "hello"`とか、`TextInput "hogehoge"`といった入力になります。このMsgのデータ構築子がコンテナのようになって、操作と入力された値を画面側からアプリ内部へ運びます。
+上記の例では`TextInput`や`MouseMove`や`Click`がデータ構築子というものにあたります。`TextInput`を見ると横に`String`があるので、この型は`TextInput "hello"`とか、`TextInput "hogehoge"`といった入力になります。このMsgのデータ構築子がコンテナのようになって、入力された値をアプリ内部へ運びます。
 
 ##update
 
@@ -172,7 +172,7 @@ view model =
 beginerProgram関数を使い、model、view、updateを記述すれば、後は関数に渡すだけです。
 
 ```elm
-import Html.App exposing (beginerProgram)
+import Html exposing (beginerProgram)
 
 main =
   beginerProgram {model = init , view = view , update = update}
