@@ -133,11 +133,11 @@ Msgというのはメッセージの略で、`Msg`型という名前でアプリ
 type Msg = TextInput String | MouseMove Position | Click | ...
 ```
 
-上記の例では、アプリケーション内に、`TextInput`や`MouseMove`や`Click`といったイベントが起こるという表現になっています。
+上記の例では、アプリケーション内に、`TextInput`や`MouseMove`や`Click`といったイベントが起こるという定義になっています。
 
 `TextInput`や`MouseMove`や`Click`がデータ構築子（コンストラクタ）というものにあたります。
 
-`TextInput`を見ると横に`String`型とあります。`TextInput "hello"`とか、`TextInput "hogehoge"`といったように、入力された値をコンテナのようにアプリ内部へ運ぶ役割も担います。
+`TextInput`を見ると横に`String`型とあります。`TextInput "hello"`とか、`TextInput "hogehoge"`といったように、Msgのデータ構築子は入力された値をコンテナのようにアプリ内部へ運ぶ役割も担います。
 
 ##Update
 
