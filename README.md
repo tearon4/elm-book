@@ -60,9 +60,7 @@ cd elm_book
 elm-reactor
 ```
 
-そしてhttp://localhost:8000/src/sample/clickSample.elmにブラウザでアクセスします。
-
-実行したclickSample.elmは、画面をクリックするとそこに四角のHTMLを置くというコードです。
+そしてhttp://localhost:8000/src/sample/clickSample.elm にブラウザでアクセスします。実行されたclickSample.elmは、画面をクリックするとそこに四角のHTMLを置くというサンプルです。
 
 ##著者欄
 
@@ -88,4 +86,5 @@ elm-reactor
 
 ###寄付等
 励みになります！
+
 mail:hasegawatann@gmail.com
