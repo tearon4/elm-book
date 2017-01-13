@@ -1,29 +1,36 @@
 ##The Elm Architectureのモジュラリティ
 
-The Elm Architectureで書かれた、init,update,Model等一連のセットをコンポーネントと呼びます。
-The Elm Architectureコンポーネント同士は木構造に組み合わせることが出来ます。
+Model、Msg、Update、Viewのセットをコンポーネントと呼びます。
+The Elm Architectureでできたコンポーネント同士は木構造に組み合わせ、大きくすることが出来ます。
 
 以下が例です。
 
 ```elm
-import Child1
+import Child1                         --子供のコンポーネントをインポートします。
 import Child2
 
-type Msg   = A Child1.Msg             -- 子供のコンポーネントを使って定義します。
+
+type Model = {child1 : Child1.Model}  --Model型に、子供コンポーネントのModelを使います。
+
+type Msg   = A Child1.Msg             -- Msg型を子供のコンポーネントのMsg型を使って定義します。
            | B Child2.Msg
 
-type Model = {child1 : Child1.Model}  --子供のコンポーネントのmodel部分を作る。
-
+update : Msg -> Model -> (Model , Cmd Msg)
 update msg model =
      case msg of
-       A child1msg ->let child = Child1.update child1msg model.child1--子供のMsgとmodelは子供のupdateに食わせます。
+       A child1msg ->
+         let child = Child1.update child1msg model.child1  --子供のMsgとmodelを子供のupdateに渡しています。
+         in
+       B ...
 
-view = div [] [HtmlApp.map A Child1.view]  --子供のviewのMsgはHtml.Appでキャッチします。
+view : Model -> Html Msg
+view model =
+  div [] [Html.map A Child1.view]  --子供のviewのMsgをHtml.map関数で、親のMsgにします。
 
 ```
 
-このようにThe Elm Architectureコンポーネント同士は融合させることができます。
-Elm Packageにも、このように使ういろいろなコンポーネント形式のものが公開されています。
+このようにThe Elm Architectureコンポーネントの定義に、The Elm Architectureを使うことができます。
+Elm Packageにも、コンポーネント形式のものが公開されています。
 
 ##The Elm Architectureで開発していく中で
 
