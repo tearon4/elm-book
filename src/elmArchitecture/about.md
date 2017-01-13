@@ -163,7 +163,7 @@ update : Msg -> Model -> Model
 update msg model =
   case msg of
     TextInput str ->
-          {model | titel = str}    --titleが変化したmodelを返す。
+          {model | title = str}    --titleが変化したmodelを返す。
     Click ->
           aresite model |> koresite |> soresite
     _ ->
@@ -180,7 +180,7 @@ update msg model =
 ```elm
 view : Model -> Html a
 view model =
-  div [] [text model.titel]  --titleデータを表示しています。
+  div [] [text model.title]  --titleデータを表示しています。
 
 ```
 
@@ -189,7 +189,7 @@ view model =
 ```elm
 view : Model -> Html a
 view model =
-  div [onClick Click] [text model.titel]
+  div [onClick Click] [text model.title]
 
 ```
 
