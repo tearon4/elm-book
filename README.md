@@ -42,19 +42,19 @@ src/sampleフォルダに、作中のコードを集めています。一部は�
 
 実行するには、（gitとElm0.18をインストールした環境で）
 
-1. この本のリポジトリをクローン（クローンする時のフォルダ名は任意）
+1.この本のリポジトリをクローン（クローンする時のフォルダ名は任意）
 
 ```
 git clone git@github.com:giisyu/elm_book.git elm_book
 ```
 
-2. フォルダに移動
+2.フォルダに移動
 
 ```
 cd elm_book
 ```
 
-3. elm-reactorを起動
+3.elm-reactorを起動
 
 ```
 elm-reactor
