@@ -1,5 +1,5 @@
 
-##Elmで動くアプリケーションを作るには？
+##Elmで状態のある動作するアプリケーションを作るには？
 
 Elmの`main`の型は、SvgやHtmlなどの画面を表現する型か、`Program`型である必要があります。
 
@@ -13,7 +13,7 @@ Elmではelm-lang/htmlパッケージのHtmlモジュールにあるprogram、be
 
 Elmでは、The Elm ArchitectureというアプリケーションアーキテクチャでGUIアプリケーションを記述します。
 
-アプリケーションアーキテクチャとは、大きなアプリケーションを構成して書くための設計や構造化の手法みたいなのを指します。他のアーキテクチャには、ゲームで使われるメインループ方式や、Webフレームワークにも採用されたMVC、MVC2や、マイクロソフトが作ったMVVMといったものがあります。
+アプリケーションアーキテクチャとは、大きなアプリケーションを構成して書くための設計や構造化の手法みたいなのを指します。他のアーキテクチャには、ゲームで使われる「メインループ」方式や、Webフレームワークにも採用された「MVC」、「MVC2」や、マイクロソフトが作った「MVVM」といったものがあります。
 
 The Elm Architectureが初めて提案され、詳しいドキュメントがあるレポジトリがこちらになります。
 https://github.com/evancz/elm-architecture-tutorial
@@ -28,7 +28,7 @@ The Elm Architectureには初期のバージョンと、非同期について考
 初期バージョンは今ではビギナー用になっています。
 model、view、update、Msgという関数と型を用意する必要があります。
 
-現行のCmd/Subがついたバージョンは、外からの入出力（マウスなど）や非同期処理、副作用を網羅したものです。
+現行のCmd/Subバージョンは、外からの入出力（マウスなど）や非同期処理、副作用を網羅したものです。
 こちらではmodel、update、view、cmd、subscriptions、Msgを用意します。
 
 まずビギナーバージョンで慣れると良いでしょう。
@@ -41,24 +41,58 @@ Cmd/Subバージョンは、ビギナーバージョンを内包しているの�
 
 ##Hello World
 
-The Elm Architecture（現行のバージョン）で書かれた、Helloと表示するだけのコードは以下のようになります。
+The Elm Architecture（Cmd/Subバージョン）で書かれた、Helloと表示するだけのコードは以下のようになります。
 
 ```elm
-[snippet](../sample/test.elm)
+module Main exposing (..)
+
+import Html exposing (..)
+import Html.Attributes exposing (..)
+
+-- MODEL
+
+type alias Model = Int
+
+type Msg = Hello
+
+-- APP
+
+main : Program Never Model Msg
+main =
+    Html.program { init = init, view = view, update = update, subscriptions = subscriptions }
+
+subscriptions : Model -> Sub Msg
+subscriptions model =
+  Sub.none
+
+
+init : (Model,Cmd Msg)
+init =
+    0 ! []
+
+update : Msg -> Model -> (Model,Cmd Msg)
+update msg model =
+    model ! []
+
+view : Model -> Html Msg
+view model =
+    text "hello"
 ```
 
 
-##実行される順番
+##init、update、view関数
 
-各関数の実行順ついて確認しておきます。
+`init`、`update`、`view`関数の実行のされかたについて確認しておきます。
 
-まずElmが起動してアプリケーション全体を構築するとき、アプリケーションに初期値をセットします。このとき`init`関数が使われます。  
-次に画面が構築された後、利用者が画面を操作します。このとき画面から起きたアクションや値が`Msg`になって`update`に送られます。  
-`update`関数は状態を更新し新しい状態を返します。その状態が`view`に渡され画面が表示されます。
+初めてElmが起動してアプリケーション全体を構築するときに、`init`関数でアプリケーションの初期値が設定されます。  
+アプリケーションが構築された後、利用者が画面を操作します。操作時画面から起きたアクションや値が`Msg`になって`update`に送られます。`update`関数は状態を更新し新しい状態を返します。  
+アプリケーションの状態は常に`view`関数で画面になり、ブラウザに表示されます。
 
-以上が基本の流れになります。
+以上が動作の主幹部分です。Cmd/Subバージョンではそれに非同期な動作が加わります。Cmd/Subのページで解説しています。
 
-次に、用意するそれぞれの型や関数(model、update、view、cmd、subscriptions、Msg)について個別に見ていきます。
+##Model、Msg、Update、View
+
+用意するそれぞれの型や関数(model、update、view、cmd、subscriptions、Msg)について個別に見ていきます。
 
 ##Model
 
@@ -72,13 +106,13 @@ model : Model          --初期化関数
 model = 0
 ```
 
-Pub/Subバージョンでは初期化の関数は以下の様にCmd型を返すようにする必要があります。Cmd型は後で解説します。
+Pub/Subバージョンでは初期化の関数は以下の様にCmd型を返すようにする必要があります。
 
 ```elm
 init : (Model ,Cmd Msg)
 ```
 
-画面にカウンターを表示するなら数字型の値を、タイトルを表示するならString型を、画面上で動くものがあるなら、そのxy座標が必要かもしれません。そうやってアプリケーションで必要な値を定義していきます。
+アプリケーションの状態を考えてみます。画面にカウンターを表示するなら数字型の値を、タイトルを表示するならString型を、画面上で動くものがあるなら、そのxy座標が必要かもしれません。そうやってアプリケーションで必要な値を定義していきます。
 
 ```elm
 type alias Model = { counter : Int
@@ -86,24 +120,28 @@ type alias Model = { counter : Int
                    , position : Position
 
 init : Model
-init = {counter = 0,title = "",position = {x =0,y=0}}
+init = { counter = 0
+       , title = ""
+       , position = {x = 0, y = 0 }}
 ```
 
 ##Msg
 
-Msgというのはメッセージの略で、アプリケーションに起こりえるイベントを定義した型です。（例えばユーザーの操作など）
+Msgというのはメッセージの略で、`Msg`型という名前でアプリケーションに起こりえるイベントを定義します。イベントとは例えばユーザーの操作などが当たります。
 
 ```elm
 type Msg = TextInput String | MouseMove Position | Click | ...
 ```
 
-（型の定義方法は、「新しい型を定義する」のページで解説しています。）
+上記の例では、アプリケーション内に、`TextInput`や`MouseMove`や`Click`といったイベントが起こるという表現になっています。
 
-上記の例では`TextInput`や`MouseMove`や`Click`がデータ構築子というものにあたります。`TextInput`を見ると横に`String`があるので、この型は`TextInput "hello"`とか、`TextInput "hogehoge"`といった入力になります。このMsgのデータ構築子がコンテナのようになって、入力された値をアプリ内部へ運びます。
+`TextInput`や`MouseMove`や`Click`がデータ構築子（コンストラクタ）というものにあたります。
 
-##update
+`TextInput`を見ると横に`String`型とあります。`TextInput "hello"`とか、`TextInput "hogehoge"`といったように、入力された値をコンテナのようにアプリ内部へ運ぶ役割も担います。
 
-updateは、Msgがあった時に自動で実行される関数です。
+##Update
+
+`update`関数は、Msgがあった時に実行される関数です。
 
 ```elm
 update : Msg -> Model -> Model
@@ -117,32 +155,25 @@ update : Msg -> Model -> (Model,Cmd Msg)
 update msg model = model ! []
 ```
 
-update関数の中ではまずMsgによって処理を振り分けることが多いです。
+updateは、何かしら入力(`Msg`)があると実行され、今の状態(`Model`)を使って処理を行って、新しい状態(`Model`)を返します。
+
 
 ```elm
 update : Msg -> Model -> Model
 update msg model =
   case msg of
-    TextInput str ->    --- Text入力があった場合の処理
+    TextInput str ->
+          {model | titel = str}    --titleが変化したmodelを返す。
     Click ->
+          aresite model |> koresite |> soresite
     _ ->
 ```
 
-updateの型は、`Msg -> Model -> Model`なので、入力(`Msg`)があって->今の状態(`Model`)それらを使って処理を行って、結果新たなアプリケーションの状態(`Model`)を返すということを表現しています。
-
-
-```elm
-update : Msg -> Model -> Model
-update msg model =
-  case msg of
-    TextInput str -> {model | titel = str}    --titleが変化したmodelを返す。
-    Click -> aresite model |> koresite |> soresite
-    _ ->
-```
+上記のように、case式を使ってMsgを選別して処理を行います。
 
 ##View
 
-viewとはモデルを受け取り画面を作る関数です。ここにHTMLやCSSを書きます。
+`view`関数はモデルを受け取り画面を作る関数です。ここにHTMLやCSSを書きます。
 
 例
 
@@ -162,7 +193,7 @@ view model =
 
 ```
 
-ここでonClick関数にMsg型のデータ構築子を渡しています。Msg型のデータ構築子がコンテナになり、イベントが発火した時はupdate関数に必要な情報が渡ります。
+ここでonClick関数にMsg型のデータ構築子を渡しています。Msg型のデータ構築子がコンテナになり、イベントが発火した時はupdate関数に渡ります。
 
 
 ##一旦のまとめ。ビギナーバージョン
@@ -178,6 +209,6 @@ main =
 
 ```
 
-これで画面にボタンや、入力をつくり、動くアプリケーションが作れます。
+これで画面にボタンや、入力のある、状態のあるアプリケーションが作れます。
 
 ビギナーバージョンで慣れたら、さらにマウスからの入力や、処理の途中からhttp通信を行ったり、といった非同期＋副作用がある処理を加えた、Cmd/Subバージョンを見てみましょう。
