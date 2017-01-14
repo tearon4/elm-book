@@ -26,6 +26,8 @@ longTask =
 
 上記の関数は処理に５秒位掛かる非同期的な処理です。
 
+様々な処理がTask型になっています。DBへのアクセスであったり、Httpでの通信であったりです。これらは、メインの処理から離れて実行することが出来ます。
+
 このTaskをinitの部分で`Task.perform`を使って実行します。
 すると、Elmアプリケーションを起動したあとすぐにこの処理が始まります。その間アプリケーションのメインの処理(update)は固まったりせず、動かすことができます。
 
@@ -33,20 +35,19 @@ longTask =
 
 ```elm
 type Msg
-    = TaskResult String   ---結果を受け取るMsg
+    = TaskResult String   ---結果を受け取るMsg型。Taskの結果はMsgになる。
 
 longTask : Task x String
-longTask =
+longTask =　　　　　　　　　　　　　　　　　　    
     Process.sleep 5000
         |> Task.map (always "完了！")
 
 init : ( Model , Cmd Msg)
 init =
-    0 ! [ Task.perform TaskResult longTask ]
+    0 ! [ Task.perform TaskResult longTask ] --performはTaskを実行する関数。実行するとCmdになる。
 
 ```
 
-様々な処理がTask型になっています。DBへのアクセスであったり、Httpでの通信であったりです。これらは、メインの処理から離れて実行することが出来ます。
 
 ##Task型を作る。
 
@@ -63,7 +64,7 @@ Task型を作ってみます。succeed関数を使うと（成功した）Task�
 
 map関数を使うと、Task型の中身に関数を適用し変化させることが出来ます。
 
-```
+```elm
 > Task.map ((*) 10) task
 <task> : Task.Task a number
 ```
@@ -72,16 +73,14 @@ map関数を使うと、Task型の中身に関数を適用し変化させるこ�
 
 ##Task型は計算のまとまり
 
-タスク内の計算が終わったあとに、その計算の結果をうけてまたTaskにする、という風にステップにすることが出来ます。
+Taskは非同期に行いたい計算のまとまりを表現します。Task内の計算が終わったあとに、その計算の結果をうけてまたTaskにする、という風にステップにすることが出来ます。
 
 ```elm
-andThen : Task x a -> (a -> Task x b) -> Task x b
+andThen : (a -> Task x b) -> Task x a -> Task x b
 ```
-andThenは二引数目がTask型を返しているのがポイントで、Task型をandThen関数で繋いでいくことが出来ます。
+Task型とTask型をandThen関数で繋いだり、Taskの結果を使って新しいTaskを作ることができます。
 
-mapとの違いは、andThenではTaskの結果を使って新しいTaskを作っています。
-
-小さなTaskを、maptとandThen関数で連続させ大きなTaskを定義することが出来ます。
+小さなTaskを、mapとandThen関数で連続させ大きなTaskを定義することが出来ます。
 
 ```elm
 task2 =
@@ -116,19 +115,21 @@ perform : (a -> msg) -> Task Never a -> Cmd msg
 attempt : (Result x a -> msg) -> Task x a -> Cmd msg
 ```
 
-performはエラーを考慮しないでよい場合に使います。エラー処理を考えないでよいTaskやエラーが起こることがない場合などです。
-attemptはエラーが起こるTaskの場合使い、Taskの結果がResult型になっています。
+performはエラーを考慮しないでよい場合に使います。エラー処理を考えないでよいTaskなどの場合です。
+attemptはエラーを考慮したいTaskの場合に使います。通信エラーがあったときには別の処理をしたいなどの場合です。Taskの結果がResult型になっています
 
 ##エラーを返すTask
 
-Taskにはエラーになるかもしれないという性質があります。（例、httpアクセスのアクセスエラー、DBアクセスなど副作用がある処理）
+Taskにはエラーになるかもしれないという性質があります（例、httpアクセスのアクセスエラー、DBアクセスなど副作用がある処理）
+Taskの型定義を見ると、Taskに続く左側の型がエラー時にTaskが返す型で、右側は成功時にTaskが返す型という意味になっています。
+
+Task型の定義
 
 ```elm
-type alias Task err ok =
-  Platform.Task err ok
+type alias Task err ok = Platform.Task err ok
 ```
 
-Taskの型定義を見ると、Taskに続く左側の型がエラー時にTaskが返す型で、右側は成功時にTaskが返す型という意味になっています。
+エラーになった時String型を返す例（Task String a）
 
 ```elm
 errorTask : Task String a
@@ -137,7 +138,9 @@ errorTask =
 
 ```
 
-TaskのandThenは前のTaskが「成功」ならその値を使ってそのまま計算を続行し、「エラー」なら次の計算へエラーを受け渡します。
+Taskにエラー時用の処理を加えるには、map関数のエラー版mapError、andThenのエラー版onError関数を使います。
+
+また、TaskのandThenは前のTaskが「成功」ならその値を使ってそのまま計算を続行し、「エラー」なら次の計算へエラーを受け渡します。
 
 ```elm
 
@@ -155,5 +158,3 @@ init =
     0 ! [ Task.attempt TaskResult errorsTask ]          --- TaskResult Err 失敗！
 
 ```
-
-Taskにエラー時用の処理を加えるには、map関数のエラー版mapError、andThenのエラー版onError関数を使います。
