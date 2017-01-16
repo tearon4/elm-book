@@ -58,6 +58,17 @@ tail : List a -> Maybe (List a)
 andThen : (a -> Task x b) -> Task x a -> Task x b
 ```
 
+Elmではやりたい処理をパイプ演算子(|>)を使って左から右に表現するのが一般的になっています。
+その時に使いやすいような引数の順番になっています。
+
+```elm
+tasks =
+    task
+        |> aresite
+        |> koresite
+        |> Task.andThen (\n -> Task.succeed (n + 5))
+```
+
 ###型表記の違い。
 
 列挙型、代数的データ型の定義を`type`で行い、  
