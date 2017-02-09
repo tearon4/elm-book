@@ -1,7 +1,7 @@
 # Summary
 
 
-### Part I　Elmのインストールと、周辺ツール
+### Part I　インストールと、周辺ツール
 
 
 * [はじめに](README.md)
@@ -15,7 +15,7 @@
     * [elm-repl:REPL](src/Tool/repl.md)
     * [elm-reactor:ファイル監視サーバー](src/Tool/reactor.md)
 
-### Part II　Elmの構文について
+### Part II　構文について
 
 
 * [Elmの構文](src/syntax/syntax.md)
@@ -52,7 +52,7 @@
   <!-- * [Test](src/Test/test.md) -->
   * [Bogdanp/elm-combine:パーサーコンビネータ](src/elmPackages/combinater.md)
 
-### Part Ⅴ　発展的なElm
+### Part Ⅴ　発展的な話題とリンク
 
 * [開発環境構築](src/develop/about.md)
 * [参考になるリンク集](src/etc/sankou.md)
