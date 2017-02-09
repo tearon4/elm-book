@@ -1,7 +1,7 @@
 # Summary
 
 
-### Part I
+### Part I　Elmのインストールと、周辺ツール
 
 
 * [はじめに](README.md)
@@ -9,13 +9,13 @@
 * [Elmのインストール](src/install/zyunbi.md)
     * [インストール](src/install/install.md)
     * [Hello World](src/install/hello.md)
-* [Elmをインストールすると同封されるツール](src/Tool/tool.md)
+* [同封されているツールについて](src/Tool/tool.md)
     * [elm-make:コンパイル](src/Tool/make.md)
     * [elm-package:パッケージング](src/Tool/elmPackage.md)
     * [elm-repl:REPL](src/Tool/repl.md)
     * [elm-reactor:ファイル監視サーバー](src/Tool/reactor.md)
 
-### Part II
+### Part II　Elmの構文について
 
 
 * [Elmの構文](src/syntax/syntax.md)
@@ -28,7 +28,7 @@
     * [新しい型を定義する](src/syntax/type/teigi.md)
     * [コラム:HaskellからみたElm](src/syntax/fromHaskell.md)
 
-### Part Ⅲ
+### Part Ⅲ　The Elm Architecture
 
 
 * [The Elm Architecture](src/elmArchitecture/about.md)
@@ -36,7 +36,7 @@
     * [The Elm Architectureのモジュラリティ](src/elmArchitecture/scale.md)
 
 
-### Part Ⅳ
+### Part Ⅳ　Coreライブラリとパッケージについて
 
 * [Coreライブラリ](src/module/about.md)
     <!-- * [Basics](src/module/basics.md) -->
@@ -52,7 +52,7 @@
   <!-- * [Test](src/Test/test.md) -->
   * [Bogdanp/elm-combine:パーサーコンビネータ](src/elmPackages/combinater.md)
 
-### Part Ⅴ
+### Part Ⅴ　発展的なElm
 
 * [開発環境構築](src/develop/about.md)
 * [参考になるリンク集](src/etc/sankou.md)
