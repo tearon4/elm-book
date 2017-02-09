@@ -1,13 +1,13 @@
 #elm-lang/html(2)
 
 
-##Elmのエントリポイント（main）の型
+##main関数の型
 
-Elmのエントリポイント（main）の型は、`Svg`や`Html`などの画面を表現する型か、`Program Never Model Msg`という型にしなければなりません。
+Elmのエントリポイント（main関数）の型は、`Svg`や`Html`などの画面を表現する型か、`Program Never Model Msg`という型になります。
 
 `Program Never Model Msg`という型はアプリケーション全体を表した特殊な型です。
-この型を作る基本の関数がHtmlにあるbeginnerProgram、program、programWithFlagsです。これらの関数はThe Elm Architectureというアプリケーションアーキテクチャにそっています。
 
+この型を作る基本の関数がbeginnerProgram、program、programWithFlagsです。
 
 ##beginnerProgram
 
@@ -23,28 +23,20 @@ main =
 
 beginnerProgram 関数は引数にmodel、view、update関数をとります。（とくに処理などがなければ、そのまま返すだけの関数でよいです。）
 
-*  modelは状態の初期値、
-*  viewは状態を画面に出す関数、
+```elm
+model : Model
+view : Model -> Html a
+update : Msg -> Model -> Model
+```
+
+*  modelはアプリケーションの状態の初期値、
+*  viewはアプリケーション状態によって画面を作る関数、
 *  updateは(画面をクリックするなどして)イベントが起きた時の処理を書きます。
 
 
 ##program
 
-program関数です。非同期処理や外部からの入力に対応したバージョンです。
-
-```elm
-program
-  : { init : (model, Cmd msg)
-    , update : msg -> model -> (model, Cmd msg)
-    , subscriptions : model -> Sub msg
-    , view : model -> Html msg
-    }
-  -> Program Never
-program app =
-  programWithFlags
-    { app | init = \_ -> app.init }
-
-```
+program関数です。非同期処理や外部からの入力に対応しています。
 
 使用例
 
@@ -61,38 +53,28 @@ initやupdateがCmdを返すようになっていて、subscriptionsという関
 
 programWithFlagsは、Elmが起動する時にJSから初期値を受け取る場合に使います。
 
-例えば、JSから渡されたデータをElmで画面に表示したりとか、サーバーから値をElmに設定しておく、といったことが出来ます。
-
-```elm
-programWithFlags
-  : { init : flags -> (model, Cmd msg)
-    , update : msg -> model -> (model, Cmd msg)
-    , subscriptions : model -> Sub msg
-    , view : model -> Html msg
-    }
-  -> Program flags
-programWithFlags =
-  VirtualDom.programWithFlags
-```
+JSから渡されたデータをElmで画面に表示したりとか、サーバーから値をElmに設定しておく、といったことが出来ます。
 
 JS側
 
 JS側から、Elmを起動する際にJSオブジェクトを渡します。
 
-```html
+```:html
  ..
 <script type="text/javascript", src="javascripts/App.js">   //ElmをJSコンパイルして出来たJSを読み込む。
  ..
 
  var app = Elm.Main.fullscreen({JSオブジェクト});            //JSオブジェクトをElmに渡す。
+
 ```
 
-fullscreen以外のモードの場合では、`embed(node,JSオブジェクト)`、`worker(JSオブジェクト)`とします。
+JSオブジェクトの渡し方は起動モードに寄って違います。fullscreen以外のモードの場合では、`embed(node,JSオブジェクト)`、`worker(JSオブジェクト)`とします。
 
 
 Elm側
 
-Elm側でprogramWithFlagsを使います。
+Elm側で`programWithFlags`を使います。
+
 するとinit関数の引数で、JS側の値をとることができます。
 
 ```elm
@@ -103,9 +85,8 @@ import Html exposing (programWithFlags)
 main =
   programWithFlags {init = init , update = update , view = view ,subscriptions = subscriptions}
 
-init : SList -> (Model,Cmd a)     ---JS側から渡される値が引数に。型を書く必要がある。
+init : List -> (Model,Cmd a)     ---JS側から渡される値が引数に。型を書く必要がある。
 init list = {data = list } ! []
 ```
 
-この時にinitに書く型は、Portのページの対応表を参考してください。
-ElmとJSの型が合わない場合はエラーとなり、Elmは起動しません。
+この時にElmとJSの型が合わない場合はエラーとなりElmは起動しません。型の対応はPortのページにある表を参考にしてください。
