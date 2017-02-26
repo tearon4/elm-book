@@ -33,7 +33,7 @@ tokyo elm meetup
 ##チュートリアル、チートシート等
 
 [Elm Tutorial · GitBook](https://www.gitbook.com/book/sporto/elm-tutorial/details)  
-\@sebasportoさんによるチュートリアル。そしてuehajさんによる日本語翻訳[イントロダクション · Elm Tutorial](https://www.elm-tutorial.org/jp/)
+\@sebasportoさんによるチュートリアル。そしてuehajさんによる日本語翻訳がこちら[イントロダクション · Elm Tutorial](https://www.elm-tutorial.org/jp/)
 
 [izdi/elm-cheat-sheet](https://github.com/izdi/elm-cheat-sheet)　   
 Elmチートシート
@@ -70,3 +70,6 @@ HTMLからElmのコードに変換するツール。
 
 [Main](http://noredink.github.io/json-to-elm/)  
 json to Elm
+
+[ellie](https://ellie-app.com/new)
+ブラウザー上でElmを書くことができて、実行結果を確認できる。書いたコードはシェアできる。
