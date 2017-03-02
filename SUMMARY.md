@@ -23,9 +23,9 @@
     * [型・型推論・型検査](src/syntax/type/type.md)
     * [基本の型](src/syntax/type/primitive.md)
     * [関数](src/syntax/function.md)
+    * [新しい型を定義する](src/syntax/type/teigi.md)
     * [Module:モジュールシステム](src/syntax/module.md)
     * [Port:JSとやり取りする](src/syntax/port.md)
-    * [新しい型を定義する](src/syntax/type/teigi.md)
     * [コラム:HaskellからみたElm](src/syntax/fromHaskell.md)
 
 ### Part Ⅲ　The Elm Architecture
@@ -55,4 +55,5 @@
 ### Part Ⅴ　発展的な話題とリンク
 
 * [開発環境構築](src/develop/about.md)
+* [ElmのCI設定](src/develop/ciSetting.md)
 * [参考になるリンク集](src/etc/sankou.md)
