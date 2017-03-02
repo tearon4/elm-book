@@ -2,6 +2,35 @@ ElmのCIの設定。
 
 CIでテストを実行してみます。設定ファイルをプロジェクトのルートディレクトリに置いて、サイトの設定画面から、CIを行うレポジトリを指定します。あとは、レポジトリにプッシュがあると自動で起動します。
 
+
+プロジェクトにelm-community/elm-testの補助ツールをインストールします。
+
+```
+npm install elm-test --save-dev
+```
+または
+
+```
+yarn add elm-test --dev
+```
+
+そして、package.jsonのnpm scriptの項目で呼び出す設定にしておきます。
+
+```
+...
+"scripts": {
+  ...
+  "test": "elm-test"
+},
+...
+
+"devDependencies": {
+  "elm": "^0.18.0",
+  "elm-test": "^0.18.2"
+},
+
+```
+
 以下は、Travis CIとCircleCIの設定です。
 
 ###Travis CI
@@ -26,6 +55,9 @@ cache:
 script:
   - yarn run test
 ```
+
+
+
 
 メモ：elm-testのサンプルコードの方では、elm-package installが失敗したらリトライするようにスクリプトを利用しています。少し試した感じ失敗しなかったのでその部分は外しています。
 
