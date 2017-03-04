@@ -1,9 +1,8 @@
 ElmのCIの設定。
 
-CIでテストを実行してみます。設定ファイルをプロジェクトのルートディレクトリに置いて、サイトの設定画面から、CIを行うレポジトリを指定します。あとは、レポジトリにプッシュがあると自動で起動します。
+elm-community/elm-testのページにもサンプルがありますが、CIでテストを実行してみます。その時のTravis CIとCircleCIでの設定についてです。
 
-
-プロジェクトにelm-community/elm-testの補助ツールをインストールします。
+まずプロジェクトにelm-community/elm-testの補助ツールをインストールします。
 
 ```
 npm install elm-test --save-dev
@@ -16,7 +15,7 @@ yarn add elm-test --dev
 
 そして、package.jsonのnpm scriptの項目で呼び出す設定にしておきます。
 
-```
+```js
 ...
 "scripts": {
   ...
@@ -31,13 +30,15 @@ yarn add elm-test --dev
 
 ```
 
-以下は、Travis CIとCircleCIの設定です。
+次に、設定ファイルをプロジェクトのルートディレクトリに設置します。そして、サイトの設定から、プロジェクトのレポジトリを指定します。レポジトリにプッシュがあると自動で起動するようになります。
+
+以下は、Travis CIとCircleCIの設定ファイルの例です。
 
 ###Travis CI
 
 Travis CIでの設定は以下のようになります。
 
-```
+```yml
 sudo: false
 
 dist: trusty
@@ -56,10 +57,7 @@ script:
   - yarn run test
 ```
 
-
-
-
-メモ：elm-testのサンプルコードの方では、elm-package installが失敗したらリトライするようにスクリプトを利用しています。少し試した感じ失敗しなかったのでその部分は外しています。
+（メモ：elm-testのサンプルコードの方では、Elmのinstallが失敗したらリトライするスクリプトを利用しています。少し試した感じ失敗しなかったのでその部分はここでは外しています。）
 
 cacheの設定で`tests/elm-stuff/build-artifacts`を設定すると速くなります。
 
@@ -67,7 +65,7 @@ cacheの設定で`tests/elm-stuff/build-artifacts`を設定すると速くなり
 
 CircleCIでの設定は以下のようになります。
 
-```
+```yml
 machine:
   environment:
     PATH: "${PATH}:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin"
@@ -111,4 +109,4 @@ cache_directoriesの設定で`tests/elm-stuff/build-artifacts`を指定してい
 まだ良くわからないので、わかったら書き直します。
 
 
-Travis CIとCircleCIどちらもyarnに対応していたので、そちらを使っています。
+Travis CIとCircleCIどちらもyarnに対応しています。yarnを使っています。
