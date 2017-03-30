@@ -3,9 +3,9 @@
 
 Elmの`main`の型は、SvgやHtmlなどの画面を表現する型か、`Program`型である必要があります。
 
-`Html`型は静的な画面になり、`Program`型はさらに入力や操作ができるアプリケーションになります。
+`Html`型を渡すと静的な画面になり、`Program`型だとさらに入力や操作ができるアプリケーションになります。
 
-Elmではelm-lang/htmlパッケージのHtmlモジュールにあるprogram、beginerProgram、programWithFlags関数を使い`Program`型を作ります。
+`Program`型を作るには、elm-lang/htmlパッケージのHtmlモジュールにある`program`、`beginerProgram`、`programWithFlags`関数を使います。
 
 そしてそれらの関数は、The Elm Architectureというアプリケーションアーキテクチャに基いて使用します。
 
