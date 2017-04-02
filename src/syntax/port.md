@@ -151,6 +151,32 @@ JS側は、`app名.ports.関数名.send(送る値)`でElmに送ります。
 app.ports.jsHello.send("hellooooo"); //Elmへ送る
 ```
 
+###トラブルシューティング
+
+Elmのスケジューラーとの兼ね合いだと思われるのですが、Elmを呼び出した後にDOMを取り出す処理を記述した所、取り出せないという事がありました。
+
+```js
+const App = Elm.Main.embed(document.getElementById("main"));
+
+document.getElementById('hoge').addEventListener("pointerdown" , (event) => {
+        console.log(event);
+    });
+
+```
+
+setTimeoutで囲むことで動きました。
+
+```js
+
+setTimeout(function () {
+    document.getElementById('hoge').addEventListener("pointerdown" , (event) => {
+        console.log(event);
+    });
+
+}, 0);
+
+```
+
 ###PortとNativeモジュール
 
 現在だいたい主要なWeb apiはライブラリとして公開されているので、「JSコード使いたい」と思ったときはだいたいPortで済むはずとなっています。
