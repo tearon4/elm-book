@@ -164,7 +164,7 @@ document.getElementById('hoge').addEventListener("pointerdown" , (event) => {
 
 ```
 
-setTimeoutで囲むことで動きました。
+setTimeoutで囲むことで動きます。
 
 ```js
 
