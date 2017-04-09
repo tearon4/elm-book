@@ -68,7 +68,7 @@ elm-package install
 elm-reactor
 ```
 
-そしてhttp://localhost:8000/src/sample/clickSample.elm にブラウザでアクセスします。  
+そしてhttp://localhost:8000/src/sample/basic/clickSample.elm にブラウザでアクセスします。  
 実行されたclickSample.elmは、画面をクリックするとそこに四角のHTMLを置くというサンプルです。
 
 ##著者欄
