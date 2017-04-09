@@ -1,6 +1,7 @@
 module Main exposing (..)
 
 import Html exposing (..)
+import Html.Attributes exposing (..)
 
 
 -- MODEL
@@ -8,10 +9,6 @@ import Html exposing (..)
 
 type alias Model =
     Int
-
-
-
--- Msg
 
 
 type Msg
@@ -22,7 +19,7 @@ type Msg
 -- APP
 
 
-main : Program Never Int Msg
+main : Program Never Model Msg
 main =
     Html.program { init = init, view = view, update = update, subscriptions = subscriptions }
 

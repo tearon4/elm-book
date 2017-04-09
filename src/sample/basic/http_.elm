@@ -6,6 +6,11 @@ import Task
 import Json.Decode as Json
 
 
+{-
+
+   同じフォルダにあるsample.jsonを読み込む、Httpのサンプル
+
+-}
 -- MODEL
 
 

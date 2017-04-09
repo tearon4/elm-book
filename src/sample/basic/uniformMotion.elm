@@ -8,6 +8,9 @@ import Time exposing (Time)
 import Keyboard exposing (KeyCode)
 
 
+{-
+   四角が等速直線運動で動きます。
+-}
 -- MODEL
 --場所と速度
 
