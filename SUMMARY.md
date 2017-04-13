@@ -1,11 +1,11 @@
 # Summary
 
+* [はじめに](README.md)
+* [Elmについて](src/Elm/aboutElm.md)
 
 ### Part I　インストールと、周辺ツール
 
 
-* [はじめに](README.md)
-* [Elmについて](src/Elm/aboutElm.md)
 * [Elmのインストール](src/install/zyunbi.md)
     * [インストール](src/install/install.md)
     * [Hello World](src/install/hello.md)
