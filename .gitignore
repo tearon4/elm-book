@@ -17,3 +17,5 @@ _book
 
 elm-stuff
 dist
+
+.DS_Store
